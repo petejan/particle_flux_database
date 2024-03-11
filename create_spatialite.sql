@@ -3,7 +3,10 @@ SELECT load_extension('/opt/homebrew/lib/mod_spatialite.dylib')
 drop view geom;
 SELECT InitSpatialMetadata(1)
 
-CREATE VIEW geom AS SELECT file.file_id, fm.value, file.mintimeextent, file.maxtimeextent, GeomFromText(concat('POINT(',file.meanLongitude, ' ', file.meanLatitude,')'), 4326) AS geometry FROM file JOIN file_metadata fm on(fm.file_id = file.file_id and fm.name = 'title');
+CREATE VIEW geom AS SELECT file.file_id, fm.value, file.mintimeextent, file.maxtimeextent, MakePoint(file.meanLongitude, file.meanLatitude , 4326) AS geometry FROM file JOIN file_metadata fm on(fm.file_id = file.file_id and fm.name = 'title');
+
+
+SELECT file.file_id, fm.value, file.mintimeextent, file.maxtimeextent, AsText(GeomFromText(concat('POINT(',file.meanLongitude, ' ', file.meanLatitude,')'), 4326)) AS geometry FROM file JOIN file_metadata fm on(fm.file_id = file.file_id and fm.name = 'title');
 
 SELECT file.file_id, fm.value, file.mintimeextent, file.maxtimeextent, concat('POINT(',file.meanLongitude, ' ', file.meanLatitude,')'), 4326 AS geometry FROM file JOIN file_metadata fm on(fm.file_id = file.file_id and fm.name = 'title');
 
