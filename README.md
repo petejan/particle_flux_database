@@ -1,5 +1,9 @@
 Python code to load data from data sources (Pangaea) into a common database
 
+map from Mouw 2016 (doi.org/10.1594/PANGAEA.855594) 
+
+![Mouw Map][maps/map-mouw.png]
+
 database scructure
 
 ![tables](sediment_data.sqlite.png)
