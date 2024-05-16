@@ -1,5 +1,9 @@
 Python code to load data from data sources (Pangaea) into a common database
 
+database scructure
+
+![tables](sediment_data.sqlite.png)
+
 load the urls into the database
 
     python load_pangaea_file.py pangaea-test-urls.txt
