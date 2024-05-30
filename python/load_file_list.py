@@ -3,8 +3,6 @@ import sys
 from datetime import datetime
 import os
 
-import pangaeapy.pandataset as pd
-
 dbname = "sediment_data.sqlite"
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
