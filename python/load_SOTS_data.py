@@ -133,14 +133,16 @@ for fn in files_to_load:
         res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (var_name,))
         var_id = res.fetchone()[0]
 
-        print(var_id, 'variable', var_name, p.name)
+        print(var_id, 'variable', var_name, p.name, p.dtype)
+        print(var_id, 'variable', var_name, 'unit', p.units)
+
         try:
             comment = p.comment
         except AttributeError:
             comment = 'NA'
 
         # save the variable metadata to the file_variables table
-        cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment) VALUES (?,?,?,?,?,?)', (file_id, var_id, p.name, p.dtype, p.units, comment))
+        cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment) VALUES (?,?,?,?,?,?)', (file_id, var_id, p.name, p.dtype.name, p.units, comment))
 
         # load the variable data
         i = 0
