@@ -46,6 +46,7 @@ for fn in files_to_load:
 
     # open netCDF file to retrieve the data set
     ds = Dataset(filename,'r', format="NETCDF4")
+    ds.set_auto_mask(False)
 
     print('dataset title', uri, ds.title)
     print('file_id', file_id)
@@ -133,27 +134,56 @@ for fn in files_to_load:
         res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (var_name,))
         var_id = res.fetchone()[0]
 
-        print(var_id, 'variable', var_name, p.name, p.dtype)
-        print(var_id, 'variable', var_name, 'unit', p.units)
+        print(var_id, 'variable', var_name, p.long_name, p.dtype)
+        try:
+            units = p.units
+        except AttributeError:
+            units = 'NA'
+
+        print(var_id, 'variable', var_name, 'unit', units)
 
         try:
             comment = p.comment
         except AttributeError:
             comment = 'NA'
 
+        print(var_id, 'variable', var_name, 'comments', comment)
+
         # save the variable metadata to the file_variables table
-        cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment) VALUES (?,?,?,?,?,?)', (file_id, var_id, p.name, p.dtype.name, p.units, comment))
+        cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment) VALUES (?,?,?,?,?,?)', (file_id, var_id, p.long_name, p.dtype.name, units, comment))
 
         # load the variable data
         i = 0
         try:
-            d = ds.variables[var_name][:]
-            for m in range(len(ds.variables[var_name])):
-                # load the data where it's not unknown or nan
-                if str(ds.variables[var_name][m]) != ds.variables[var_name]._FillValue: #and str(ds.variables[var_name][m]) != 'unknown':
-                    #print('variable', var_name, ds.data[var_name][m])
-                    cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[m])))
-                i += 1
+            # this is true for nominal depth, latitude and longitude
+            if not ds.variables[var_name].shape:
+                d = ds.variables[var_name]
+                # this is a hack to give lat, lon and nominal_depth the same shape as other variables
+                for m in range(len(ds.variables["TIME"])):
+                    # load the data where it's not unknown or nan
+                    if str(ds.variables[var_name][0]) != 'nan' and ds.variables[var_name][0] != netCDF4.default_fillvals["f4"]:
+                        #print('variable', var_name, i, d[0])
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)', (file_id, i, var_id, str(d[0])))
+                    i += 1
+            # this is true for all variables, except TIME_bnds
+            elif len(ds.variables[var_name].shape) == 1:
+                d = ds.variables[var_name][:]
+                for m in range(len(ds.variables[var_name])):
+                    # load the data where it's not unknown or nan
+                    if str(ds.variables[var_name][m]) != 'nan' and ds.variables[var_name][m] != netCDF4.default_fillvals["f4"]:
+                        #print('variable', var_name, ds.variables[var_name][m])
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[m])))
+                    i += 1
+            # this is true for TIME_bnds
+            elif len(ds.variables[var_name].shape) >1:
+                d = ds.variables[var_name][:]
+                for m in range(len(ds.variables[var_name])):
+                    # load the data where it's not unknown or nan
+                    if (str(ds.variables[var_name][m]) != 'nan' and ds.variables[var_name][m] != netCDF4.default_fillvals["f4"]).all():
+                        # print('variable', var_name, ds.variables[var_name][m])
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)', (file_id, i, var_id, str(d[m])))
+                    i += 1
+
         except KeyError:
             pass
 
