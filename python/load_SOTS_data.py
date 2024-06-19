@@ -21,7 +21,9 @@ def download_file_from_server_endpoint(server_endpoint, local_file_path):
 
 
 
-dbname = r"C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\sediment_data.sqlite\sediment_data.sqlite"
+#dbname = r"C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\sediment_data.sqlite\sediment_data.sqlite"
+dbname = "data/sediment_data.sqlite"
+
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
 
@@ -35,14 +37,11 @@ for fn in files_to_load:
     uri = fn[1]
     file_id = fn[0]
     fnsplit = uri.split('/')
-    filename = fnsplit[-1]
+    filename = "data/" + fnsplit[-1]
 
     # download netCDF file to retrieve the data set
 
     download_file_from_server_endpoint(uri, filename)
-    # move the files
-    dest = r"C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\SOTS\netCDF"
-    shutil.copy(filename, dest)
 
     # open netCDF file to retrieve the data set
     ds = Dataset(filename,'r', format="NETCDF4")
@@ -90,102 +89,133 @@ for fn in files_to_load:
                 print('metadata', md, getattr(ds, md))
                 cur.execute('INSERT INTO file_metadata (file_id, name, value) VALUES (?,?,?)', (file_id, md, getattr(ds, md)))
 
-
-# not needed for netCDF files since lat and lon min and max are captured by cycling through all global attributes?
-    # print('file-geometry', ds.geometryextent)
-    # for md in ds.geometryextent:
-    #     #print('metadata-geom', md, ds.geometryextent[md])
-    #     cur.execute('INSERT INTO file_metadata (file_id, name, value) VALUES (?,?,?)', (file_id, 'geometry-'+md, ds.geometryextent[md]))
-
-# not needed since all our metadata is in the global attributes of each netCDF file, which is already captured
-    # add event metadata
-    # en = 1
-    # for e in ds.events:
-    #     #print('event - dir', dir(e))
-    #     for md in dir(e):
-    #         if not md.startswith("_"):
-    #             print('event', md, type(getattr(e, md)))
-    #             if isinstance(getattr(e, md), (float, str)):
-    #                 cur.execute('INSERT INTO file_metadata (file_id, name, value) VALUES (?,?,?)', (file_id, 'event-'+str(en)+'-'+md, getattr(e, md)))
-    #     en += 1
-    #
-    # print('file_id events', len(ds.events))
-
-    # try:
-    #     cur.execute('INSERT INTO file_metadata (file_id, name, value) VALUES (?,?,?)',[file_id, 'method', ds.events[0].device])
-    #     con.commit()
-    # except IndexError:
-    #     print('No events in', uri)
-
     cur = con.cursor()
+
+# dimensions:
+# 	TIME = 21 ;
+# 	bnds = 2 ;
+# variables:
+# 	double TIME(TIME) ;
+# 		TIME:name = "time" ;
+# 		TIME:standard_name = "time" ;
+# 		TIME:long_name = "time of sample midpoint" ;
+# 		TIME:units = "days since 1950-01-01T00:00:00 UTC" ;
+# 		TIME:axis = "T" ;
+# 		TIME:valid_min = 10957. ;
+# 		TIME:valid_max = 54787. ;
+# 		TIME:calendar = "gregorian" ;
+# 		TIME:ancillary_variables = "TIME_bnds" ;
+# 	double TIME_bnds(TIME, bnds) ;
+# 		TIME_bnds:name = "time open, closed" ;
+# 		TIME_bnds:long_name = "time sample open, closed" ;
+# 		TIME_bnds:units = "days since 1950-01-01T00:00:00 UTC" ;
+# 		TIME_bnds:axis = "T" ;
+# 		TIME_bnds:valid_min = 10957. ;
+# 		TIME_bnds:valid_max = 54787. ;
+# 		TIME_bnds:calendar = "gregorian" ;
+# 	double NOMINAL_DEPTH ;
+# 		NOMINAL_DEPTH:axis = "Z" ;
+# 		NOMINAL_DEPTH:long_name = "nominal depth" ;
+# 		NOMINAL_DEPTH:positive = "down" ;
+# 		NOMINAL_DEPTH:reference_datum = "sea surface" ;
+# 		NOMINAL_DEPTH:standard_name = "depth" ;
+# 		NOMINAL_DEPTH:units = "m" ;
+# 		NOMINAL_DEPTH:valid_max = 12000. ;
+# 		NOMINAL_DEPTH:valid_min = -5. ;
+# 	double LATITUDE ;
+# 		LATITUDE:standard_name = "latitude" ;
+# 		LATITUDE:long_name = "latitude of anchor" ;
+# 		LATITUDE:units = "degrees_north" ;
+# 		LATITUDE:axis = "Y" ;
+# 		LATITUDE:valid_min = -90. ;
+# 		LATITUDE:valid_max = 90. ;
+# 		LATITUDE:reference_datum = "WGS84 coordinate reference system" ;
+# 		LATITUDE:coordinate_reference_frame = "urn:ogc:crs:EPSG::4326" ;
+# 	double LONGITUDE ;
+# 		LONGITUDE:standard_name = "longitude" ;
+# 		LONGITUDE:long_name = "longitude of anchor" ;
+# 		LONGITUDE:units = "degrees_east" ;
+# 		LONGITUDE:axis = "X" ;
+# 		LONGITUDE:valid_min = -180. ;
+# 		LONGITUDE:valid_max = 180. ;
+# 		LONGITUDE:reference_datum = "WGS84 coordinate reference system" ;
+# 		LONGITUDE:coordinate_reference_frame = "urn:ogc:crs:EPSG::4326" ;
+# 	float pressure_actual(TIME) ;
+# 		pressure_actual:_FillValue = NaNf ;
+# 		pressure_actual:long_name = "actual pressure" ;
+# 		pressure_actual:units = "dbar" ;
+# 		pressure_actual:uncertainty = "3" ;
+# 		pressure_actual:comment = "actual" ;
+# 		pressure_actual:comment_method = "pressure from nearest instrument on mooring, extrapolated to trap position" ;
+# 		pressure_actual:valid_min = -2.f ;
+# 		pressure_actual:valid_max = 12000.f ;
+# 		pressure_actual:coordinates = "TIME LATITUDE LONGITUDE NOMINAL_DEPTH" ;
+# 	float sample(TIME) ;
+# 		sample:_FillValue = NaNf ;
+# 		sample:long_name = "sample number" ;
+# 		sample:units = "1" ;
+# 		sample:coordinates = "TIME LATITUDE LONGITUDE NOMINAL_DEPTH" ;
+# 		sample:ancillary_variables = "sample_quality_control" ;
 
     # load variables into variables and file-variables
     for var_name in ds.variables.keys():
         print("variable name", var_name)
         p = ds.variables[var_name]
 
-        res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (var_name,))
-        var_id_n = res.fetchone()
+        var_names = [var_name]
+        if var_name is "TIME_bnds":
+            var_names = ["TIME_OPEN", "TIME_CLOSE"]
 
-        if var_id_n is None:
-            # variables simply the variable name to var-id map
-            cur.execute('INSERT OR IGNORE INTO variables (name) VALUES (?)', (var_name,))
+        for name in var_names:
+            res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (name,))
+            var_id_n = res.fetchone()
 
-        res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (var_name,))
-        var_id = res.fetchone()[0]
+            if var_id_n is None:
+                # variables simply the variable name to var-id map
+                cur.execute('INSERT OR IGNORE INTO variables (name) VALUES (?)', (name,))
 
-        print(var_id, 'variable', var_name, p.long_name, p.dtype)
-        try:
-            units = p.units
-        except AttributeError:
-            units = 'NA'
+            res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (name,))
+            var_id = res.fetchone()[0]
 
-        print(var_id, 'variable', var_name, 'unit', units)
+            print(var_id, 'variable', name, p.long_name, p.dtype)
+            try:
+                units = p.units
+            except AttributeError:
+                units = 'NA'
 
-        try:
-            comment = p.comment
-        except AttributeError:
-            comment = 'NA'
+            print(var_id, 'variable', name, 'unit', units)
 
-        print(var_id, 'variable', var_name, 'comments', comment)
+            try:
+                comment = p.comment
+            except AttributeError:
+                comment = 'NA'
 
-        # save the variable metadata to the file_variables table
-        cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment) VALUES (?,?,?,?,?,?)', (file_id, var_id, p.long_name, p.dtype.name, units, comment))
+            print(var_id, 'variable', name, 'comments', comment)
 
-        # load the variable data
-        i = 0
-        try:
-            # this is true for nominal depth, latitude and longitude
-            if not ds.variables[var_name].shape:
-                d = ds.variables[var_name]
-                # this is a hack to give lat, lon and nominal_depth the same shape as other variables
+            # save the variable metadata to the file_variables table
+            cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment) VALUES (?,?,?,?,?,?)', (file_id, var_id, p.long_name, p.dtype.name, units, comment))
+
+            # load the variable data
+            i = 0
+            try:
                 for m in range(len(ds.variables["TIME"])):
                     # load the data where it's not unknown or nan
-                    if str(ds.variables[var_name][0]) != 'nan' and ds.variables[var_name][0] != netCDF4.default_fillvals["f4"]:
-                        #print('variable', var_name, i, d[0])
-                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)', (file_id, i, var_id, str(d[0])))
-                    i += 1
-            # this is true for all variables, except TIME_bnds
-            elif len(ds.variables[var_name].shape) == 1:
-                d = ds.variables[var_name][:]
-                for m in range(len(ds.variables[var_name])):
-                    # load the data where it's not unknown or nan
-                    if str(ds.variables[var_name][m]) != 'nan' and ds.variables[var_name][m] != netCDF4.default_fillvals["f4"]:
-                        #print('variable', var_name, ds.variables[var_name][m])
-                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[m])))
-                    i += 1
-            # this is true for TIME_bnds
-            elif len(ds.variables[var_name].shape) >1:
-                d = ds.variables[var_name][:]
-                for m in range(len(ds.variables[var_name])):
-                    # load the data where it's not unknown or nan
-                    if (str(ds.variables[var_name][m]) != 'nan' and ds.variables[var_name][m] != netCDF4.default_fillvals["f4"]).all():
-                        # print('variable', var_name, ds.variables[var_name][m])
-                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)', (file_id, i, var_id, str(d[m])))
+                    d = ds.variables[var_name][:]
+                    data_idx = m
+                    if not p.shape:  # for latitude, longitude, nominal_depth
+                        data_idx = 0
+
+                    if name == "TIME_OPEN":
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[data_idx][0])))
+                    elif name == "TIME_CLOSE":
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[data_idx][1])))
+                    else:
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)', (file_id, i, var_id, str(d[data_idx])))
                     i += 1
 
-        except KeyError:
-            pass
+            except KeyError as e:
+                print("KeyError", e)
+                pass
 
     # save time when we processed this file
     cur.execute('UPDATE file SET date_loaded=? WHERE file_id = ?', (datetime.now().strftime("%Y-%m-%d, %H:%M:%S"), file_id))
