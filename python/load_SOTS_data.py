@@ -21,8 +21,8 @@ def download_file_from_server_endpoint(server_endpoint, local_file_path):
 
 
 
-#dbname = r"C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\sediment_data.sqlite\sediment_data.sqlite"
-dbname = "data/sediment_data.sqlite"
+dbname = r"C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\sediment_data.sqlite\sediment_data.sqlite"
+#dbname = "data/sediment_data.sqlite"
 
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
@@ -37,7 +37,7 @@ for fn in files_to_load:
     uri = fn[1]
     file_id = fn[0]
     fnsplit = uri.split('/')
-    filename = "data/" + fnsplit[-1]
+    filename = fnsplit[-1]
 
     # download netCDF file to retrieve the data set
 
@@ -163,7 +163,7 @@ for fn in files_to_load:
         p = ds.variables[var_name]
 
         var_names = [var_name]
-        if var_name is "TIME_bnds":
+        if var_name == "TIME_bnds":
             var_names = ["TIME_OPEN", "TIME_CLOSE"]
 
         for name in var_names:
@@ -199,10 +199,11 @@ for fn in files_to_load:
             i = 0
             try:
                 for m in range(len(ds.variables["TIME"])):
-                    # load the data where it's not unknown or nan
+                    # load the data
                     d = ds.variables[var_name][:]
                     data_idx = m
                     if not p.shape:  # for latitude, longitude, nominal_depth
+                        d = ds.variables[var_name]
                         data_idx = 0
 
                     if name == "TIME_OPEN":
@@ -218,7 +219,7 @@ for fn in files_to_load:
                 pass
 
     # save time when we processed this file
-    cur.execute('UPDATE file SET date_loaded=? WHERE file_id = ?', (datetime.now().strftime("%Y-%m-%d, %H:%M:%S"), file_id))
+    cur.execute('UPDATE file SET date_loaded=? WHERE file_id = ?', (datetime.datetime.now().strftime("%Y-%m-%d, %H:%M:%S"), file_id))
     con.commit()  # only commit when entire file inserted
 
 cur.close()
