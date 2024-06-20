@@ -5,7 +5,8 @@ import os
 
 import pangaeapy.pandataset as pd
 
-dbname = "sediment_data.sqlite"
+#dbname = "sediment_data.sqlite"
+dbname = "test_sed_data.sqlite"
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
 

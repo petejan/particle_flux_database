@@ -21,8 +21,9 @@ def download_file_from_server_endpoint(server_endpoint, local_file_path):
 
 
 
-dbname = r"C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\sediment_data.sqlite\sediment_data.sqlite"
+#dbname = r"C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\sediment_data.sqlite\sediment_data.sqlite"
 #dbname = "data/sediment_data.sqlite"
+dbname = "test_sed_data.sqlite"
 
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
