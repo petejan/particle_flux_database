@@ -2,7 +2,8 @@ import sqlite3
 import pandas as pd
 
 
-def create_processed_data_db(dbname):
+def create_processed_data_db():
+    dbname = "test_sed_data.sqlite"
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -2989,9 +2990,10 @@ def add_date_downloaded(dbname):
 
 
 if __name__ == "__main__":
-    dbname = "test_sed_data.sqlite"
-    fn = 'Pangaea_wanted_variables_2.csv'
-    var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
+#    fn = 'Pangaea_wanted_variables_2.csv'
+#    var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
+#    filename = 'conversion_factors.csv'
+#    var_dict = pd.read_csv(filename).to_dict()
 
     u_mg = {'mg m-2 d-1', 'mg m-2 day-1', 'mg C m-2 d-1', 'mg N m-2 d-1', 'mg Chl a m-2 d-1',
             'mg Chl equivalents a m-2 d-1', 'mg/m2/d', 'mg/m2/day', 'mg m**2 d*1', 'mg m**2 day*1',
@@ -3035,11 +3037,9 @@ if __name__ == "__main__":
                         'pop', 'opa', 'psi', 'psio2', 'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn',
                         'ba', 'lithogenic', 'detrital', 'ti'}
 
-    filename = 'conversion_factors.csv'
-    var_dict = pd.read_csv(filename).to_dict()
     # print(dict_from_csv)
 
-    create_processed_data_db(dbname)
+    create_processed_data_db()
 #    add_timestamp_var(var_interp, dbname)
     # add_duration_var(var_interp, dbname)
 #    add_time_recovered_var(var_interp, dbname)
