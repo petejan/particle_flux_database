@@ -1,12 +1,9 @@
 import sqlite3
 import datetime
-import sys
-import datetime
-import os
-import netCDF4
 from netCDF4 import Dataset
 import requests
-import shutil as shutil
+import pandas as pd
+#import shutil as shutil
 
 # function to download netCDF files from the IMOS thredds server
 def download_file_from_server_endpoint(server_endpoint, local_file_path):

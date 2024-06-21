@@ -2990,10 +2990,11 @@ def add_date_downloaded(dbname):
 
 
 if __name__ == "__main__":
-#    fn = 'Pangaea_wanted_variables_2.csv'
-#    var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
-#    filename = 'conversion_factors.csv'
-#    var_dict = pd.read_csv(filename).to_dict()
+#    dbname = 'test_sed_data.sqlite'
+    fn = 'Pangaea_wanted_variables_2.csv'
+    var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
+    filename = 'conversion_factors.csv'
+    var_dict = pd.read_csv(filename).to_dict()
 
     u_mg = {'mg m-2 d-1', 'mg m-2 day-1', 'mg C m-2 d-1', 'mg N m-2 d-1', 'mg Chl a m-2 d-1',
             'mg Chl equivalents a m-2 d-1', 'mg/m2/d', 'mg/m2/day', 'mg m**2 d*1', 'mg m**2 day*1',
