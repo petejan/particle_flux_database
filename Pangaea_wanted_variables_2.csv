@@ -1,0 +1,627 @@
+name,units,count(units),group_concat(comment),column_name
+Al,%,260,"of total lithogenic material,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,total,residues,leachates,total,residues,total,residues,lower value,upper value,27Al,27Al,detection limit 0.2 ppm,leached,residue,mass %,fraction < 2mm, detection limit 10 ppm,fraction < 2mm, detection limit 0.5 ppm,fraction < 2mm, detection limit 0.2 ppm,fraction < 2mm, detection limit 10 ppm,fraction < 2mm, detection limit 300 ppm,wt. %,concentration of aluminium,Aluminum",pal
+Al e,±,4,"Reproducibility: very good,Reproducibility: very good,Reproducibility: very good",pal_sd
+Al flux,%,9,"particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm",pal
+Al flux,mg/m**2/day,43,"size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm",pal
+Al flux,µmol/cm**2/a,8,,pal
+Al part std dev,±,2,,pal_sd
+Al std dev,±,14,1 sigma,pal_sd
+Al unc,±,3,measured in sediment (grain size <63 µm),pal_sd
+Al_QC,unitless,1,quality control flag,pal_qc
+Ann mass flux,g/m**2/a,97,"mass flux,Preserved vertical flux",mass_total
+BPC flux,mg/m**2/day,1,,carbon_total
+BSi_mass_flux,mg m-2 d-1,56,"<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm",psi
+BSi_mass_flux_quality_control,unitless,56,"quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux,quality flag for particulate biogenic silicon mass flux",psi_qc
+BSi_mass_flux_uncertainty,mg m-2 d-1,56,"uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux,uncertainty for particulate biogenic silicon mass flux",psi_sd
+Ba,%,30,"concentration of barium,barium",ba
+Ba e,±,3,"Reproducibility: very good,Reproducibility: very good,Reproducibility: very good",ba_sd
+Ba flux,µg/m**2/day,13,,ba
+Ba part std dev,±,5,,ba_sd
+Ba std dev,±,32,"2Sigma Error,2Sigma Error,in %,n = 6,in %",ba_sd
+Ba unc,±,4,measured in sediment (grain size <63 µm),ba_sd
+Ba xs flux,µmol/m**2/a,1,,NA
+Ba xs flux std dev,±,1,,NA
+Ba_QC,unitless,1,quality control flag,ba_qc
+Bathy depth,m,12,ETOPO1 bathymetry,bathymetry_depth_ETOPO1
+Biog,%,2,"Mollusk/echinoid,Plant fragments/Organic matter",NA
+Biog flux,g/m**2/a,1,2 x POC + CaCO3 + Opal (Opal = 2.1x bPSi),NA
+Biog flux,mg/m**2/day,4,2 x POC + CaCO3 + Opal (Opal = 2.1x bPSi),NA
+Biogenic,%,1,"of total components, # = 18-20",NA
+Biogenic_SiO2,%,1,biogenic SiO2,psio2
+Biogenic_SiO2_flux,mg/m2/d,1,biogenic SiO2 flux,psio2
+C,%,14,"determined from material collected with sediment traps, irregularly in 2017, in 4-week intervals in 2018,Detection limit: 0.05",carbon_total
+C (carb),%,13,"wt. %,of total biogenic material",carbon_total
+C flux,g/m**2/a,1,of dominant species,carbon_total
+C flux,mg/m**2/day,77,"Carbon flux, as measured by the contents of the sediment trap over the length of time indicated",carbon_total
+C flux std dev,±,10,"Standard deviation for replicates = 3, Difference for replicates = 2",carbon_total_sd
+C inorg flux,mg/m**2/day,9,,pic
+C inorg flux,mmol/m**2/day,35,"particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm",pic
+C inorg flux std dev,±,6,,pic_sd
+C org,%,2,,poc
+C org mar,%,107,"GF/F filtered,centrifuged,centrifuged,centrifuged,centrifuged,GF/F filtered,centrifuged,Element analysis CHN/Acidification - 0.4-0.45 µm pore filtered,centrifuged,GF/F filtered,centrifuged",poc
+C_org,mg C m-2 d-1,1,Particulate organic carbon flux,poc
+Ca,%,187,"particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,fraction < 2mm, detection limit 1 %,uncertainty = 3 %,from Chavagnac et al. (2005), corrected by a 5 % error on content determination (error by ICP-AES analysis),detection limit = 0.5 %,detection limit 20 ppm,uncorrected,mass %,fraction < 2mm, detection limit 3 ppm,fraction < 2mm, detection limit 0.5 ppm,fraction < 2mm, detection limit 5 ppm,fraction < 2mm, detection limit 3 ppm,fraction < 2mm, detection limit 50 ppm,fraction < 2mm, detection limit 1 %,concentration of calcium,Calcium",ca
+Ca e,±,4,"Reproducibility: very good,Reproducibility: very good,Reproducibility: very good",ca_sd
+Ca flux,mg/m**2/day,16,,ca
+Ca flux,µg/m**2/a,1,,NA
+Ca std dev,±,19,"1 sigma uncertainty,1 sigma uncertainty,2Sigma Error,2Sigma Error",ca_sd
+Ca unc,±,4,measured in sediment (grain size <63 µm),ca_sd
+CaCO3,%,262,"of total flux,of total flux,of total flux,of total flux,of total flux,of total flux,CaCO3 = TIC * 8.33,CaCO3 = TIC * 8.33,CaCO3 = TIC * 8.33,CaCO3 = TIC * 8.33,CaCO3 = TIC * 8.33,Carmhograph 6,CaCO3 = TIC * 8.33,CaCO3 = TIC * 8.33,Carmhograph 6,of total flux,Carmhograph 6,Carmhograph 6,Carmhograph 6,Carmhograph 6,Carmhograph 6,Carmhograph 6,Carmhograph 6,wt. %,of total flux,percentage of total flux,percentage of total flux,of total biogenic material,based on loss on leaching with 1M HCl,based on the assumption that all Ca is present as CaCO3,CaCO3 [%] = 2.5 * Ca [%],based on an estimated stoichiometric amount of CO2 assuming that all the measure,computed from calcium (ca),computed from carbonate carbon (cc),based on reflectance measurements on Hole 1119C (Millwood et al., 2002, doi:10.2973/odp.proc.sr.181.208.2002),calculated from total Ca concentration,determined at University of Rhode Island,calculated from total Ca concentration,determined at University of Rhode Islan,from Martinez et al. 2006,%carbonate is estimated from Ca and Al concentrations by correcting for detrital Ca assuming a detrital Ca/Al ratio of 0.26. This ratio was determined to give the best fit to the sparse shipboard %carbonate data for Site 1234,Salt-corrected,wt. %,calcium carbonate",caco3
+CaCO3 flux,%,20,"wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%",caco3
+CaCO3 flux,g/m**2/a,6,,caco3
+CaCO3 flux,mg m-2 day-1,1,Ca-based CaCO3 flux (Ca (%) - Al (%) x 0.5) x 100 / 40,caco3
+CaCO3 flux,mg/m**2/day,211,"original unit g/m**2/d**1,(Total C-org C)*8.33*flux total,(Total C-org C)*8.33*flux total,Average,CaCO3 flux =8.34*PIC flux,CaCO3 flux =8.34*PIC flux,CaCO3 flux =8.34*PIC flux,CaCO3 flux =8.34*PIC flux,CaCO3 flux =8.34*PIC flux,Excl. aragonite",caco3
+CaCO3 flux,mmol/m**2/day,1,,caco3
+CaCO3 flux std dev,±,2,,caco3_sd
+CaCO3 frac,%,2,"size fraction less than 5 µm,size fraction less than 5 µm",caco3
+CaCO3 std dev,±,2,Salt-corrected,caco3_sd
+CaCO3-1,%,1,Inorganic Carbon based CaCO3 (inorg-C x 100) /12,caco3
+CaCO3-2,%,1,Ca based CaCO3 (Ca (%) - 0.5 x Al (%)) x 100 / 40,caco3
+CaCO3_flux,mg/m2/d,1,calcium carbonate flux,caco3
+Ca_QC,unitless,1,quality control flag,ca_qc
+Cal flux,mg/m**2/day,7,Mass flux,ca
+Cal flux std dev,±,6,,ca_sd
+Cal std dev,±,8,,ca_sd
+Calc depth,m,3,"range minimum,range maximum",NA
+Carb,%,98,"bulk sediment,bulk sediment,size fraction less than 63 µm,bulk sediment,bulk sediment,bulk sediment,bulk sediment,bulk sediment,bulk sediment,size fraction less than 63 µm,bulk sediment,bulk sediment,bulk sediment,bulk sediment",carbon_total
+Carb part std dev,±,2,,carbon_total_sd
+CarbFlux,mg/m2/day,1,"total carbonate flux, in mg per m2 per day.",caco3
+CarbonFlux,mg/m**2/d,1,particulate carbon flux,carbon_total
+Carbon_flux,mg/m2/d,1,Carbon (mg/m2/d),carbon_total
+Carbon_flux_SD,mg/m2/d,1,Standard Deviation presented where n=3. Difference between replicate presented where n=2,carbon_total_sd
+Ccarb,%,2,carbonate (i.e. inorganic) carbon,pic
+Ccarb flux,%,14,"wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%",pic
+Ccarb_flux,mg/m2/d,1,inorganic carbon flux,pic
+Chl,%,22,"Relative area percentage,Relative area percentage,Relative area percentage,Relative area percentage,Relative area percentage,Relative area percentage,Relative area percentage,Relative area percentage,Relative area percentage,Relative area percentage",chl
+Chl,mg Chl a m-2 d-1,1,Chlorophyll Flux (Chl a),chl
+Chl a,%,2,,chl
+Chl a flux,mg/m**2/day,47,"corresponds to ICE event; measured from filtered water samples from sediment trap cylinders with about 24-hour deployment, then calculated,>10µm; corresponds to ICE event; measured from filtered water samples from sediment trap cylinders with about 24-hour deployment, then calculated",chl
+Chl a flux,pmol/m**2/day,4,,chl
+Chl a flux,µg/m**2/day,1,sum,chl
+Chl a flux std dev,±,10,,chl_sd
+Chl a std dev,±,2,,chl_sd
+Chl a+DV Chl a flux,µg/m**2/day,6,,chl
+Chl a+phide flux,µg/m**2/day,2,,chl
+Chl flux,mg/m**2/day,24,"Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a,Chlorophyll a and chlorophyllide a",chl
+Chl flux,µg/m**2/day,9,Chl a,chl
+Chl_flux,mg/m2/day,1,chlorophyll flux (fluorometer detects chlorophyll-a and chlorophyllide-a),chl
+Chloro pig std dev,±,21,,chl_sd
+Chloropigm flux,µg/m**2/day,1,,chl
+Comments,unitless,1,notes/comments,comments
+Corg,%,1,organic carbon,poc
+CorgFlux,mg/m2/day,1,"total organic carbon flux, in mg per m2 per day.",poc
+Corg_Flux,mg/m2/d,1,organic carbon flux,poc
+Corg_flux_Th,mmol m-2 d-1,1,"Organic carbon flux, using the thorium-based approach",poc
+Corg_flux_Th_sd,mmol m-2 d-1,1,"Standard deviation of organic carbon flux, using the thorium-based approach. Uncertainty in Th-based approach calculated by propagating uncertainty in upwelling velocity and Th deficiency.",poc_sd
+Corg_flux_sed,mmol m-2 d-1,1,Sediment trap-based organic carbon flux,poc
+Corg_flux_sed_sd,mmol m-2 d-1,1,Standard deviation of sediment trap-based organic carbon flux. Uncertainty is reported as 50% for all sediment trap deployments.,poc_sd
+DSi + PSi flux,mg/m**2/day,15,"biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic",psi
+DSiO2 flux,mg/m**2/day,6,,psio2
+Date/Time,,13739,,timestamp
+Date_Recovered,unitless,1,Recovery date and time in format %m/%d/%y %H:%M (e.g. 5/13/17 12:50). Local time zone variesÿbetween US/Eastern and US/Central over the course of this dataset.,time_recovered
+Days,days,36,"number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ",duration
+Days cum,day,16,,duration
+Dec_Year_end,unitless,2,"Decimal Year      (recovery)            ,Decimal Year      (recovery)            ",time_recovered
+Dec_Year_start,unitless,2,"Decimal Year      (deployment)            ,Decimal Year      (deployment)            ",timestamp
+Deploy_DateTime_UTC,unitless,1,Time of sediment trap deployment in ISO8601 format,timestamp
+Depth,Meters,3,"Depth,Depth,Depth",depth
+Depth,m,39,"Depth,Depth of sample collection,Nominal depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth,sampling depth",depth
+Depth bot,m,474,"trap depth lower,Bottom Core depth (below sea floor) [m CSF-A],Bottom Core depth (below sea floor) [m CSF-B],Cycle bottom,sample,CSF-A (m)",depth
+Depth corr,m,7,,depth
+Depth top,m,473,"trap depth upper,Top Core depth (below sea floor) [m CSF-B],Cycle, top,sample,Sample surface,CSF-A (m)",depth
+Depth w.e.,m,2,Trap depth,depth
+Depth water,m,10612,"Deployment depth,trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,mean trap depth,trap depth,trap deployment depth,trap deployment depth,bsl,Sediment trap deployment depth,salt water,corresponds to CTD event; measurements from Nikolopoulos et al. (2016),bsl,water depth of the sediment trap,Deployment depth,Min,Max,SP and LP,ST,BU,# = moonpool,Present depth in metres below sea level,#0.0=bottom",depth
+Depth water bot,m,2,,depth
+Depth water exp,m,5,"top,bottom",depth
+Depth water top,m,1,,depth
+Detr flux,g/m**2/a,1,,detrital
+Detr flux std dev,±,1,,detrital_sd
+Detrital flux,mg/m**2/day,1,,detrital
+Detritus,%,4,"of total components,detrital,detrital",detrital
+Dry Weight Flux (mg/m2/day),mg/m2/day,1,Dry Weight Flux (mg/m2/day),mass_total
+Dry Weight Flux (mg/m2/day) Flag,unitless,1,Dry Weight Flux (mg/m2/day) Flag,mass_total_qc
+Duration,days,785,"deployment time,days sampled,days open,days sampled,days open,days open,days since 1. September 1995,days since 1. September 1995,days since 1. September 1995,days after start,exposure,Sampling d,Sampling d,Sampling d,pooled,sampling interval days,days after release,Days collecting",duration
+Duration,h,2,,duration
+Duration,hours,1,Duration of trap deployment,duration
+Duration,number of days,1,measure of the passing of time of sample collection,duration
+Duration,unitless,1,number of days the sample collected,duration
+Duration_d,days,1,duration of sample collection,duration
+End,YYYY-MM-DD,36,"ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date,ending date",time_recovered
+EndDate,YYYY-MM-DD,1,end date of sample collection in GMT,time_recovered
+Fe,%,332,"determined from material collected with sediment traps, irregularly in 2017, in 4-week intervals in 2018,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,fraction < 2mm, detection limit 0.01 %,uncertainty = 2 %,from Chavagnac et al. (2005),CFB,detection limit 10 ppm,AAS,INAA,leached,residue,mass %,fraction < 2mm, detection limit 10 ppm,fraction < 2mm, detection limit 0.5 ppm,fraction < 2mm, detection limit 10 ppm,fraction < 2mm, detection limit 10 ppm,fraction < 2mm, detection limit 200 ppm,fraction < 2mm, detection limit 100 ppm,concentration of iron,iron",fe
+Fe e,±,4,"Reproducibility: very good,Reproducibility: very good,Reproducibility: very good",fe_sd
+Fe flux,mg/m**2/day,19,,fe
+Fe flux,µg/m**2/a,1,,NA
+Fe flux,µmol/cm**2/a,5,,fe
+Fe flux std dev,±,1,,fe_sd
+Fe part std dev,±,2,,fe_sd
+Fe std dev,±,13,,fe_sd
+Fe tot,%,1,,fe
+Fe unc,±,4,measured in sediment (grain size <63 µm),fe_sd
+Fe_QC,unitless,1,quality control flag,fe_qc
+Flag C flux,mg/m**2/day,6,,carbon_total_qc
+Flux Ba,µg/cm**2/a,1,Ba in barite,NA
+Flux std dev,±,10,"total,total,total,total,total,Standard deviation for replicates = 3, Difference for replicates = 2. Total,total,total",mass_total_sd
+Flux tot,mg/m**2/day,145,"original unit g/m**2/d**1,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,> 1 mm,< 1 mm,< 1 mm,< 1 mm,< 1 mm,< 1 mm,< 1 mm,< 1 mm,> 1 mm,< 1 mm,< 1 mm,> 1 mm,< 1 mm,< 1 mm,< 1 mm,> 1 mm,< 1 mm,< 1 mm,< 1 mm,> 1mm,> 1mm,Korte et al. 2017,total, per cylinder,dry weight,Sedimentation rate",mass_total
+Inorg-C,%,2,"concentration of inorganic carbon,Inorganic carbon",pic
+Inorg-C_QC,unitless,1,quality control flag,pic_qc
+LAT,degrees,1,latitude,latitude
+LATITUDE,degrees_north,58,"latitude,Latitude of each location,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude,latitude",latitude
+LON,degrees,1,longitude,longitude
+LONGITUDE,degrees_east,58,"longitude,Longitude of each location,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude,longitude",longitude
+Lat,decimal degrees,1,"Latitude (N+, S-)",latitude
+Latitude,deg,14414,,latitude
+Latitude,degrees,1,latitude,latitude
+Latitude,degrees North,1,latitude,latitude
+Latitude ,decimal degrees,1,Latitude ,latitude
+LithFlux,mg/m2/day,1,"the estimated lithogenic flux, in mg per m2 per day.",lithogenic
+Lithic,%,2,total (including polycrystalline quartz),NA
+Litho,%,42,"of total flux,of total flux,of total flux,of total flux,of total flux,of total flux,of total flux,of total flux,percentage of total flux,percentage of total flux,lithogenic matter, of total lithogenic material,Lithogenic in bulk (FA = factor analysis results from bulk sediment composition),Lithogenic in bulk (TI),Extracted from bulk (by mass),Using the measured 232Th concentration assuming 10 ppm 232Th in the lithogenic fraction and a conversion factor of 0.24253 µg/dpm,Using the measured 232Th concentration assuming 10 ppm 232Th in the lithogenic fraction",lithogenic
+Litho flux,%,21,"wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,Corg/N atom",lithogenic
+Litho flux,g/m**2/a,39,,lithogenic
+Litho flux,mg/m**2/day,108,"original unit g/m**2/d**1,Mineral flux-opal flux-CaCO3 flux,Mineral flux-opal flux-CaCO3 flux,Average",lithogenic
+Litho flux std dev,±,2,,lithogenic_sd
+Lithogenic flux,mg m-2 day-1,1,(Al (%) x 100) / 8,lithogenic
+Lon,decimal degrees,1,"Longitude (E+, W-)",longitude
+Longitude,deg,14414,,longitude
+Longitude,degrees,1,longitude,longitude
+Longitude,degrees East,1,longitude,longitude
+Longitude ,decimal degrees,1,Longitude ,longitude
+MF_Al,mg m**2 d*1,1,mass flux of aluminium (Al),pal
+MF_Cinorg,mg m**2 d*1,1,mass flux inorganic carbon (Cinorg),pic
+MF_Corg,mg m**2 d*1,1,mass flux organic carbon (Corg),poc
+MF_Ls1mm,mg m**2 d*1,1,mass flux of the <1mm particle sample,mass_total
+MF_N_,mg m**2 d*1,1,Mass flux of nitrogen (N),pon
+MF_Sibio,mg m**2 d*1,1,mass flux biogenic Si (Sibio),psi
+MLD,m,12,"ARGO (2000-2018) - Mixed Layer Depth in situ data from Argo Project (http://www.argo.net),NOBM - Mixed Layer Depth Modelled data from the NASA Ocean Biogeochemical Model (https://gmao. gsfc.nasa.gov/reanalysis/MERRA-NOBM/),ARGO (2000-2018) - Mixed Layer Depth in situ data from Argo Project (http://www.argo.net),NOBM - Mixed Layer Depth Modelled data from the NASA Ocean Biogeochemical Model (https://gmao. gsfc.nasa.gov/reanalysis/MERRA-NOBM/),ARGO (2000-2018) - Mixed Layer Depth in situ data from Argo Project (http://www.argo.net),NOBM - Mixed Layer Depth Modelled data from the NASA Ocean Biogeochemical Model (https://gmao. gsfc.nasa.gov/reanalysis/MERRA-NOBM/),ARGO (2000-2018) - Mixed Layer Depth in situ data from Argo Project (http://www.argo.net).,NOBM - Mixed Layer Depth Modelled data from the NASA Ocean Biogeochemical Model (https://gmao. gsfc.nasa.gov/reanalysis/MERRA-NOBM/),at which sigma-theta is ≥ than the surface density by 0.125 kg/m3 (Levitus, 1982),at which sigma-theta is > than the surface density by 0.2*a (where a is the thermal expansion coefficient) (Sprintall & Tomczak, 1992),at which buoyancy frequency (N2) > than the standard deviation of N2 (Mojica and Gaube, in review)",mixed_layer_depth
+Mass Flux,mg m-2 day-1,1,Total mass flux,mass_total
+Mass flux,g/m**2/a,2,"including salt,no salt",mass_total
+Mass flux,mg m**2 day*1,36,"sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1],sinking_mass_flux_of_particulate_matter_in_sea_water  [mg m-2 d-1]",mass_total
+Mass std dev,±,2,"1s err.,1s err.",mass_total_sd
+MassFlux,mg/m2/day,1,"in mg per m2 per day. NOTE: The 500m and 1500m fluxes are semi-quantitative for deployments between Oct 1992 and Jan 1996 (see ""2019_OFP methodologies"" file)",mass_total
+Mass_Flux,mg/m2/day,1,Mass flux,mass_total
+Mass_QF,unitless,36,"quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag",mass_total_qc
+Mass_f_E,mg/m**2/d,1,mass flux of split E,mass_total
+Mass_f_F,mg/m**2/d,1,mass flux of split F,mass_total
+Mass_f_G,mg/m**2/d,1,mass flux of split G,mass_total
+Mass_f_H,mg/m**2/d,1,mass flux of split H,mass_total
+Mass_f_err_E,mg/m**2/d,1,"mass flux uncertainty of split E,propagated from the per-filter analytical error",mass_total_sd
+Mass_f_err_F,mg/m**2/d,1,"mass flux uncertainty of split F,propagated from the per-filter analytical error",mass_total_sd
+Mass_f_err_G,mg/m**2/d,1,"mass flux uncertainty of split G,propagated from the per-filter analytical error",mass_total_sd
+Mass_f_err_H,mg/m**2/d,1,"mass flux uncertainty of split H,propagated from the per-filter analytical error",mass_total_sd
+Mass_f_err_mean,mg/m**2/d,1,"mass flux uncertainty,propagated from the maximum of either the per-filter analytical error or the standard deviation among replicate filter splits",mass_total_sd
+Mass_f_mean,mg/m**2/d,1,"mean mass flux of splits E, F, G, H",mass_total
+Mass_flux_1,mg/m2/d,2,"Mass flux #1 (mg /m^2/day)               ,Mass flux #1 (mg /m^2/day)               ",mass_total
+Mass_flux_2,mg/m2/d,2,"Mass flux #2 (mg /m^2/day)               ,Mass flux #2 (mg /m^2/day)               ",mass_total
+Mass_flux_3,mg/m2/d,2,"Mass flux #3 (mg /m^2/day)               ,Mass flux #3 (mg /m^2/day)               ",mass_total
+Mass_flux_avg,mg/m2/d,2,"Average mass flux (mg /m^2/day)                                 ,Average mass flux (mg /m^2/day)                                 ",mass_total
+Mean_Corg_flux,mmol m-2 d-1,1,Mean organic carbon flux,poc
+Mean_Corg_flux_sd,mmol m-2 d-1,1,Standard deviation of mean organic carbon flux. Uncertainty is reported as the same as in Th-based approach.,poc_sd
+MidDate,unitless,1,mid-point date of sample collection in GMT,time_mid
+MidJDay,unitless,1,Mid Julian Day is the Julian Day (Day of Year) of the midpoint of the sample collection period.,NA
+Mine flux,mg/m**2/day,2,"Total flux-org matter flux,Total flux-org matter flux",mass_total
+Mn,%,274,"particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,particulate,of bulk sediment,of bulk sediment,silt fraction of moraine,of bulk sediment,of bulk sediment,of bulk sediment,of bulk sediment,of bulk sediment,CFB,detection limit 1 ppm,leached,residue,mass %,fraction < 2mm, detection limit 0.5 ppm,fraction < 2mm, detection limit 0.05 ppm,fraction < 2mm, detection limit 1 ppm,fraction < 2mm, detection limit 0.5 ppm,fraction < 2mm, detection limit 80 ppm,concentration of manganese,manganese",mn
+Mn e,±,4,"Reproducibility: very good,Reproducibility: very good,Reproducibility: very good",mn_sd
+Mn flux,µg/m**2/day,24,,mn
+Mn part std dev,±,2,,mn_sd
+Mn std dev,±,21,"1 sigma uncertainty,1 sigma uncertainty,2Sigma Error,2Sigma Error",mn_sd
+Mn unc,±,3,measured in sediment (grain size <63 µm),mn_sd
+Mn_QC,unitless,1,quality control flag,mn_qc
+N,%,5,"determined from material collected with sediment traps, irregularly in 2017, in 4-week intervals in 2018,Detection limit: 0.02,concentration of nitrogen,Nitrogen",pon
+N flux,%,25,"wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm",pon
+N flux,g/m**2/a,25,1000 m,pon
+N flux,mg/m**2/day,180,"Nitrogen flux (NO3 uptake), as measured by the contents of the sediment trap over the length of time indicated,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged",pon
+N flux,mmol/m**2/day,38,"particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm",pon
+N flux std dev,±,19,"Standard deviation for replicates = 3, Difference for replicates = 2",pon_sd
+N org,%,48,wt. %,pon
+N org flux,%,1,,pon
+N org flux,mg/m**2/day,2,,pon
+N org std dev,±,1,,pon_sd
+N std dev,±,9,,pon_sd
+NO2+NO3 flux,µmol/m**2/day,1,,NA
+NO2+NO3 flux,µmol/m**2/h,1,,NA
+NO3,%,1,,pon
+NO3 std dev,±,3,,pon_sd
+NO3 std e,±,1,,pon_sd
+NOMINAL_DEPTH,m,56,"depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth,depth",depth
+N_QC,unitless,1,quality control flag,pon_qc
+N_f,mg/m**2/d,1,Total nitrogen flux of the sinking fraction operationally defined as particles <350 um. The nitrogen measured in all process blanks from the five cruises was averaged to determine the mean process blank in sediment trap tubes for the field program (0.015 +/- 0.006 mg N). This mean process blank was subtracted from the total nitrogen measured in each trap sample and the result was divided by the trap collection area (0.0113 m^2) and the deployment length to yield flux. Reported fluxes are the mean of measurements from 2 or 3 tubes.,pon
+N_f_A,mmol/m**2/d,1,total nitrogen flux of split A,pon
+N_f_B,mmol/m**2/d,1,total nitrogen flux of split B,pon
+N_f_C,mmol/m**2/d,1,total nitrogen flux of split C,pon
+N_f_D,mmol/m**2/d,1,total nitrogen flux of split D,pon
+N_f_err,mg/m**2/d,1,Total nitrogen flux error; Uncertainties are propagated from the standard deviation of the process blanks from the five cruises (0.006 mg N) and the standard deviation or range of the two or three TN measurements per NBST deployment.,pon_sd
+N_f_err_A,mmol/m**2/d,1,"total nitrogen flux uncertainty of split A, propagated from the per-filter analytical error",pon_sd
+N_f_err_B,mmol/m**2/d,1,"total nitrogen flux uncertainty of split B, propagated from the per-filter analytical error",pon_sd
+N_f_err_C,mmol/m**2/d,1,"total nitrogen flux uncertainty of split C, propagated from the per-filter analytical error",pon_sd
+N_f_err_D,mmol/m**2/d,1,"total nitrogen flux uncertainty of split D, propagated from the per-filter analytical error",pon_sd
+N_f_err_mean,mmol/m**2/d,1,"total nitrogen flux uncertainty, propagated from the maximum of either the per-filter analytical error or the standard deviation among replicate filter splits",pon_sd
+N_f_mean,mmol/m**2/d,1,"mean total nitrogen flux of splits A, B, C, D",pon
+N_flux_Th,mmol m-2 d-1,1,"Nitrogen flux, using the thorium-based approach",pon
+N_flux_Th_sd,mmol m-2 d-1,1,"Standard deviation of nitrogen flux, using the thorium-based apporach. Uncertainty in Th-based approach calculated by propagating uncertainty in upwelling velocity and Th deficiency.",pon_sd
+N_flux_sed,mmol m-2 d-1,1,Sediment trap-based nitrogen flux,pon
+N_flux_sed_sd,mmol m-2 d-1,1,Standard deviation of sediment trap-based nitrogen flux. Uncertainty is reported as 50% for all sediment trap deployments.,pon_sd
+N_org,mg N m-2 d-1,1,Particulate nitrogen flux,pon
+Nflux,mg/m2/day,1,"total nitrogen flux, in mg per m2 per day.",pon
+NitrogenFlux,mg/m**2/d,1,particulate nitrogen flux,pon
+Nitrogen_flux,mg/m2/d,1,Nitrogen (mg/m2/d),pon
+Nitrogen_flux_1,mg/m2/d,2,"Nitrogen flux #1 (mgN/m^2/day)               ,Nitrogen flux #1 (mgN/m^2/day)               ",pon
+Nitrogen_flux_2,mg/m2/d,2,"Nitrogen flux #2 (mgN/m^2/day)               ,Nitrogen flux #2 (mgN/m^2/day)               ",pon
+Nitrogen_flux_3,mg/m2/d,2,"Nitrogen flux #3 (mgN/m^2/day)               ,Nitrogen flux #3 (mgN/m^2/day)               ",pon
+Nitrogen_flux_SD,mg/m2/d,1,Standard Deviation presented where n=3. Difference between replicate presented where n=2,pon_sd
+Nitrogen_flux_avg,mg/m2/d,2,"Average Nitrogen flux (mgN/m^2/day),Average Nitrogen flux (mgN/m^2/day)",pon
+Nominal_lat,unitless,36,"Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude,Nominal latitude",latitude
+Nominal_lon,unitless,36,"nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude,nominal longitude",longitude
+OM,%,28,"of total flux,of total flux,of total flux,of total flux,of total flux,of total flux,published factors range from up to 2.0 and 2.5, i.e. are poorly constrained,published factors range from up to 2.0 and 2.5, i.e. are poorly constrained,published factors range from up to 2.0 and 2.5, i.e. are poorly constrained,published factors range from up to 2.0 and 2.5, i.e. are poorly constrained,published factors range from up to 2.0 and 2.5, i.e. are poorly constrained,published factors range from up to 2.0 and 2.5, i.e. are poorly constrained,published factors range from up to 2.0 and 2.5, i.e. are poorly constrained,of total flux,of total flux,of total biogenic material,organic matter,Org-C (%) / 0.35",NA
+OM flux,%,14,"wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%",NA
+OM flux,mg/m**2/day,74,"1.87*C org flux (cf. Anderson, 1995),1.87*C org flux (cf. Anderson, 1995),recovered, time-weighted for composite samples,recovered, time-weighted for composite samples,recovered, time-weighted for composite samples,recovered, time-weighted for composite samples,recovered, time-weighted for composite samples,recovered, time-weighted for composite samples,recovered, time-weighted for composite samples",NA
+OM std dev,±,6,,NA
+OM_flux,mg/m2/d,1,organic matter flux,NA
+OMflux std dev,±,6,,NA
+Opal,%,1,(Si (%) - 3.42 x Si (%)) x 6.72 / 28,opal
+Opal flux,mg m-2 day-1,1,(Si (%) - 3.42 x Al (%)) x 67.2 / 28,opal
+OpalFlux,mg/m2/day,1,"the opal flux, in mg per m2 per day.",opal
+Open_Time,HHMM,1,sample cup opening time,NA
+Opt depth,m,3303,,depth
+Org-C,%,2,"concentration of organic carbon,Organic carbon",poc
+Org-C (flux),mg m-2 day-1,1,(Total mass flux x organic carbon (%)) * 100,poc
+Org-C_QC,unitless,1,quality control flag,poc_qc
+Organic_carbon_flux_1,mg/m2/d,2,"Organic Carbon flux #1 (mgC/m^2/day)               ,Organic Carbon flux #1 (mgC/m^2/day)               ",poc
+Organic_carbon_flux_2,mg/m2/d,2,"Organic Carbon flux #2 (mgC/m^2/day)               ,Organic Carbon flux #2 (mgC/m^2/day)               ",poc
+Organic_carbon_flux_3,mg/m2/d,2,"Organic Carbon flux #3 (mgC/m^2/day)               ,Organic Carbon flux #3 (mgC/m^2/day)               ",poc
+Organic_carbon_flux_avg,mg/m2/d,2,"Average Organic Carbon flux (mgC/m^2/day)   ,Average Organic Carbon flux (mgC/m^2/day)   ",poc
+P,%,53,"of total biogenic material,mass %",pop
+P e,±,4,"Reproducibility: very good,Reproducibility: very good,Reproducibility: very good",pop_sd
+P flux,g/m**2/a,2,,pop
+P flux std dev,±,3,"Standard deviation for replicates = 3, Difference for replicates = 2",pop_sd
+P std dev,±,10,,pop_sd
+P unc,±,3,measured in sediment (grain size <63 µm),pop_sd
+PAR,%,1,,par
+PAR,mol quanta/m**2/day,2,,par
+PAl,mg/m**2/day,1,,pal
+PAl std dev,±,1,,pal_sd
+PCC flux,mg/m**2/day,2,,pic
+PCNT_AL,%,1,percentage of aluminium in the <1mm size fraction sample,pal
+PCNT_Cinorg,%,1,percentage of inorganic carbon in the <1mm size fraction sample,pic
+PCNT_Corg,%,1,percentage of organic carbon in the <1mm size fraction sample,poc
+PCNT_N,%,1,percentage of nitrogen in the <1mm size fraction sample,pon
+PCNT_Sibio,%,1,percentage of biogenic silicon in the <1mm size fraction sample,psi
+PC_mass_flux,mg m-2 d-1,56,"<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm",carbon_total
+PC_mass_flux_quality_control,unitless,56,"quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux,quality flag for particulate total carbon mass flux",carbon_total_qc
+PC_mass_flux_uncertainty,mg m-2 d-1,56,"uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux,uncertainty for particulate total carbon mass flux",carbon_total_sd
+PIC,%,4,"salt-corrected,weight fraction",pic
+PIC flux,%,9,"particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm",pic
+PIC flux,mg/m**2/day,21,PIC was calculated as 12% of carbonate by weight,pic
+PIC flux,mol/m**2/a,85,,pic
+PIC flux std dev,±,1,,pic_sd
+PIC_f_A,umol/m**2/d,1,particulate inorganic carbon flux of split A,pic
+PIC_f_B,umol/m**2/d,1,particulate inorganic carbon flux of split B,pic
+PIC_f_C,umol/m**2/d,1,particulate inorganic carbon flux of split C,pic
+PIC_f_D,umol/m**2/d,1,particulate inorganic carbon flux of split D,pic
+PIC_f_err_A,umol/m**2/d,1,"particulate inorganic carbon flux uncertainty of split A, propagated from the per-filter analytical error",pic_sd
+PIC_f_err_B,umol/m**2/d,1,"particulate inorganic carbon flux uncertainty of split B, propagated from the per-filter analytical error",pic_sd
+PIC_f_err_C,umol/m**2/d,1,"particulate inorganic carbon flux uncertainty of split C, propagated from the per-filter analytical error",pic_sd
+PIC_f_err_D,umol/m**2/d,1,"particulate inorganic carbon flux uncertainty of split D, propagated from the per-filter analytical error",pic_sd
+PIC_f_err_mean,umol/m**2/d,1,"particulate inorganic carbon flux uncertainty, propagated from the maximum of either the per-filter analytical error or the standard deviation among replicate filter splits",pic_sd
+PIC_f_mean,umol/m**2/d,1,"mean particulate inorganic carbon flux of splits A, B, C, D",pic
+PIC_flux,mmol/m2/day,1,Particulate inorganic carbon flux,pic
+PIC_mass_flux,mg m-2 d-1,56,"<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm",pic
+PIC_mass_flux_quality_control,unitless,56,"quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux,quality flag for particulate inorganic carbon mass flux",pic_qc
+PIC_mass_flux_uncertainty,mg m-2 d-1,56,"uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux,uncertainty for particulate inorganic carbon mass flux",pic_sd
+PN flux,mg m**2 day*1,36,"sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1],sinking_flux_of_particulate_total_nitrogen_in_sea_water  [mg m-2 d-1]",pon
+PN flux,mg/m**2/day,29,averagePN(mmol m-2d-1),pon
+PN std dev,±,1,,pon_sd
+PN_QF,unitless,36,"quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag",pon_qc
+PN_flux,mg/m2/day,1,particulate nitrogen flux,pon
+PN_mass_flux,mg m-2 d-1,56,"<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm",pon
+PN_mass_flux_quality_control,unitless,56,"quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux,quality flag for particulate total nitrogen mass flux",pon_qc
+PN_mass_flux_uncertainty,mg m-2 d-1,56,"uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux,uncertainty for particulate total nitrogen mass flux",pon_sd
+PO4,%,2,"fraction < 2mm, detection limit ???,fraction < 2mm, detection limit 4 ppm, not covered by accreditation, use with great care",pon_sd
+POC,%,28,"salt-corrected,Diatoms, surface standing stock (integrated over 80 m),Unidentified flagellates, surface standing stock (integrated over 80 m),Phaeocystis antarctica, surface standing stock (integrated over 80 m),Coccoid cells, surface standing stock (integrated over 80 m),Dinoflagellates, thecate, surface standing stock (integrated over 80 m),Dinoflagellates, athecate, surface standing stock (integrated over 80 m),Dinoflagellates, total, surface standing stock (integrated over 80 m),Total protists carbon, surface standing stock (integrated over 80 m),percentage of total flux,percentage of total flux",poc
+POC flux,%,24,"particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,Diatoms,Unidentified flagellates,Phaeocystis antarctica,Coccoid cells,Dinoflagellates, thecate,Dinoflagellates, athecate,Dinoflagellates, total,Total protists carbon",poc
+POC flux,g/m**2/a,3,,poc
+POC flux,mg m**2 day*1,36,"sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_organic_carbon_in_sea  [mg m-2 d-1]",poc
+POC flux,mg/m**2/day,370,"original unit g/m**2/d**1,Replicate 1,Replicate 2,Replicate 3,Average,mean,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,Total organic carbon dis. in a samples brine solution expressed as carbon flux,Total organic carbon dis. in a sample`s brine solution expressed as carbon flux,Total organic carbon dis. in a samples brine solution expressed as carbon flux,Total organic carbon dis. in a sample`s brine solution expressed as carbon flux,Total organic carbon dis. in a samples brine solution expressed as carbon flux,Total organic carbon dis. in a samples brine solution expressed as carbon flux,at 150m water depth,at 200m water depth,at 300m water depth,corresponds to ICE event; measured from filtered water samples from sediment trap cylinders with about 24-hour deployment, then calculated,Total POC fluxes from PELAGRA traps (Martin et al., 2013),Acanthostomella norvegica,Stenosomella avellana,Cymatocylis antarctica,Cymatocylis vanhoeffeni,Codonellopsis pusilla,Codonellopsis gausii,other tintinnid ciliates,total tintinnid ciliates,non-spinose, full,non-spinose, empty,non-spinose, broken,spinose, full,spinose, empty,spinose, broken,total, full,total, empty,total, broken,total, full + empty + broken individuals of all foraminifers,Fragilariopsis kerguelensis, F (full),Fragilariopsis kerguelensis, E (empty),Fragilariopsis kerguelensis, B (broken),Fragilariopsis kerguelensis, F + E + B,Fragilariopsis kerguelensis, F + E + B standing stock (average over all surface IN stations, integrated over the upper 80 m),Thalassionema nitzschioides, F (ful),Thalassionema nitzschioides, E (empty),Thalassionema nitzschioides, B (broken),Thalassionema nitzschioides, F + E + B,Thalassionema nitzschioides, F + E + B standing stock (average over all surface IN stations, integrated over the upper 80 m),Ephemera cf. planamembranacea, F (full),Ephemera cf. planamembranacea, E (empty),Ephemera cf. planamembranacea, B (broken),Ephemera cf. planamembranacea, F + E + B,Ephemera cf. Planamembranacea, F + E + B standing stock (average over all surface IN stations, integrated over the upper 80 m)",poc
+POC flux,mmol/m**2/day,21,"export,small volume (SV) analysis,sediment trap",poc
+POC flux,mol/m**2/a,88,,poc
+POC flux std dev,±,14,,poc_sd
+POC std dev,±,4,"SV analysis,sediment trap",poc_sd
+POCF,milligram/m2/day,1,mean flux of particulate organic matter for the next 15 days,poc
+POCF_QC,unitless,1,,mass_total_qc
+POC_QF,unitless,36,"quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag",poc_qc
+POC_f_A,mmol/m**2/d,1,"particulate organic carbon flux of split A, computed as the difference between TC flux and PIC flux of split A",poc
+POC_f_B,mmol/m**2/d,1,"particulate organic carbon flux of split B, computed as the difference between TC flux and PIC flux of split B",poc
+POC_f_C,mmol/m**2/d,1,"particulate organic carbon flux of split C, computed as the difference between TC flux and PIC flux of split C",poc
+POC_f_D,mmol/m**2/d,1,"particulate organic carbon flux of split D, computed as the difference between TC flux and PIC flux of split D",poc
+POC_f_err_A,mmol/m**2/d,1,"particulate organic carbon flux uncertainty of split A,POC_f_err_A = (TC_f_err_A**2 + PIC_f_err_A**2)1/2",poc_sd
+POC_f_err_B,mmol/m**2/d,1,"particulate organic carbon flux uncertainty of split B,POC_f_err_B = (TC_f_err_B**2 + PIC_f_err_B**2)1/2",poc_sd
+POC_f_err_C,mmol/m**2/d,1,"particulate organic carbon flux uncertainty of split C,POC_f_err_C = (TC_f_err_C**2 + PIC_f_err_C**2)1/2",poc_sd
+POC_f_err_D,mmol/m**2/d,1,"particulate organic carbon flux uncertainty of split D,POC_f_err_D = (TC_f_err_D**2 + PIC_f_err_D**2)1/2",poc_sd
+POC_f_err_mean,mmol/m**2/d,1,"particulate organic carbon flux uncertainty, POC_f_err_mean = (TC_f_err_mean**2 + PIC_f_err_mean**2)1/2",poc_sd
+POC_f_mean,mmol/m**2/d,1,"mean particulate organic carbon flux,computed as the difference between mean TC flux and mean PIC flux",poc
+POC_flux,mg/m2/day,1,Particulate organic carbon flux,poc
+POC_mass_flux,mg m-2 d-1,56,"<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm",poc
+POC_mass_flux_quality_control,unitless,56,"quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux,quality flag for particulate organic carbon mass flux",poc_qc
+POC_mass_flux_uncertainty,mg m-2 d-1,56,"uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux,uncertainty for particulate organic carbon mass flux",poc_sd
+POM,%,2,,NA
+POM flux,mg/m**2/day,29,,NA
+PON,%,2,salt-corrected,pon
+PON flux,g/m**2/a,3,,pon
+PON flux,mg/m**2/day,66,"original unit g/m**2/d**1,Replicate 1,Replicate 2,Replicate 3,Average,mean,PON total,PON total,at 150m water depth,at 200m water depth,at 300m water depth,corresponds to ICE event; measured from filtered water samples from sediment trap cylinders with about 24-hour deployment, then calculated",pon
+PON flux,mmol/m**2/day,20,export,pon
+PON flux std dev,±,2,,pon_sd
+PON std dev,±,2,,pon_sd
+POP flux,mg/m**2/a,2,,pop
+POP flux,mg/m**2/day,3,"mean,averagePOP(mmol m-2d-1)",pop
+POP flux std dev,±,1,,pop_sd
+PP C,mg/m**2/day,2,Npp (mg C/m2/day),npp_c
+PP C area,g/m**2/a,10,"integrated to 150 m,Ba/Al=0.0075,Ba/Al=0.0045,gross PP,new PP",npp_c
+PP C area,g/m**2/day,3305,"in situ, if reported",npp_c
+PP exp,g/m**2/a,2,"export to 133 m, Schlitzer 2002 personal comment",npp_c
+PP flux,µg/m**2/day,9,,npp_c
+PP24 int,mmol/m**2/day,3,,npp_c
+PSi flux,g/m**2/a,4,,psi
+PSi flux,mg/m**2/day,24,"biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic",psi
+PSi flux std dev,±,1,,psi_sd
+PSi(OH)4 flux,mg/m**2/day,2,,psi_oh_4
+PSiO2,%,8,"percentage of total flux,percentage of total flux",psio2
+PSiO2 flux,mg/m**2/day,33,original unit g/m**2/d**1,psio2
+PSiO2 flux,mmol/m**2/day,6,,psio2
+Part flux,g/m**2/a,22,"total partical flux recovered,total partical flux recovered,total partical flux recovered,total partical flux recovered,total partical flux recovered,total partical flux recovered,total partical flux recovered,total partical flux recovered,total vertical from the nepheloid layer,vertical from the intermediate layer,pure vertical from the nepheloid layer,horizontal,vertical,advective,total horizontal,dust flux,dust flux,dust flux,dust flux,dust flux,dust flux,calculated from 230Th xs",mass_total
+Part flux other,mg/m**2/day,1,,mass_total
+Part flux tot,mg/m**2/day,1,,mass_total
+Particulate Inorganic Carbon Flux (mg/m2/day),mg/m2/day,1,Particulate Inorganic Carbon Flux (mg/m2/day),pic
+Particulate Inorganic Carbon Flux (mg/m2/day) Flag,unitless,1,Particulate Inorganic Carbon Flux (mg/m2/day) Flag,pic_qc
+Particulate Organic Carbon Flux (mg/m2/day),mg/m2/day,1,Particulate Organic Carbon Flux (mg/m2/day),pic
+Particulate Organic Carbon Flux (mg/m2/day) Flag,unitless,1,Particulate Organic Carbon Flux (mg/m2/day) Flag,pic_qc
+Particulate_inorganic_carbon_flux,mg/m2/d,1,Particulate inorganic carbon (mg/m2/d),pic
+Particulate_inorganic_carbon_flux_SD,mg/m2/d,1,Standard Deviation presented where n=3. Difference between replicate presented where n=2,pic_sd
+Phaeo,mg Chl a m-2 d-1,1,Phaeopigment flux,pheop
+Phe flux,mg/m**2/day,1,,pheop
+Pheop flux,µg/m**2/day,56,"Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,Phaeophorbide a, phaeophytin a, and other phaeopigments of chl a,total Phaeopigment flux; corresponds to ICE event; measured from filtered water samples from sediment trap cylinders with about 24-hour deployment, then calculated,>10µm; corresponds to ICE event; measured from filtered water samples from sediment trap cylinders with about 24-hour deployment, then calculated",pheop
+Pheop flux std dev,±,10,,pheop_sd
+Phosph,%,1,,pop
+PhosphorusFlux,mg/m**2/d,1,particulate phosphorus flux,pop
+Phosphorus_flux,mg/m2/d,1,Phosphorus (mg/m2/d),pop
+Phosphorus_flux_1,mmol/m2/day,2,"Phosphorus flux #1 (mmol/m^2/day)               ,Phosphorus flux #1 (mmol/m^2/day)               ",pop
+Phosphorus_flux_2,mmol/m2/day,2,"Phosphorus flux #2 (mmol/m^2/day)               ,Phosphorus flux #2 (mmol/m^2/day)               ",pop
+Phosphorus_flux_3,mmol/m2/day,2,"Phosphorus flux #3 (mmol/m^2/day)               ,Phosphorus flux #3 (mmol/m^2/day)               ",pop
+Phosphorus_flux_SD,mg/m2/d,1,Standard Deviation presented where n=3. Difference between replicate presented where n=2,pop_sd
+Phosphorus_flux_avg,mmol/m2/day,2,"Average Phosphorus flux (mmol/m^2/day)  ,Average Phosphorus flux (mmol/m^2/day)  ",pop
+PtotalFlux,ug/m2/day,1,"the phosphorus flux, in ug m-2 d-1. Includes both phosphorus measured in the particle phase as well as dissolved/colloidal phosphorus measured in the trap cup supernatant.",pop
+Recover_DateTime_UTC,unitless,1,Time of sediment trap recovery in ISO8601 format,time_recovered
+Recover_Time_local,unitless,1,"Time of sediment trap recovery (local, Hawaii Standard Time)",time_recovered
+Reference,unitless,1,reference where source data in table was obtained,reference
+Sample identity - trap,unitless,1,Sample identity - trap,comments
+Sample_Description,unitless,1,sample description,comments
+Sample_ID,unitless,1,sample identifier,comments
+Sample_Type,unitless,1,sample type,comments
+Sampling period,days,1,,duration
+SamplingInterval,day,1,yyyy/mm/dd,duration
+SeqDay,unitless,2,"Number of days since the beginning of the OFP time-series (SeqDay 1=4 April 1978). The SeqDay is the first day of the sample collection period.,Number of days since the beginning of the OFP time-series (SeqDay 1=4 April 1978). The SeqDay is the first day of the sample collection period.",NA
+Si,%,156,"amorphous,bulk,amorphous,total,amorphous,bulk,amorphous,bulk,amorphous,bulk,amorphous,bulk,amorphous,bulk,amorphous,bulk,amorphous,bulk,amorphous,total,amorphous,total,amorphous,total,amorphous,total,amorphous,total,amorphous,total,amorphous,total,amorphous,total,of total lithogenic material,particulate,particulate,particulate,particulate,particulate,particulate,detection limit 20 ppm,leached,residue,mass %,fraction < 2mm, detection limit 10 ppm,fraction < 2mm, detection limit 1 ppm,fraction < 2mm, detection limit 20 ppm,fraction < 2mm, detection limit 10 ppm,fraction < 2mm, detection limit 0.23 %,concentration of silica,Silica",psi
+Si e,±,4,"Reproducibility: very good,Reproducibility: very good,Reproducibility: very good",psi_sd
+Si flux,mmol/m**2/day,9,"particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm",psi
+Si flux,±,13,biogenic silica flux,psi
+Si std dev,±,5,,psi_sd
+Si(OH)4 flux,mmol/m**2/day,110,,psi_oh_4
+SiO2,%,448,"calculated on volatile-free basis,Reported in LaGatta (2003),of bulk sediment,of bulk sediment,silt fraction of moraine,of bulk sediment,of bulk sediment,of bulk sediment,of bulk sediment,shipboard,Leicester,Amherst,of bulk sediment,n = 28,from Heath et al. (1985), converted to oxides,normalized,from Heath et al. (1985), converted to oxides,anhydrous,†,theoretical,wt.%,mass percentages,salt corrected, mass percentages,mass percentages,salt corrected, mass percentages,Internal standard concentration (oxide weight %),Method 3,Original unit is in [g/100g] on anhydrous basis.,wt.%,wt.%,recalculated,anhydrous,wt.%",psio2
+SiO2 carb free,%,4,,psio2
+SiO2 std dev,±,11,n = 28,psio2_sd
+SiO2 xs,%,3,"calculated after Böning et al. (2005) (doi:10.1016/j.margeo.2005.07.005) using salt corrected data, mass percentages,Böning et al. (2005) (doi:10.1016/j.margeo.2005.07.005) using salt corrected data; mass percentages",psio2
+Si_QC,unitless,1,quality control flag,psi_qc
+Sigma_C_org,mg C m-2 d-1,1,Standard deviation of replicated organic carbon flux measurements,poc_sd
+Sigma_Chl,mg Chl a m-2 d-1,1,Standard deviation of replicated chlorophyll flux (Chl a) measurements.,chl_sd
+Sigma_N_org,mg N m-2 d-1,1,Standard deviation of replicated nitrogen flux measurements,pon_sd
+Sigma_Phaeo,mg Chl a m-2 d-1,1,Standard deviation of replicated phaeopigment flux measurements.,pheop_sd
+Silica_flux,mg/m2/d,1,Silica (mg/m2/d),psi
+Silica_flux_SD,mg/m2/d,1,Standard Deviation presented where n=3. Difference between replicate presented where n=2,psi_sd
+Start,YYYY-MM-DD,36,"starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date,starting date",timestamp
+TC,%,81,"wt. %,% sed dry mass,mass %,mass percentages,salt corrected, mass percentages,mass percentages,salt corrected, mass percentages,wt.%",carbon_total
+TC flux,%,14,"wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%",carbon_total
+TC flux,mg m**2 day*1,36,"sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1],sinking_flux_of_particulate_total_carbon_in_sea  [mg m-2 d-1]",carbon_total
+TC std dev,±,10,,carbon_total_sd
+TCCF,milligram/m2/day,1,mean flux of particulate total carbon for the next 15 days.,carbon_total
+TCCF_QC,unitless,1,,carbon_total_qc
+TC_QF,unitless,36,"quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag,quality flag",carbon_total_qc
+TC_f,mg/m**2/d,1,"Total carbon flux of the sinking fraction operationally defined as particles <350 um. The carbon measured in all process blanks from the five cruises was averaged to determine the mean process blank in sediment trap tubes for the field program (0.11 +/-0.2 mg C). This mean process blank was subtracted from the total carbon measured in each trap sample, and the result was divided by the trap collection area (0.0113 m^2) and the deployment length to yield flux. Reported fluxes are the mean of measurements from 2 or 3 tubes.",carbon_total
+TC_f_A,mmol/m**2/d,1,total carbon flux of split A,carbon_total
+TC_f_B,mmol/m**2/d,1,total carbon flux of split B,carbon_total
+TC_f_C,mmol/m**2/d,1,total carbon flux of split C,carbon_total
+TC_f_D,mmol/m**2/d,1,total carbon flux of split D,carbon_total
+TC_f_err,mg/m**2/d,1,Total carbon flux error; Uncertainties are propagated from the standard deviation of the process blanks from the five cruises (0.2 mg C) and the standard deviation or range of the two or three TC measurements per NBST deployment: TC_f_err = (STD tubes^2 + STD blanks^2)^1/2 / deployment length / trap area; For depths with only two replicate analyses the range of the TC fluxes measured in each tube is used in place of STDtubes in the above equation.,carbon_total_sd
+TC_f_err_A,mmol/m**2/d,1,"total carbon flux uncertainty of split A, propagated from the per-filter analytical error",carbon_total_sd
+TC_f_err_B,mmol/m**2/d,1,"total carbon flux uncertainty of split B, propagated from the per-filter analytical error",carbon_total_sd
+TC_f_err_C,mmol/m**2/d,1,"total carbon flux uncertainty of split C, propagated from the per-filter analytical error",carbon_total_sd
+TC_f_err_D,mmol/m**2/d,1,"total carbon flux uncertainty of split D, propagated from the per-filter analytical error",carbon_total_sd
+TC_f_err_mean,mmol/m**2/d,1,"total carbon flux uncertainty, propagated from the maximum of either the per-filter analytical error or the standard deviation among replicate filter splits",carbon_total_sd
+TC_f_mean,mmol/m**2/d,1,"mean total carbon flux of splits A, B, C, D",carbon_total
+TIC,%,55,"Inorganic carbon content of trapped particulate matter,Inorganic carbon content of trapped particulate matter,Inorganic carbon content of trapped particulate matter,Inorganic carbon content of trapped particulate matter,Inorganic carbon content of trapped particulate matter,Inorganic carbon content of trapped particulate matter,C/N analyser results on total - acidified samples (centrifuged),C/N analyser results on total - acidified samples (centrifuged),C/N analyser results on total - acidified samples (centrifuged),C/N analyser results on total - acidified samples (centrifuged),mass percentages,salt corrected, mass percentages,mass percentages,salt corrected, mass percentages,wt.%",pic
+TIC std dev,±,6,,pic_sd
+TIME,YYYY-MM-DD,56,"time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time,time",timestamp
+TIME_BOUNDS_END,unitless,1,,time_recovered
+TIME_BOUNDS_START,unitless,1,,timestamp
+TIME_END,unitless,56,"time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed,time sample closed",time_recovered
+TIME_START,unitless,56,"time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open,time sample open",timestamp
+TMF,mg m-2 day-1,1,Total Mass Flux,mass_total
+TMF_QC,unitless,1,quality control flag,mass_total_qc
+TN,%,196,"Total nitrogen content of trapped particulate matter,Total nitrogen content of trapped particulate matter,Total nitrogen content of trapped particulate matter,Total nitrogen content of trapped particulate matter,Total nitrogen content of trapped particulate matter,Total nitrogen content of trapped particulate matter,wt. %,centrifuged,centrifuged,centrifuged,centrifuged,Carbon/nitrogen analyser - 0.4-0.45 µm pore filtered,% sed dry mass,determined at University of Rhode Island,mass %,fraction < 2mm, detection limit 0.1 %",pon
+TNNF,milligram/m2/day,1,mean flux of particulate total nitrogen for the next 15 days,pon
+TNNF_QC,unitless,1,,pon_qc
+TOC,%,320,"Organic carbon content of trapped particulate matter,Organic carbon content of trapped particulate matter,Organic carbon content of trapped particulate matter,Organic carbon content of trapped particulate matter,Organic carbon content of trapped particulate matter,Organic carbon content of trapped particulate matter,in dry samples,wt. %,of total biogenic material,determined at University of Rhode Island,determined at University of Rhode Islan,published in Muratli et al. 2010,fraction < 2mm, detection limit 0.1 %,wt. %",poc
+TOC flux,%,16,"wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%",poc
+TOC flux,g/m**2/a,7,"1000 m,to 1000 m water depth",poc
+TOC flux,mg/m**2/day,53,"Corg,Corg,OC flux at 100 m depth using equation of Pace et al., (1987),OC flux at 100 m depth using equation of Berger et al. (1987)",poc
+TOC flux,mmol/m**2/day,37,"particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,particle size less than 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm",poc
+TOC flux std dev,±,9,,poc_sd
+TOC std dev,±,14,unfiltered,poc_sd
+TP flux,mmol/m**2/day,2,,pop
+TP flux,µg/m**2/day,15,"reactive,reactive,reactive,reactive,reactive,reactive",pop
+TPC flux,mmol/m**2/day,5,,carbon_total
+TSMF,milligram/m2/day,1,mean flux of particulate matter for the next 15 days.,mass_total
+TSMF_QC,unitless,1,,mass_total_qc
+Ti,%,163,"mass %,fraction < 2mm, detection limit 0.5 ppm,fraction < 2mm, detection limit 0.05 ppm,fraction < 2mm, detection limit 0.5 ppm,fraction < 2mm, detection limit 30 ppm,concentration of titanium,Titanium",ti
+Ti e,±,4,"Reproducibility: very good,Reproducibility: very good,Reproducibility: very good",ti_sd
+Ti flux,µg/cm**2/a,5,,ti
+Ti flux,µg/m**2/day,4,,ti
+Ti std dev,±,16,"2Sigma Error,2Sigma Error",ti_sd
+Ti unc,±,4,measured in sediment (grain size <63 µm),ti_sd
+Ti_QC,unitless,1,quality control flag,ti_qc
+Time,days,7,"Trap rotation,Decay,Days post hatch,Days post hatch,rebound time",duration
+Time,h,44,,NA
+Time,min,2,maximum closure time of chamber during measurement,NA
+Time,s,15,"Time to closest acoustic fix,lamp,Time to closest acoustic fix,Time to closest acoustic fix,lamp,lamp,Time to closest acoustic fix,Time to closest acoustic fix,Time to closest acoustic fix,Ablation,Start,End,Analyses interval,Ablation duration,Counting time",NA
+Tl,%,1,,ti
+Tl e,±,3,"Reproducibility: moderate,Reproducibility: moderate,Reproducibility: moderate",ti_sd
+Tl std dev,±,1,,ti_sd
+Tl unc,±,4,measured in sediment (grain size <63 µm),ti_sd
+Tot mass flux,mg/m**2/day,286,"mass flux,Replicate 1,Replicate 2,Replicate 3,Average,mean,median,mean,median,mean,median,mean,median,mean,median,mean,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,3 replicates averaged,Particulate mass flux,total particle flux recovered,Particulate mass flux,Particulate mass flux,Particulate mass flux,total particle flux recovered,total particle flux recovered,total particle flux recovered,total particle flux recovered,total particle flux recovered,total particle flux recovered,total particle flux recovered,total particle flux recovered,Particulate mass flux,Particulate mass flux,at 150m water depth,at 200m water depth,at 300m water depth,Particulate matter flux,Particulate matter flux,Particulate matter flux,Particulate matter flux,Particulate matter flux,Particulate matter flux,total dry weight flux,total particle flux recovered,total particle flux recovered,uncorrected,90 %,75 %",mass_total
+Tot mass flux std dev,±,1,,mass_total_sd
+Total Particulate Nitrogen Flux (mg/m2/day),mg/m2/day,1,Total Particulate Nitrogen Flux (mg/m2/day),pon
+Total Particulate Nitrogen Flux (mg/m2/day) Flag,unitless,1,Total Particulate Nitrogen Flux (mg/m2/day) Flag,pon_qc
+Total_C_flux,mg/m2/day,1,Total carbon flux,carbon_total
+Total_Flux_mg_cm2_y,mg/cm2/y,1,total flux,NA
+Total_Flux_mg_m2_d,mg/m2/d,1,total flux,carbon_total
+Total_mass_flux,mg/m2/d,1,Mass (mg/m2/d),carbon_total
+Total_mass_flux_SD,mg/m2/d,1,Standard Deviation presented where n=3. Difference between replicate presented where n=2,carbon_total_sd
+Trap_Depth,m,2,"trap depth,Sediment trap depth",depth
+Treatment,unitless,1,"C-Solutions from individual traps combined and replicate subsamples drawn from this solution. I-Individual traps sampled as replicates.
+W-Swimmers picked out before analyzed. O-Some other (special?) treatment.",comments
+bSiO2,%,151,"of total flux,of total flux,of total flux,of total flux,of total flux,of total flux,bSi, measured,bSiO2 = bSi * 2.139,bSi, measured,bSiO2 = bSi * 2.139,bSi, measured,bSiO2 = bSi * 2.139,bSi, measured,bSiO2 = bSi * 2.139,bSi, measured,bSiO2 = bSi * 2.139,bSi, measured,bSiO2 = bSi * 2.139,bSi, measured,bSiO2 = bSi * 2.139,of total flux,wt. %,weight fraction,of total flux,amorph., of total biogenic material,salt corrected,mass %,published in Muratli et al. 2010,published in Muratli et al. 2010,wt. %,wt. %,Salt-corrected,sea salt corrected,leaching BSi sea salt corrected,wt. %",psio2
+bSiO2 e,%,7,wt. %,psio2
+bSiO2 e,±,2,"err RSD,standard error",psio2_sd
+bSiO2 flux,%,28,"wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,wt.-%,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm,particle size < 1 mm",psio2
+bSiO2 flux,g/m**2/a,3,,psio2
+bSiO2 flux,mg/m**2/day,193,"BSi (µmol/mg dry weight)*60 (g/mol)*total flux,BSi (µmol/mg dry weight)*60 (g/mol)*total flux,Opal,Opal (biogenic silica)",psio2
+bSiO2 flux,mmol/m**2/day,14,"size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,size fraction < 1 mm,averageBSi(mmol m-2d-1)",psio2
+bSiO2 flux,mol/m**2/a,88,,psio2
+bSiO2 flux std dev,±,7,,psio2_sd
+bSiO2 part flux,mg/m**2/day,4,"Average,Total bSi fluxes from PELAGRA traps (Martin et al., 2013)",psio2
+bSiO2 std dev,±,13,Salt-corrected,psio2_sd
+bSi_f_E,umol/m**2/d,1,biogenic silica flux of split E,psi
+bSi_f_F,umol/m**2/d,1,biogenic silica flux of split F,psi
+bSi_f_G,umol/m**2/d,1,biogenic silica flux of split G,psi
+bSi_f_H,umol/m**2/d,1,biogenic silica flux of split H,psi
+bSi_f_err_E,umol/m**2/d,1,"biogenic silica flux uncertainty of split E,propagated from the per-filter analytical error",psi_sd
+bSi_f_err_F,umol/m**2/d,1,"biogenic silica flux uncertainty of split F,propagated from the per-filter analytical error",psi_sd
+bSi_f_err_G,umol/m**2/d,1,"biogenic silica flux uncertainty of split G,propagated from the per-filter analytical error",psi_sd
+bSi_f_err_H,umol/m**2/d,1,"biogenic silica flux uncertainty of split H,propagated from the per-filter analytical error",psi_sd
+bSi_f_err_mean,umol/m**2/d,1,"biogenic silica flux uncertainty,propagated from the maximum of either the per-filter analytical error or the standard deviation among replicate filter splits",psi_sd
+bSi_f_mean,umol/m**2/d,1,"mean biogenic silica flux of splits E, F, G, H",psi
+bSi_flux_Th,mmol m-2 d-1,1,"Biogenic silica flux, using the thorium-based approach",psi
+bSi_flux_Th_sd,mmol m-2 d-1,1,"Standard deviation of biogenic silica flux, using the thorium-based approach. Uncertainty in Th-based approach calculated by propagating uncertainty in upwelling velocity and Th deficiency.",psi_sd
+bSi_flux_sed,mmol m-2 d-1,1,Sediment trap-based biogenic silica flux,psi
+bSi_flux_sed_sd,mmol m-2 d-1,1,Standard deviation of sediment trap-based biogenic silica flux. Uncertainty is reported as 50% for all sediment trap deployments.,psi_sd
+close date (dd/mm/yyyy),dd/mm/yyyy,1,close date (dd/mm/yyyy),time_recovered
+close day julian,unitless,1,close day julian,NA
+date,yyyymmdd,18,,timestamp
+date_end,YYYYMMDD,1,End Date (YYYYMMDD) in HST,time_recovered
+date_end,YYmmmdd,2,"Year Month Day    (recovery)           ,Year Month Day    (recovery)           ",time_recovered
+date_end,unitless,1,date of collector lid closure or platform recovery (GMT) in ISO 8601 format yyyy-mm-dd,time_recovered
+date_end,yyyymmdd,18,,time_recovered
+date_recover,unitless,1,date of platform recovery (GMT) in ISO 8601 format yyyy-mm-dd,time_recovered
+date_recovered,unitless,1,date/time sediment trap recovered,time_recovered
+date_recovery,yyyymmdd,18,,time_recovered
+date_resurface,yyyymmdd,18,,NA
+date_start,YYYY-MM-DD,4,"time,sample cup opening date,date_start,start date of sample collection in GMT",timestamp
+date_start,YYYYMMDD,1,Start Date (YYYYMMDD) in HST,timestamp
+date_start,YYmmmdd,2,"Year Month Day    (deployment)  ,Year Month Day    (deployment)  ",timestamp
+date_start,unitless,10,"Deployment date and time in format %m/%d/%y %H:%M (e.g. 5/13/17 12:50). Local time zone variesÿbetween US/Eastern and US/Central over the course of this dataset.,date when cup was opened; format: YYYY-MM-DD,Date of deployment; yyyy/mm/dd,date sampling began (GMT) in ISO 8601 format yyyy-mm-dd,Time of sediment trap deployment (local, Hawaii Standard Time),Time,date/time sediment trap deployed,time,Start date in format YYYY-MM-DD,Date of sampling formatted as yyyy-mm-dd",timestamp
+date_start,yyyy-MM-DD,1,,timestamp
+date_start,yyyymmdd,18,,timestamp
+day,unitless,1,2-digit day,NA
+depth,m,24,"target depth of sediment trap collectors,depth of trap below water surface,sampling depth in meters,sampling depth in meters,nominal depth,Sample depth",depth
+depth,unitless,1,The nominal depth of the NBST. During the July 2013 deployment the NBSTs were programmed to hold depth within +/-25 m of the measurement depth while in subsequent deployments this band was narrowed to +/-10 m.,depth
+duration,unitless,1,sample interval,duration
+field_blank_corrected_nitrogen_flux_1,mg/m2/d,2,"Field Blank correctedNitrogen flux #1 (mgN/m^2/day)               ,Field Blank correctedNitrogen flux #1 (mgN/m^2/day)               ",pon
+field_blank_corrected_nitrogen_flux_2,mg/m2/d,2,"Field Blank correctedNitrogen flux #2 (mgN/m^2/day)               ,Field Blank correctedNitrogen flux #2 (mgN/m^2/day)               ",pon
+field_blank_corrected_nitrogen_flux_3,mg/m2/d,2,"Field Blank correctedNitrogen flux #3 (mgN/m^2/day)               ,Field Blank correctedNitrogen flux #3 (mgN/m^2/day)               ",pon
+field_blank_corrected_nitrogen_flux_avg,mg/m2/d,2,"Field Blank correctedAverage Nitrogen flux (mgN/m^2/day)         ,Field Blank correctedAverage Nitrogen flux (mgN/m^2/day)         ",pon
+field_blank_corrected_organic_carbon_flux_1,mg/m2/d,2,"Field Blank corrected Organic Carbon flux #1 (mgC/m^2/day)               ,Field Blank corrected Organic Carbon flux #1 (mgC/m^2/day)               ",poc
+field_blank_corrected_organic_carbon_flux_2,mg/m2/d,2,"Field Blank correctedOrganic Carbon flux #2 (mgC/m^2/day)               ,Field Blank correctedOrganic Carbon flux #2 (mgC/m^2/day)               ",poc
+field_blank_corrected_organic_carbon_flux_3,mg/m2/d,2,"Field Blank correctedOrganic Carbon flux #3 (mgC/m^2/day)               ,Field Blank correctedOrganic Carbon flux #3 (mgC/m^2/day)               ",poc
+field_blank_corrected_organic_carbon_flux_avg,mg/m2/d,2,"Field Blank correctedAverage Organic Carbon flux (mgC/m^2/day)   ,Field Blank correctedAverage Organic Carbon flux (mgC/m^2/day)   ",poc
+flux_Ba,mmol_m^-2_d^-1,2,,ba
+flux_Ba_sd,mmol_m^-2_d^-1,2,,ba_sd
+flux_P,mmol_m^-2_d^-1,2,,pop
+flux_PC,mmol_m^-2_d^-1,4,,carbon_total
+flux_PC_sd,mmol_m^-2_d^-1,4,,carbon_total_sd
+flux_PIC,mmol_m^-2_d^-1,4,,pic
+flux_PIC_sd,mmol_m^-2_d^-1,4,,pic_sd
+flux_PN,mmol_m^-2_d^-1,4,,pon
+flux_PN_sd,mmol_m^-2_d^-1,4,,pon_sd
+flux_POC,mmol_m^-2_d^-1,4,,poc
+flux_POC_sd,mmol_m^-2_d^-1,4,,poc_sd
+flux_P_sd,mmol_m^-2_d^-1,2,,pop_sd
+flux_bSi,mmol_m^-2_d^-1,2,,psi
+flux_bSi_sd,mmol_m^-2_d^-1,2,,psi_sd
+flux_bsi,mmol_m^-2_d^-1,2,,psi
+flux_bsi_sd,mmol_m^-2_d^-1,2,,psi_sd
+flux_mass,mg_m^-2_d^-1,4,,mass_total
+flux_mass_sd,mg_m^-2_d^-1,4,,mass_total_sd
+flux_sampling_method,unitless,18,,comments
+flux_submethod,unitless,18,,comments
+large_particle_POC_flux,mg/m**2/d,1,large particle particulate organic carbon flux,poc
+lat,decimal degrees,1,Latitude of the site,latitude
+lat,degrees,18,,latitude
+lat,unitless,2,"Latitude of trap deployment,Latitude of the OFP site",latitude
+lat_end,degrees,12,"Latitude (recovery)  ,Latitude (recovery)  ",latitude
+lat_recovery,degrees,18,,latitude
+lat_resurface,degrees,18,,latitude
+lat_start,degrees,20,"Latitude (deployment)  ,Latitude (deployment)  ",latitude
+latitdue,degrees,1,nominal latitude,latitude
+latitude,degrees,1,latitude,latitude
+lon,decimal degrees,1,Longitude of the site,longitude
+lon,degrees,18,,longitude
+lon,unitless,2,"Longitude of trap deployment,Longitude of the OFP site",longitude
+lon_end,degrees,12,"Longitude (recovery)                  ,Longitude (recovery)                  ",longitude
+lon_recovery,degrees,18,,longitude
+lon_resurface,degrees,18,,longitude
+lon_start,degrees,20,"Longitude (deployment)  ,Longitude (deployment)  ",longitude
+longitude,degrees,2,"longitude,nominal longitude",longitude
+mass_flux,mg m-2 d-1,56,"<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm,<1mm",mass_total
+mass_flux_quality_control,unitless,56,"quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux,quality flag for particulate total mass flux",mass_total_qc
+mass_flux_sed,mg m-2 d-1,1,Sediment trap-based mass flux,mass_total
+mass_flux_uncertainty,mg m-2 d-1,56,"uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux,uncertainty for particulate total mass flux",mass_total_sd
+mid date (dd/mm/yyyy),dd/mm/yyyy,1,mid date (dd/mm/yyyy),time_mid
+midSeqDay,unitless,1,Sequence day of the middle of the sample collection period,NA
+open day julian,unitless,1,open day julian,NA
+pcnt_Lith_lt_1000est,percent,1,"estimated mass percent lithogenic material, for <1000 um size fraction.",lithogenic
+pcnt_Opal_lt_1000est,percent,1,"estimated mass percent opal, for <1000 um size fraction.",opal
+pcnt_Ppart_lt_1000,percent,1,"the percent phosphorus by weight, in the <1000 um size fraction.",pop
+phaeopigment_flux,mg/m2/day,1,"Phaeopigment flux (fluorometer detects phaeophorbide-a, phaeophytin-a, and other phaeopigments of chl-a)",pheop
+pressure,unitless,8,,pressure
+pressure_actual,dbar,56,"actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual,actual",pressure
+small_particle_POC_flux,mg/m**2/d,1,small particle particulate organic carbon flux,poc
+time,hh:mm:ss,18,,NA
+time_end,hh:mm:ss,18,,NA
+time_end,unitless,1,time of collector lid closure or platform recovery (GMT) in ISO 8601 format hh:mm:ss,NA
+time_recover,unitless,1,time of platform recovery (GMT) in ISO 8601 format hh:mm:ss,NA
+time_recovery,hh:mm:ss,18,,NA
+time_resurface,hh:mm:ss,18,,NA
+time_start,hh:mm:ss,18,,NA
+time_start,unitless,1,time sampling began (GMT) in ISO 8601 format hh:mm:ss,NA
+yrday,unitless,1,"Year day (sequential day of year, eg. Jan 1 = 1)",NA
+z(eu),m,2,,z_eu
+Date/Time 2,,,,time_recovered
+Days_Cup_Open,days (d),,number of days cup was open,duration
+deploy_length,days (d),,Days between deployment of NBST and tube lid closure,duration
+Corg,mg C m-2 d-1,,Particulate organic carbon flux,poc
+Corg_stdev,mg C m-2 d-1,,Standard deviation of organic carbon flux,poc_sd
+Duration,days,,Duration of deployment,duration
+Deployment_Lat,degrees North,,Latitude of deployment (positive values = North),latitude
+Deployment_Lon,degrees East,,Longitude of deployment (positive values = East),longitude
+Depth,meters,,Depth of deployment,depth
+Norg,mg N m-2 d-1,,Particulate nitrogen flux,pon
+Norg_stdev,mg N m-2 d-1,,Standard deviation of particulate nitrogen flux,pon_sd
+Chl,ug chl a m-2 d-1,,Chlorophyll a,chl
+Chl_stdev,ug chl a m-2 d-1,,Standard deviation of chlorophyll a,chl_sd
+Phaeo,ug chl a m-2 d-1,,Phaeo,pheop
+Phaeo_stdev,ug chl a m-2 d-1,,Standard deviation of phaeo,pheop_sd
+date_start,YYYY-MM-DDThh:mmZ,,,timestamp
+date_start,MM/DD/YY hh:mm,,,timestamp
+Recovered_ISO_DateTime_UTC,YYYY-MM-DDThh:mmZ,2,,time_recovered
+Chl,mg Chl a m-2 d-1,,Chlorophyll a flux,chl
+Chl_stdev,mg Chl a m-2 d-1,,Standard deviation of Chlorophyll a flux,chl_sd
+Phaeo,mg Chl equivalents a m-2 d-1,,Phaeopigment flux,pheop
+Phaeo_stdev,mg Chl equivalents a m-2 d-1,,Standard deviation of Phaeopigment flux,pheop_sd
