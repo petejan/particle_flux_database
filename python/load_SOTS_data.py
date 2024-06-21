@@ -45,7 +45,8 @@ for fn in files_to_load:
     download_file_from_server_endpoint(uri, filename)
 
     # open netCDF file to retrieve the data set
-    ds = Dataset(filename,'r', format="NETCDF4")
+#    ds = Dataset(filename,'r', format="NETCDF4")
+    ds = Dataset("data/" + filename,'r', format="NETCDF4")
     ds.set_auto_mask(False)
 
     print('dataset title', uri, ds.title)
@@ -56,16 +57,19 @@ for fn in files_to_load:
         samples = len(ds.variables["sample"])
         minTime = ds.time_deployment_start
         maxTime = ds.time_deployment_end
-        cur.execute('UPDATE file SET doi=?, cite=?, number_params=?, number_samples=?, mintimeextent=?, maxtimeextent=? WHERE file_id = ?', (uri, ds.citation, parameters, samples, minTime, maxTime, file_id))
-    except sqlite3.IntegrityError:
-        # cur.close()
-        print("skipping, non-unique", uri)
-        continue
+        meanDepth = ds.geospatial_vertical_max
+        # cur.execute('UPDATE file SET doi=?, cite=?, number_params=?, number_samples=?, mintimeextent=?, maxtimeextent=? WHERE file_id = ?', (uri, ds.citation, parameters, samples, minTime, maxTime, file_id))
+    # except sqlite3.IntegrityError:
+    #     # cur.close()
+    #     print("skipping, non-unique", uri)
+    #     continue
 
-    try:
+    # try:
         lat = ds.geospatial_lat_max
         lon = ds.geospatial_lon_max
-        cur.execute('UPDATE file SET meanLatitude=?, meanLongitude=? WHERE file_id = ?', (lat, lon, file_id))
+        cur.execute('UPDATE file SET doi=?, cite=?, number_params=?, number_samples=?, mintimeextent=?, maxtimeextent=?, '
+                    'meanLatitude=?, meanLongitude=?, meandepth=? WHERE file_id = ?', (uri, ds.citation,
+                    parameters, samples, minTime, maxTime, lat, lon, meanDepth, file_id))
     except sqlite3.IntegrityError:
         # cur.close()
         print("skipping, non-unique", uri)

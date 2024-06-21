@@ -31,16 +31,18 @@ for fn in files_to_load:
         samples = len(ds.parameters.values())
         minTime = ds.mintimeextent
         maxTime = ds.maxtimeextent
-        cur.execute('UPDATE file SET doi=?, cite=?, number_params=?, number_samples=?, mintimeextent=?, maxtimeextent=? WHERE file_id = ?', (ds.doi, ds.citation, parameters, samples, minTime, maxTime, file_id))
-    except sqlite3.IntegrityError:
-        # cur.close()
-        print("skipping, non-unique", ds.doi)
-        continue
-
-    try:
+    #     cur.execute('UPDATE file SET doi=?, cite=?, number_params=?, number_samples=?, mintimeextent=?, maxtimeextent=? WHERE file_id = ?', (ds.doi, ds.citation, parameters, samples, minTime, maxTime, file_id))
+    # except sqlite3.IntegrityError:
+    #     # cur.close()
+    #     print("skipping, non-unique", ds.doi)
+    #     continue
+    #
+    # try:
         lat = ds.geometryextent['meanLatitude']
         lon = ds.geometryextent['meanLongitude']
-        cur.execute('UPDATE file SET meanLatitude=?, meanLongitude=? WHERE file_id = ?', (lat, lon, file_id))
+        cur.execute('UPDATE file SET doi=?, cite=?, number_params=?, number_samples=?, mintimeextent=?, '
+                    'maxtimeextent=?, meanLatitude=?, meanLongitude=? WHERE file_id = ?',
+                    (ds.doi, ds.citation, parameters, samples, minTime, maxTime, lat, lon, file_id))
     except sqlite3.IntegrityError:
         # cur.close()
         print("skipping, non-unique", ds.doi)
@@ -48,6 +50,14 @@ for fn in files_to_load:
         continue
     except KeyError:
         pass
+
+    try:
+        meanDepth = ds.data["Depth water"].values.mean()
+    except KeyError:
+        meanDepth = 'nan'
+        print('could not find depth variable, setting mean depth to nan')
+
+    cur.execute('UPDATE file SET meandepth=? WHERE file_id = ?', (meanDepth, file_id))
 
     # need to add in when the data was cached
     try:
