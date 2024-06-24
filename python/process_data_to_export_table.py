@@ -11,7 +11,7 @@ def create_processed_data_db():
     # create the database table to take the data
     cur.execute("CREATE TABLE IF NOT EXISTS processed_data"
                 "(file_id integer, var_id integer, sample_id integer, "
-                "timestamp REAL, duration REAL, duration_units REAL, time_recovered REAL, time_mid REAL, latitude REAL, "
+                "timestamp REAL, duration REAL, duration_units REAL, time_deployed REAL, time_recovered REAL, time_mid REAL, latitude REAL, "
                 "longitude REAL, data_type TEXT, instrument_descriptor TEXT, instrument_collector_size REAL,"
                 "bathymetry_depth_ETOPO1 REAL, depth REAL, depth_units REAL, mass_total REAL, "
                 "mass_total_units TEXT, mass_total_sd REAL, mass_total_qc TEXT, carbon_total REAL, "
