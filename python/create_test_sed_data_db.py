@@ -6,8 +6,6 @@ import os
 from datetime import datetime
 
 
-
-
 dbname = "test_sed_data.sqlite"
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 

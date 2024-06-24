@@ -16,10 +16,6 @@ def download_file_from_server_endpoint(server_endpoint, local_file_path):
         for chunk in response.iter_content(chunk_size=128):
             local_file.write(chunk)
 
-fn = 'Pangaea_wanted_variables_2.csv'
-var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
-filename = 'conversion_factors.csv'
-var_dict = pd.read_csv(filename).to_dict()
 
 #dbname = r"C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\sediment_data.sqlite\sediment_data.sqlite"
 #dbname = "data/sediment_data.sqlite"
@@ -172,64 +168,60 @@ for fn in files_to_load:
             var_names = ["TIME_OPEN", "TIME_CLOSE"]
 
         for name in var_names:
-            output = var_interp.column_name[var_interp.name == name]
-            output_name = output_name.values[0]
-            if output_name != 'NA':
-                res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (name,))
-                var_id_n = res.fetchone()
+            res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (name,))
+            var_id_n = res.fetchone()
 
-                if var_id_n is None:
-                    # variables simply the variable name to var-id map
-                    cur.execute('INSERT OR IGNORE INTO variables (name, output_name) VALUES (?,?)', (name, output_name.values[0]))
+            if var_id_n is None:
+                # variables simply the variable name to var-id map
+                cur.execute('INSERT OR IGNORE INTO variables (name) VALUES (?)', (name,))
 
-                res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (name,))
-                var_id = res.fetchone()[0]
+            res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (name,))
+            var_id = res.fetchone()[0]
 
-                print(var_id, 'variable', name, p.long_name, p.dtype)
-                try:
-                    units = p.units
-                except AttributeError:
-                    units = 'NA'
+            print(var_id, 'variable', name, p.long_name, p.dtype)
+            try:
+                units = p.units
+            except AttributeError:
+                units = 'NA'
 
-                print(var_id, 'variable', name, 'unit', units)
+            print(var_id, 'variable', name, 'unit', units)
 
-                try:
-                    comment = p.comment
-                except AttributeError:
-                    comment = 'NA'
+            try:
+                comment = p.comment
+            except AttributeError:
+                comment = 'NA'
 
-                print(var_id, 'variable', name, 'comments', comment)
+            print(var_id, 'variable', name, 'comments', comment)
 
-                # save the variable metadata to the file_variables table
-                cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment, output_name) '
-                            'VALUES (?,?,?,?,?,?,?)', (file_id, var_id, p.long_name, p.dtype.name, units, comment,
-                                                       output_name.values[0]))
+            # save the variable metadata to the file_variables table
+            cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment) '
+                        'VALUES (?,?,?,?,?,?)', (file_id, var_id, p.long_name, p.dtype.name, units, comment))
 
-                # load the variable data
-                i = 0
-                try:
-                    for m in range(len(ds.variables["TIME"])):
-                        # load the data
-                        d = ds.variables[var_name][:]
-                        data_idx = m
-                        if not p.shape:  # for latitude, longitude, nominal_depth
-                            d = ds.variables[var_name]
-                            data_idx = 0
+            # load the variable data
+            i = 0
+            try:
+                for m in range(len(ds.variables["TIME"])):
+                    # load the data
+                    d = ds.variables[var_name][:]
+                    data_idx = m
+                    if not p.shape:  # for latitude, longitude, nominal_depth
+                        d = ds.variables[var_name]
+                        data_idx = 0
 
-                        if name == "TIME_OPEN":
-                            cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[data_idx][0])))
-                        elif name == "TIME_CLOSE":
-                            cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[data_idx][1])))
-                        else:
-                            cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)', (file_id, i, var_id, str(d[data_idx])))
-                        i += 1
+                    if name == "TIME_OPEN":
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[data_idx][0])))
+                    elif name == "TIME_CLOSE":
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[data_idx][1])))
+                    else:
+                        cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)', (file_id, i, var_id, str(d[data_idx])))
+                    i += 1
 
-                except KeyError as e:
-                    print("KeyError", e)
-                    pass
+            except KeyError as e:
+                print("KeyError", e)
+                pass
 
 
-    # save time when we processed this file
+# save time when we processed this file
     cur.execute('UPDATE file SET date_loaded=? WHERE file_id = ?', (datetime.datetime.now().strftime("%Y-%m-%d, %H:%M:%S"), file_id))
     con.commit()  # only commit when entire file inserted
 
