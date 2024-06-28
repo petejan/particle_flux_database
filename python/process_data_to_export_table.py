@@ -160,7 +160,7 @@ def add_variables(var, var_interp, dbname, var_calculations):
             for row in cur:
                 d = dict(row)
                 vu = d['units']
-                print(vu)
+                #print(vu)
                 try:
                     if conv_unit.empty:
                         conv_unit = vu
@@ -180,9 +180,13 @@ def add_variables(var, var_interp, dbname, var_calculations):
                 else:
                     val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
                     new_data = (val_in, conv_unit, vu, d['var_id'])
+                    # insert.execute(
+                    #     "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?",
+                    #     (new_data,))
                     insert.execute(
-                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?",
-                        (new_data,))
+                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = processed_data.file_id AND sample_id = processed_data.sample_id AND var_id = ?",
+                        (val_in, conv_unit, vu, d['var_id']))
+
             con.commit()
         except sqlite3.OperationalError:
             continue
@@ -217,7 +221,7 @@ def add_variables(var, var_interp, dbname, var_calculations):
 
                     units_raw = get_units.fetchone()
                     var_units = dict(units_raw)[var + '_units_raw']
-                    print(vu)
+                    #print(vu)
                     if vu in u_pc:
                         new_data = (d['value'], d['var_id'])
                         insert.execute(
@@ -397,10 +401,10 @@ def add_date_downloaded(dbname):
 
 
 if __name__ == "__main__":
-    dbname = 'test_sed_data.sqlite'
-    fn = 'Pangaea_wanted_variables_2.csv'
+    dbname = r'C:\Users\wyn028\OneDrive - CSIRO\Documents\GitHub\particle_flux_database\python\test_sed_data.sqlite'
+    fn = r'C:\Users\wyn028\OneDrive - CSIRO\Documents\GitHub\particle_flux_database\python\Pangaea_wanted_variables_2.csv'
     var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
-    filename = 'conversion_factors.csv'
+    filename = r'C:\Users\wyn028\OneDrive - CSIRO\Documents\GitHub\particle_flux_database\python\conversion_factors.csv'
 #    var_dict = pd.read_csv(filename).to_dict()
     var_calculations = pd.read_csv(filename)
 
