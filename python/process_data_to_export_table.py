@@ -160,14 +160,14 @@ def add_variables(var, var_interp, dbname, var_calculations):
             for row in cur:
                 d = dict(row)
                 vu = d['units']
-                #print(vu)
+                print(d)
                 try:
-                    if conv_unit.empty:
+                    if conv_unit is None:
                         conv_unit = vu
                 except AttributeError:
                     pass
                 try:
-                    if conv_factor.empty:
+                    if conv_factor is None:
                         conv_factor = 1
                 except AttributeError:
                     pass
@@ -188,7 +188,8 @@ def add_variables(var, var_interp, dbname, var_calculations):
                         (val_in, conv_unit, vu, d['var_id']))
 
             con.commit()
-        except sqlite3.OperationalError:
+        except sqlite3.OperationalError as e:
+            print(e)
             continue
 
     # SD
@@ -240,7 +241,8 @@ def add_variables(var, var_interp, dbname, var_calculations):
                             "UPDATE processed_data set '" + var + "'= ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?",
                             (new_data,))
                 con.commit()
-            except sqlite3.OperationalError:
+            except sqlite3.OperationalError as e:
+                print(e)
                 continue
 
     # QC
@@ -269,7 +271,8 @@ def add_variables(var, var_interp, dbname, var_calculations):
                         "UPDATE processed_data set '"+ var + "_qc' = ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?",
                         (new_data,))
                 con.commit()
-            except sqlite3.OperationalError:
+            except sqlite3.OperationalError as e:
+                print(e)
                 continue
 
 
