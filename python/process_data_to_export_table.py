@@ -133,8 +133,8 @@ def add_times_var(var_interp, dbname):
 
 def add_variables(var, var_interp, dbname, var_calculations):
     var_dict = var_calculations.loc[var_calculations['varname'] == var]
-    conv_factor = var_dict['conversion_factor']
-    conv_unit = var_dict['final_unit']
+    conv_factor = var_dict['conversion_factor'].values[0]
+    conv_unit = var_dict['final_unit'].values[0]
 
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
     con.row_factory = sqlite3.Row
@@ -150,17 +150,15 @@ def add_variables(var, var_interp, dbname, var_calculations):
         print('working on ', v)
         # update the processed data table db
         try:
-#            cur.execute(
-#                 "SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
-            cur.execute(
-                "SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
+            cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
 
             insert = con.cursor()
 
             for row in cur:
                 d = dict(row)
                 vu = d['units']
-                print(d)
+                print(v, d)
+                continue
                 try:
                     if conv_unit is None:
                         conv_unit = vu
@@ -173,10 +171,10 @@ def add_variables(var, var_interp, dbname, var_calculations):
                     pass
 
                 if vu in u_pc:
-                    new_data = (d['value'], conv_unit, vu, d['var_id'])
+                    new_data = (d['value'], conv_unit, vu, d['file_id'], d['sample_id'], d['var_id'])
                     insert.execute(
-                        "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ? AND '" + var + "' IS NULL",
-                        (new_data,))
+                        "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
+                        new_data)
                 else:
                     val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
                     new_data = (val_in, conv_unit, vu, d['var_id'])
@@ -185,12 +183,11 @@ def add_variables(var, var_interp, dbname, var_calculations):
                     #     (new_data,))
                     insert.execute(
                         "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = processed_data.file_id AND sample_id = processed_data.sample_id AND var_id = ?",
-                        (val_in, conv_unit, vu, d['var_id']))
+                        new_data)
 
             con.commit()
         except sqlite3.OperationalError as e:
             print(e)
-            continue
 
     # SD
     vars = var_interp[var_interp.column_name == var + '_sd']
@@ -404,10 +401,10 @@ def add_date_downloaded(dbname):
 
 
 if __name__ == "__main__":
-    dbname = r'C:\Users\wyn028\OneDrive - CSIRO\Documents\GitHub\particle_flux_database\python\test_sed_data.sqlite'
-    fn = r'C:\Users\wyn028\OneDrive - CSIRO\Documents\GitHub\particle_flux_database\python\Pangaea_wanted_variables_2.csv'
+    dbname = r'test_sed_data.sqlite'
+    fn = r'Pangaea_wanted_variables_2.csv'
     var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
-    filename = r'C:\Users\wyn028\OneDrive - CSIRO\Documents\GitHub\particle_flux_database\python\conversion_factors.csv'
+    filename = r'conversion_factors.csv'
 #    var_dict = pd.read_csv(filename).to_dict()
     var_calculations = pd.read_csv(filename)
 
@@ -458,7 +455,9 @@ if __name__ == "__main__":
 
 #    create_processed_data_db()
 #    add_times_var(var_interp, dbname)
-    add_variables('mass_total', var_interp, dbname, var_calculations)
+    var = {'mass_total'}
+    for v in var:
+        add_variables(v, var_interp, dbname, var_calculations)
 #    add_reference_var(dbname)
 #    add_comments_var(var_interp, dbname)
 #    add_doi(dbname)
