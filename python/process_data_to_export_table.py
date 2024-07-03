@@ -177,7 +177,7 @@ def add_variables(var, var_interp, dbname, var_calculations):
                         new_data)
                 else:
                     val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
-                    new_data = (val_in, conv_unit, vu, d['var_id'])
+                    #new_data = (val_in, conv_unit, vu, d['var_id'])
                     # insert.execute(
                     #     "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?",
                     #     (new_data,))
