@@ -150,15 +150,17 @@ def add_variables(var, var_interp, dbname, var_calculations):
         print('working on ', v)
         # update the processed data table db
         try:
-            cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
-
+            # cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
+            cur.execute(
+                "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+                "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
             insert = con.cursor()
 
             for row in cur:
                 d = dict(row)
                 vu = d['units']
                 print(v, d)
-                continue
+                #continue
                 try:
                     if conv_unit is None:
                         conv_unit = vu
@@ -172,17 +174,21 @@ def add_variables(var, var_interp, dbname, var_calculations):
 
                 if vu in u_pc:
                     new_data = (d['value'], conv_unit, vu, d['file_id'], d['sample_id'], d['var_id'])
+                    # insert.execute(
+                    #     "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
+                    #     new_data)
                     insert.execute(
-                        "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
+                        "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "'",
                         new_data)
+
                 else:
                     val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
-                    #new_data = (val_in, conv_unit, vu, d['var_id'])
+                    new_data = (val_in, conv_unit, vu, d['file_id'], d['sample_id'], d['var_id'])
                     # insert.execute(
-                    #     "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?",
-                    #     (new_data,))
+                    #     "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
+                    #     new_data)
                     insert.execute(
-                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = processed_data.file_id AND sample_id = processed_data.sample_id AND var_id = ?",
+                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ?",
                         new_data)
 
             con.commit()
@@ -192,7 +198,7 @@ def add_variables(var, var_interp, dbname, var_calculations):
     # SD
     vars = var_interp[var_interp.column_name == var + '_sd']
     print(vars)
-    if not vars.empty:
+    if vars is not None:
         var_names = set(vars.name)
         print(var + '_sd names', str(var_names)[1:-1])
         # update the processed data table db for the variable
@@ -201,42 +207,48 @@ def add_variables(var, var_interp, dbname, var_calculations):
             # update the processed data table db
             try:
                 # cur.execute(
-                #     "SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
+                #     "SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
                 cur.execute(
-                    "SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
-
+                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+                    "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
                 insert = con.cursor()
 
                 for row in cur:
                     d = dict(row)
                     vu = d['units']
+                    print(v, d)
                     # get the sample units
                     get_units = con.cursor()
+#                    unit_file_id = (d['file_id'], d['sample_id'], d['var_id'])
                     unit_file_id = (d['file_id'], d['sample_id'])
-                    get_units.execute(
-                        "SELECT '" + var + '_units_raw FROM processed_data WHERE file_id = ? AND sample_id = ?',
-                        unit_file_id)
-
+                    get_units.execute("SELECT '" + var + "_units_raw' FROM processed_data WHERE file_id = ? AND sample_id = ?", unit_file_id)
                     units_raw = get_units.fetchone()
                     var_units = dict(units_raw)[var + '_units_raw']
                     #print(vu)
                     if vu in u_pc:
-                        new_data = (d['value'], d['var_id'])
+                        new_data = (d['value'], d['file_id'], d['sample_id'], d['var_id'])
+                        # insert.execute(
+                        #     "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
+                        #     new_data)
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ? AND '" + var + "' IS NULL",
-                            (new_data,))
+                            "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ? ",
+                            new_data)
+
                     elif v in u_plus_minus:
                         val_in = convert_units_mg_p_day(d['value'], var_units, conv_factor)
-                        new_data = (val_in, d['var_id'])
+                        new_data = (val_in, d['file_id'], d['sample_id'], d['var_id'])
+                        # insert.execute(
+                        #     "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
+                        #     new_data)
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ? AND '" + var + "' IS NULL",
-                            (new_data,))
+                            "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                            new_data)
                     else:
                         val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
-                        new_data = (val_in, d['var_id'])
+                        new_data = (val_in, d['file_id'], d['sample_id'], d['var_id'])
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "'= ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?",
-                            (new_data,))
+                            "UPDATE processed_data set '" + var + "'= ? WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                            new_data)
                 con.commit()
             except sqlite3.OperationalError as e:
                 print(e)
@@ -246,7 +258,7 @@ def add_variables(var, var_interp, dbname, var_calculations):
 
     vars = var_interp[var_interp.column_name == var + '_qc']
     print(vars)
-    if not vars.empty:
+    if vars is not None:
         var_names = set(vars.name)
         print(var + '_qc names', str(var_names)[1:-1])
         # update the processed data table db for the variable
@@ -255,18 +267,18 @@ def add_variables(var, var_interp, dbname, var_calculations):
             # update the processed data table db
             try:
                 # cur.execute(
-                #     "SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
+                #     "SELECT data.file_id as file_id, sample_id, value, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
                 cur.execute(
-                    "SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
+                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id FROM data JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
 
                 insert = con.cursor()
 
                 for row in cur:
                     d = dict(row)
-                    new_data = (d['value'], d['var_id'])
+                    new_data = (d['value'], d['file_id'], d['sample_id'], d['var_id'])
                     insert.execute(
-                        "UPDATE processed_data set '"+ var + "_qc' = ? WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?",
-                        (new_data,))
+                        "UPDATE processed_data set '" + var + "_qc' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                        new_data)
                 con.commit()
             except sqlite3.OperationalError as e:
                 print(e)
@@ -456,8 +468,8 @@ if __name__ == "__main__":
 #    create_processed_data_db()
 #    add_times_var(var_interp, dbname)
     var = {'mass_total'}
-    for v in var:
-        add_variables(v, var_interp, dbname, var_calculations)
+    for vv in var:
+        add_variables(vv, var_interp, dbname, var_calculations)
 #    add_reference_var(dbname)
 #    add_comments_var(var_interp, dbname)
 #    add_doi(dbname)
