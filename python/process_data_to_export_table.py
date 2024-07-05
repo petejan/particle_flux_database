@@ -219,35 +219,28 @@ def add_variables(var, var_interp, dbname, var_calculations):
                     print(v, d)
                     # get the sample units
                     get_units = con.cursor()
-#                    unit_file_id = (d['file_id'], d['sample_id'], d['var_id'])
-                    unit_file_id = (d['file_id'], d['sample_id'])
-                    get_units.execute("SELECT '" + var + "_units_raw' FROM processed_data WHERE file_id = ? AND sample_id = ?", unit_file_id)
+                    unit_file_id = (d['file_id'], d['var_id'])
+                    get_units.execute("SELECT units FROM file_variables WHERE file_id = ? AND var_id = ?", unit_file_id)
                     units_raw = get_units.fetchone()
-                    var_units = dict(units_raw)[var + '_units_raw']
+                    var_units = dict(units_raw)['units']
                     #print(vu)
                     if vu in u_pc:
                         new_data = (d['value'], d['file_id'], d['sample_id'], d['var_id'])
-                        # insert.execute(
-                        #     "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
-                        #     new_data)
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ? ",
+                            "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ? ",
                             new_data)
 
                     elif v in u_plus_minus:
                         val_in = convert_units_mg_p_day(d['value'], var_units, conv_factor)
                         new_data = (val_in, d['file_id'], d['sample_id'], d['var_id'])
-                        # insert.execute(
-                        #     "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
-                        #     new_data)
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                            "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ?",
                             new_data)
                     else:
                         val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
                         new_data = (val_in, d['file_id'], d['sample_id'], d['var_id'])
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "'= ? WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                            "UPDATE processed_data set '" + var + "_sd'= ? WHERE file_id = ? AND sample_id = ? AND var_id = ?",
                             new_data)
                 con.commit()
             except sqlite3.OperationalError as e:
