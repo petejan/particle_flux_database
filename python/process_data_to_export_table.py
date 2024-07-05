@@ -93,6 +93,11 @@ def convert_units_mg_p_day(value, units_in, conversion_factor):
             val_in = value * conversion_factor
         except TypeError:
             val_in = 'NA'
+    elif units_in in u_plus_minus:
+        try:
+            val_in = value
+        except TypeError:
+            val_in = 'NA'
     else:
         print('did not understand : ', units_in, ' unit')
 
@@ -277,6 +282,76 @@ def add_variables(var, var_interp, dbname, var_calculations):
                 print(e)
                 continue
 
+def add_lat_var(var_interp, dbname):
+    var = 'latitude'
+    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    # latitude
+    vars = var_interp[var_interp.column_name == var]
+    print(vars)
+    var_names = set(vars.name)
+    print(var + ' names', str(var_names)[1:-1])
+
+    # update the processed data table db for the variable
+    cur.execute(
+        "SELECT data.file_id as file_id, sample_id, value, units FROM data JOIN variables v using (var_id) WHERE v.name IN (" + str(
+            var_names)[1:-1] + ")")
+    insert = con.cursor()
+
+    for row in cur:
+        d = dict(row)
+        #    print(d)
+        v = d['units']
+        # print(v)
+        if v in u_lat:
+            # print('inserted', d['value'], 'with unit ', v)
+            new_data = (d['value'], d['file_id'], d['sample_id'])
+            insert.execute('UPDATE processed_data set ' + var + ' = ? WHERE file_id = ? AND sample_id = ?',
+                           new_data)
+        else:
+            print('did not understand', v)
+
+    con.commit()
+
+
+def add_lon_var(var_interp, dbname):
+    var = 'longitude'
+    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    u = {'degrees', 'deg', 'unitless', 'decimal degrees', 'degrees_east', 'degrees East'}
+
+    # depth
+    vars = var_interp[var_interp.column_name == var]
+    print(vars)
+    var_names = set(vars.name)
+    print(var + ' names', str(var_names)[1:-1])
+
+    # update the processed data table db for the variable
+    cur.execute(
+        "SELECT data.file_id as file_id, sample_id, value, units FROM data JOIN variables v using (var_id) WHERE v.name IN (" + str(
+            var_names)[1:-1] + ")")
+    insert = con.cursor()
+
+    for row in cur:
+        d = dict(row)
+        #    print(d)
+        v = d['units']
+        # print(v)
+        if v in u:
+            # print('inserted', d['value'], 'with unit ', v)
+            new_data = (d['value'], d['file_id'], d['sample_id'])
+            insert.execute('UPDATE processed_data set ' + var + ' = ? WHERE file_id = ? AND sample_id = ?',
+                           new_data)
+        else:
+            print('did not understand', v)
+
+    con.commit()
+
+
 
 def add_reference_var(dbname):
     var = 'reference'
@@ -458,16 +533,34 @@ if __name__ == "__main__":
 
     # print(dict_from_csv)
 
-#    create_processed_data_db()
-#    add_times_var(var_interp, dbname)
-    var = {'mass_total'}
+    create_processed_data_db()
+    add_times_var(var_interp, dbname)
+    var = ('mass_total', 'duration', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
+           'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
+           'ti')
     for vv in var:
         add_variables(vv, var_interp, dbname, var_calculations)
+
+#    add_lat_var(var_interp, dbname)
+#    add_lon_var(var_interp, dbname)
+#    add_depth
 #    add_reference_var(dbname)
 #    add_comments_var(var_interp, dbname)
 #    add_doi(dbname)
 #    add_url(dbname)
 #    add_citation(dbname)
+#    add_data_type
+#    add_instrument_type
+#    add_instrument_collector_size
+#    add_bathymetry
+#    add_sst
+#    add_mixed_layer_depth
+#    add_chl_tot_gsm
+#    add_npp_c
+#    add_kd490
+#    add_z_eu
+#    add_par
+#    add_sfm
 #    add_date_downloaded(dbname)
 
 
