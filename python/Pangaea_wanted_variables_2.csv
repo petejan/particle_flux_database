@@ -97,7 +97,7 @@ Corg_flux_sed,mmol m-2 d-1,1,Sediment trap-based organic carbon flux,poc
 Corg_flux_sed_sd,mmol m-2 d-1,1,Standard deviation of sediment trap-based organic carbon flux. Uncertainty is reported as 50% for all sediment trap deployments.,poc_sd
 DSi + PSi flux,mg/m**2/day,15,"biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic,biogenic",psi
 DSiO2 flux,mg/m**2/day,6,,psio2
-Date/Time,,13739,,timestamp
+Date/Time,unitless,13739,,timestamp
 Date_Recovered,unitless,1,Recovery date and time in format %m/%d/%y %H:%M (e.g. 5/13/17 12:50). Local time zone variesÿbetween US/Eastern and US/Central over the course of this dataset.,time_recovered
 Days,days,36,"number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ,number of days  ",duration
 Days cum,day,16,,duration
@@ -603,7 +603,7 @@ time_start,hh:mm:ss,18,,NA
 time_start,unitless,1,time sampling began (GMT) in ISO 8601 format hh:mm:ss,NA
 yrday,unitless,1,"Year day (sequential day of year, eg. Jan 1 = 1)",NA
 z(eu),m,2,,z_eu
-Date/Time 2,,,,time_recovered
+Date/Time 2,unitless,,,time_recovered
 Days_Cup_Open,days (d),,number of days cup was open,duration
 deploy_length,days (d),,Days between deployment of NBST and tube lid closure,duration
 Corg,mg C m-2 d-1,,Particulate organic carbon flux,poc

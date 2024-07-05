@@ -21,3 +21,9 @@ lithogenics,1,mg m-2 d-1
 detrital,1,mg m-2 d-1
 ti,1,mg m-2 d-1
 mass_total,1,mg m-2 d-1
+timestamp,1,unchanged
+time_mid,1,unchanged
+time_deployed,1,unchanged
+time_recovered,1,unchanged
+latitude,1,unchanged
+longitude,1,unchanged

@@ -10,9 +10,10 @@ def create_processed_data_db():
 
     # create the database table to take the data
     cur.execute("CREATE TABLE IF NOT EXISTS processed_data"
-                "(file_id integer, var_id integer, sample_id integer, "
-                "timestamp REAL, duration REAL, duration_units REAL, time_deployed REAL, time_recovered REAL, time_mid REAL, latitude REAL, "
-                "longitude REAL, data_type TEXT, instrument_descriptor TEXT, instrument_collector_size REAL,"
+                "(file_id integer, sample_id integer, "
+                "timestamp REAL, timestamp_units REAL, duration REAL, duration_units REAL, time_deployed REAL, time_deployed_units REAL,"
+                "time_recovered REAL, time_recovered_units REAL, time_mid REAL, time_mid_units REAL, latitude REAL, "
+                "latitude_units REAL, longitude REAL, longitude_units REAL, data_type TEXT, instrument_descriptor TEXT, instrument_collector_size REAL,"
                 "bathymetry_depth_ETOPO1 REAL, depth REAL, depth_units REAL, mass_total REAL, mass_total_units_raw TEXT, "
                 "mass_total_units TEXT, mass_total_sd REAL, mass_total_qc TEXT, carbon_total REAL, "
                 "carbon_total_units_raw TEXT, carbon_total_units TEXT, carbon_total_sd REAL, carbon_total_qc TEXT, "
@@ -33,25 +34,29 @@ def create_processed_data_db():
                 "detrital_qc TEXT, ti REAL, ti_units_raw TEXT, ti_units TEXT, ti_sd REAL, ti_qc TEXT, reference TEXT, "
                 "comments TEXT, doi TEXT, url TEXT, citation TEXT, date_downloaded REAL, sst REAL, "
                 "mixed_layer_depth REAL, chl_tot_gsm REAL, npp_c REAL, kd490 REAL, z_eu REAL, par REAL, sfm REAL, "
-                "CONSTRAINT FK_data_var_id FOREIGN KEY(var_id) REFERENCES variables(var_id) CONSTRAINT FK_data_file_id "
+                "CONSTRAINT FK_data_var_id CONSTRAINT FK_data_file_id "
                 "FOREIGN KEY(file_id) REFERENCES file(file_id))")
 
     cur.execute("CREATE INDEX processed_data_file_id_IDX ON 'processed_data' (file_id)")
-    cur.execute("CREATE INDEX processed_data_var_id_IDX ON 'processed_data' (var_id)")
+#    cur.execute("CREATE INDEX processed_data_var_id_IDX ON 'processed_data' (var_id)")
     cur.execute("CREATE INDEX processed_data_sample_IDX ON 'processed_data' (sample_id)")
 
     # start populating the table with file_id and sample_id to get started
+    # cur.execute(
+    #     "SELECT data.file_id as file_id, sample_id, var_id FROM data GROUP BY file_id, sample_id, var_id ORDER BY file_id, sample_id, var_id")
     cur.execute(
-        "SELECT data.file_id as file_id, sample_id, var_id FROM data GROUP BY file_id, sample_id, var_id ORDER BY file_id, sample_id, var_id")
+        "SELECT data.file_id as file_id, sample_id FROM data GROUP BY file_id, sample_id ORDER BY file_id, sample_id")
+
     insert = con.cursor()
 
     for row in cur:
         d = dict(row)
         print(d)
 
-        new_data = (d['file_id'], d['sample_id'], d['var_id'])
-        insert.execute('INSERT INTO processed_data (file_id, sample_id, var_id) VALUES (?,?,?)', new_data)
-
+        # new_data = (d['file_id'], d['sample_id'], d['var_id'])
+        new_data = (d['file_id'], d['sample_id'])
+        # insert.execute('INSERT INTO processed_data (file_id, sample_id, var_id) VALUES (?,?,?)', new_data)
+        insert.execute('INSERT INTO processed_data (file_id, sample_id) VALUES (?,?)', new_data)
     con.commit()
 
 
@@ -100,6 +105,7 @@ def convert_units_mg_p_day(value, units_in, conversion_factor):
             val_in = 'NA'
     else:
         print('did not understand : ', units_in, ' unit')
+        val_in = value
 
     return val_in
 
@@ -121,20 +127,64 @@ def add_times_var(var_interp, dbname):
             print('working on ', v)
             # update the processed data table db
             try:
-                cur.execute("SELECT var_id FROM variables WHERE name = '" + v + "'")
+                # cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
+                cur.execute(
+                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+                    "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
                 insert = con.cursor()
 
                 for row in cur:
                     d = dict(row)
-                    print(d)
-                    new_data = (d['var_id'])
-                    insert.execute(
-                        'UPDATE processed_data set ' + var + ' = data.value FROM data WHERE data.file_id = processed_data.file_id AND data.sample_id = processed_data.sample_id AND data.var_id = ?',
-                        (new_data,))
-                    con.commit()
-            except sqlite3.OperationalError:
-                continue
+                    vu = d['units']
+                    print(v, d)
+                    # continue
 
+                    new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
+                    insert.execute(
+                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
+                        new_data)
+
+                con.commit()
+            except sqlite3.OperationalError as e:
+                print(e)
+
+def add_lat_lon(var_interp, dbname):
+    geo_vars = {'latitude', 'longitude'}
+    for var in geo_vars:
+        con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+
+        vars = var_interp[var_interp.column_name == var]
+        print(vars)
+        var_names = set(vars.name)
+        print(var + ' names', str(var_names)[1:-1])
+
+        # # update the processed data table db
+        for v in var_names:
+            print('working on ', v)
+            # update the processed data table db
+            try:
+                # cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
+                cur.execute(
+                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+                    "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
+                insert = con.cursor()
+
+                for row in cur:
+                    d = dict(row)
+                    vu = d['units']
+                    print(v, d)
+                    # continue
+
+                    new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
+                    insert.execute(
+                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
+                        new_data)
+
+                con.commit()
+            except sqlite3.OperationalError as e:
+                print(e)
 
 def add_variables(var, var_interp, dbname, var_calculations):
     var_dict = var_calculations.loc[var_calculations['varname'] == var]
@@ -178,22 +228,22 @@ def add_variables(var, var_interp, dbname, var_calculations):
                     pass
 
                 if vu in u_pc:
-                    new_data = (d['value'], conv_unit, vu, d['file_id'], d['sample_id'], d['var_id'])
+                    new_data = (d['value'], conv_unit, vu, d['file_id'], d['sample_id'])
                     # insert.execute(
                     #     "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
                     #     new_data)
                     insert.execute(
-                        "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "'",
+                        "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND '" + var + "'",
                         new_data)
 
                 else:
                     val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
-                    new_data = (val_in, conv_unit, vu, d['file_id'], d['sample_id'], d['var_id'])
+                    new_data = (val_in, conv_unit, vu, d['file_id'], d['sample_id'])
                     # insert.execute(
                     #     "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
                     #     new_data)
                     insert.execute(
-                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ?",
                         new_data)
 
             con.commit()
@@ -230,22 +280,22 @@ def add_variables(var, var_interp, dbname, var_calculations):
                     var_units = dict(units_raw)['units']
                     #print(vu)
                     if vu in u_pc:
-                        new_data = (d['value'], d['file_id'], d['sample_id'], d['var_id'])
+                        new_data = (d['value'], d['file_id'], d['sample_id'])
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ? ",
+                            "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ?",
                             new_data)
 
                     elif v in u_plus_minus:
                         val_in = convert_units_mg_p_day(d['value'], var_units, conv_factor)
-                        new_data = (val_in, d['file_id'], d['sample_id'], d['var_id'])
+                        new_data = (val_in, d['file_id'], d['sample_id'])
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                            "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ?",
                             new_data)
                     else:
                         val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
-                        new_data = (val_in, d['file_id'], d['sample_id'], d['var_id'])
+                        new_data = (val_in, d['file_id'], d['sample_id'])
                         insert.execute(
-                            "UPDATE processed_data set '" + var + "_sd'= ? WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                            "UPDATE processed_data set '" + var + "_sd'= ? WHERE file_id = ? AND sample_id = ?",
                             new_data)
                 con.commit()
             except sqlite3.OperationalError as e:
@@ -273,9 +323,9 @@ def add_variables(var, var_interp, dbname, var_calculations):
 
                 for row in cur:
                     d = dict(row)
-                    new_data = (d['value'], d['file_id'], d['sample_id'], d['var_id'])
+                    new_data = (d['value'], d['file_id'], d['sample_id'])
                     insert.execute(
-                        "UPDATE processed_data set '" + var + "_qc' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ?",
+                        "UPDATE processed_data set '" + var + "_qc' = ? WHERE file_id = ? AND sample_id = ?",
                         new_data)
                 con.commit()
             except sqlite3.OperationalError as e:
@@ -527,6 +577,8 @@ if __name__ == "__main__":
 
     u_lon = {'degrees', 'deg', 'unitless', 'decimal degrees', 'degrees_east', 'degrees East'}
 
+    u_unknown = ''
+
     vars_4_inclusion = {'duration', 'latitude', 'longitude', 'depth', 'mass_total', 'carbon_total', 'poc', 'poc', 'pon',
                         'pop', 'opa', 'psi', 'psio2', 'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn',
                         'ba', 'lithogenic', 'detrital', 'ti'}
@@ -535,9 +587,10 @@ if __name__ == "__main__":
 
     create_processed_data_db()
     add_times_var(var_interp, dbname)
+    add_lat_lon(var_interp, dbname)
     var = ('mass_total', 'duration', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
-           'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
-           'ti')
+            'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
+            'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid')
     for vv in var:
         add_variables(vv, var_interp, dbname, var_calculations)
 
