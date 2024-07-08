@@ -63,13 +63,13 @@ for fn in files_to_load:
     # try:
         lat = ds.geospatial_lat_max
         lon = ds.geospatial_lon_max
-        cur.execute('UPDATE file SET doi=?, cite=?, number_params=?, number_samples=?, mintimeextent=?, maxtimeextent=?, '
+        cur.execute('UPDATE file SET doi=?, citation=?, number_params=?, number_samples=?, mintimeextent=?, maxtimeextent=?, '
                     'meanLatitude=?, meanLongitude=?, meandepth=? WHERE file_id = ?', (uri, ds.citation,
                     parameters, samples, minTime, maxTime, lat, lon, meanDepth, file_id))
     except sqlite3.IntegrityError:
         # cur.close()
         print("skipping, non-unique", uri)
-        cur.execute('DELETE FROM file WHERE file_id = ?', (file_id,))
+        #cur.execute('DELETE FROM file WHERE file_id = ?', (file_id,))
         continue
     except KeyError:
         pass

@@ -10,7 +10,7 @@ dbname = "test_sed_data.sqlite"
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 
 cur = con.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS file (file_id integer primary key autoincrement, cite TEXT, doi TEXT, source TEXT, "
+cur.execute("CREATE TABLE IF NOT EXISTS file (file_id integer primary key autoincrement, citation TEXT, doi TEXT, source TEXT, "
             "date_loaded REAL, mintimeextent REAL, maxtimeextent REAL, number_params integer, number_samples integer, "
             "meanLatitude REAL, meanLongitude REAL, meandepth REAL, CONSTRAINT file_uniq UNIQUE (meanlatitude, meanlongitude, "
             "number_params, number_samples, mintimeextent, maxtimeextent, meandepth))")

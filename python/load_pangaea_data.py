@@ -11,7 +11,8 @@ con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
 
 # select files from file table which are from PANGAEA and have not been processed
-files_to_load_res = cur.execute("SELECT file_id, source FROM file WHERE source LIKE 'doi.org/10.1594/PANGAEA%' AND date_loaded IS NULL")
+#files_to_load_res = cur.execute("SELECT file_id, source FROM file WHERE source LIKE 'doi.org/10.1594/PANGAEA%' AND date_loaded IS NULL")
+files_to_load_res = cur.execute("SELECT file_id, source FROM file WHERE source LIKE 'doi:10.1594/PANGAEA%' AND date_loaded IS NULL")
 files_to_load = files_to_load_res.fetchall()
 
 for fn in files_to_load:
@@ -40,7 +41,7 @@ for fn in files_to_load:
     # try:
         lat = ds.geometryextent['meanLatitude']
         lon = ds.geometryextent['meanLongitude']
-        cur.execute('UPDATE file SET doi=?, cite=?, number_params=?, number_samples=?, mintimeextent=?, '
+        cur.execute('UPDATE file SET doi=?, citation=?, number_params=?, number_samples=?, mintimeextent=?, '
                     'maxtimeextent=?, meanLatitude=?, meanLongitude=? WHERE file_id = ?',
                     (ds.doi, ds.citation, parameters, samples, minTime, maxTime, lat, lon, file_id))
     except sqlite3.IntegrityError:
