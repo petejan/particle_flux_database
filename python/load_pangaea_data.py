@@ -47,9 +47,10 @@ for fn in files_to_load:
     except sqlite3.IntegrityError:
         # cur.close()
         print("skipping, non-unique", ds.doi)
-        cur.execute('DELETE FROM file WHERE file_id = ?', (file_id,))
+        #cur.execute('DELETE FROM file WHERE file_id = ?', (file_id,))
         continue
-    except KeyError:
+    except KeyError as e:
+        print(e)
         pass
 
     try:
@@ -125,7 +126,7 @@ for fn in files_to_load:
         try:
             d = ds.data[var_name].values
             for m in range(len(ds.data[var_name])):
-                # load the data where its not unknown or nan
+                # load the data where it's not unknown or nan
                 if str(ds.data[var_name][m]) != 'nan' and str(ds.data[var_name][m]) != 'unknown':
                     #print('variable', var_name, ds.data[var_name][m])
                     cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',(file_id, i, var_id, str(d[m])))

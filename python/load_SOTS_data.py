@@ -71,7 +71,8 @@ for fn in files_to_load:
         print("skipping, non-unique", uri)
         #cur.execute('DELETE FROM file WHERE file_id = ?', (file_id,))
         continue
-    except KeyError:
+    except KeyError as e:
+        print(e)
         pass
 
     # need to add in when the data was cached
