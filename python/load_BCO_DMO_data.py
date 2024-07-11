@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 #dbname = "BCO_test.sqlite"
-dbname = "test.sqlite"
+dbname = r'python\test.sqlite'
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
 
@@ -36,6 +36,10 @@ for folder in os.listdir(root):
 #        data['date_start'] = pd.to_datetime(data.date_start, format = '%d/%m/%Y %H:%M')
     data['date_start'] = pd.to_datetime(data.date_start, format='mixed', dayfirst=True)
     data['date_start'].dt.strftime('%Y/%m/%d')
+    parameters = data.columns
+    num_parameters = data.shape[1]
+    num_samples = data.shape[0]
+    # TO DO: find aliases for lat, lon and depth --> use mean for file metadata
 
     # read the metadata from the README.txt file I created
     metadata_keys = ("URI", "date_downloaded", "Citation", "Abstract", "Method", "Title", "DOI", "Description")
@@ -84,7 +88,7 @@ for folder in os.listdir(root):
     unit_metadata = pd.read_csv(unit_metadata_fn, encoding='utf-8')
 
     # load variables
-    parameters = data.columns
+
     try:
         res = cur.execute("SELECT sample_id FROM data ORDER BY sample_id DESC LIMIT 1")
         s_idx = res.fetchone()[0]
