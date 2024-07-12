@@ -516,7 +516,7 @@ if __name__ == "__main__":
                         'pop', 'opa', 'psi', 'psio2', 'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn',
                         'ba', 'lithogenic', 'detrital', 'ti'}
 
-    create_processed_data_db(dbname)
+#    create_processed_data_db(dbname)
     populate_file_id(dbname)
     add_times_var(var_interp, dbname)
     add_lat_lon(var_interp, dbname)
@@ -526,7 +526,6 @@ if __name__ == "__main__":
     for vv in var:
         add_variables(vv, var_interp, dbname, var_calculations)
 
-#    add_depth
 #    add_reference_var(dbname)
 #    add_comments_var(var_interp, dbname)
 #    add_doi(dbname)
