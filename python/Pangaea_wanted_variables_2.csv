@@ -629,3 +629,7 @@ TIME_OPEN,unitless,1,,time_deployed
 TIME_CLOSE,unitless,1,,time_recovered
 Date/Time end,,,,time_recovered
 sample,,,,NA
+deploy_lat,,,Latitude of deployment (positive values = North),latitude
+deploy_lon,,,Longitude of deployment (positive values = East),longitude
+lat_deploy,,,Latitude of deployment (positive values = North),latitude
+lon_deploy,,,Longitude of deployment (positive values = East),longitude

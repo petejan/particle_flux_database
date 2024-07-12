@@ -2,16 +2,18 @@
 import sqlite3
 import pandas as pd
 import os
-from datetime import datetime
+import datetime
 
 
 #dbname = "BCO_test.sqlite"
-dbname = r'python\test.sqlite'
+dbname = r'test.sqlite'
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
+fn = r'Pangaea_wanted_variables_2.csv'
+var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
+
 
 # the root directory where all the BCO_DMO files are
-
 root = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\BCO_DMO_database'
 # create a list of folders
 for folder in os.listdir(root):
@@ -33,13 +35,9 @@ for folder in os.listdir(root):
 
     # read the csv file
     data = pd.read_csv(filename)
-#        data['date_start'] = pd.to_datetime(data.date_start, format = '%d/%m/%Y %H:%M')
-    data['date_start'] = pd.to_datetime(data.date_start, format='mixed', dayfirst=True)
-    data['date_start'].dt.strftime('%Y/%m/%d')
     parameters = data.columns
     num_parameters = data.shape[1]
     num_samples = data.shape[0]
-    # TO DO: find aliases for lat, lon and depth --> use mean for file metadata
 
     # read the metadata from the README.txt file I created
     metadata_keys = ("URI", "date_downloaded", "Citation", "Abstract", "Method", "Title", "DOI", "Description")
@@ -67,8 +65,39 @@ for folder in os.listdir(root):
                         print(m, ": ", d[-1])
                         metadata[m] = d[-1]
 
+
+    geo_vars = {'latitude', 'longitude', 'depth'}
+    new_data = dict.fromkeys(geo_vars)
+    for var in geo_vars:
+        vars = var_interp[var_interp.column_name == var]
+        print(vars)
+        var_names = set(vars.name)
+        print(var + ' names', str(var_names)[1:-1])
+
+        for v in var_names:
+            print('working on ', v)
+            # update the processed data table db
+            try:
+                new_data[var] = data[v]
+                print(new_data)
+            except KeyError:
+                continue
     try:
-        cur.execute('INSERT INTO file (citation, doi, source, date_loaded) VALUES (?,?,?,?)', [metadata["Citation"], metadata["DOI"], metadata["URI"], metadata["date_downloaded"]])
+        min_ext_time = pd.to_datetime(data.date_start, format='mixed', dayfirst=True).min().strftime('%Y-%m-%d')
+    except ValueError:
+        min_ext_time = 'NaT'
+    try:
+        max_ext_time = pd.to_datetime(data.date_start, format='mixed', dayfirst=True).max().strftime('%Y-%m-%d')
+    except ValueError:
+        max_ext_time = 'NaT'
+    mean_lon = new_data['longitude'].mean()
+    mean_lat = new_data['latitude'].mean()
+    mean_depth = new_data['depth'].mean()
+
+    try:
+        cur.execute('INSERT INTO file (citation, doi, source, date_loaded, mintimeextent, maxtimeextent, number_params, number_samples, meanLatitude,'
+                    'meanLongitude, meandepth) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [metadata["Citation"], metadata["DOI"], metadata["URI"], metadata["date_downloaded"],
+                    min_ext_time, max_ext_time, num_parameters, num_samples, mean_lat, mean_lon, mean_depth])
         con.commit()
     except sqlite3.IntegrityError:
         print("skipping, non-unique doi", metadata["DOI"])
@@ -88,48 +117,54 @@ for folder in os.listdir(root):
     unit_metadata = pd.read_csv(unit_metadata_fn, encoding='utf-8')
 
     # load variables
+    for var_name in data.keys():
+        print("variable name", var_name)
 
-    try:
-        res = cur.execute("SELECT sample_id FROM data ORDER BY sample_id DESC LIMIT 1")
-        s_idx = res.fetchone()[0]
-    except TypeError:
-        s_idx = 0
+        res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (var_name,))
+        var_id_n = res.fetchone()
 
-    try:
-        ts = data['date_start'].values
-        s_id = list(range(s_idx + 1, s_idx + 1 + len(ts)))
+        if var_id_n is None:
+            # variables simply the variable name to var-id map
+            cur.execute('INSERT OR IGNORE INTO variables (name) VALUES (?)', (var_name,))
 
-        for var_name in parameters:
-#               if var_name != 'date_start':
-            p = data[var_name].values
-            print('variable', data[var_name].name)
+        res = cur.execute("SELECT var_id FROM variables WHERE name = ?", (var_name,))
+        var_id = res.fetchone()[0]
 
-            # get the unit for the variable in process
-            u_idx = unit_metadata.loc[unit_metadata['Supplied Name'] == var_name, 'Supplied Units']
+        print(var_id, 'variable', var_name, data[var_name].dtype.name)
+        try:
+            units = unit_metadata['Supplied Units'][unit_metadata['Supplied Name'] == var_name].values[0]
+        except KeyError:
+            units = 'NA'
 
-            try:
-                unit = u_idx._values[0].split('(', 1)[1].split(')')[0]
-            except (IndexError, AttributeError):
-                unit = 'unitless'
+        print(var_id, 'variable', var_name, 'unit', units)
 
-            # pull in the descriptions for the variables as well
-            c_idx = unit_metadata.loc[unit_metadata['Supplied Name'] == var_name, 'Supplied description']
-            unit_comment = c_idx._values[0]
+        try:
+            comment = unit_metadata['Supplied description'][unit_metadata['Supplied Name'] == var_name].values[0]
+        except KeyError:
+            comment = 'NA'
 
-            print('unit', unit)
+        print(var_id, 'variable', var_name, 'comments', comment)
 
-            cur.execute('INSERT INTO variables (file_id, name, type, units, comment) VALUES (?,?,?,?,?)',
-                        [file_id, data[var_name].name, data[var_name].dtypes.name, unit, unit_comment])
-            con.commit()
+        # save the variable metadata to the file_variables table
+        cur.execute('INSERT INTO file_variables (file_id, var_id, name, type, units, comment) '
+                    'VALUES (?,?,?,?,?,?)', (file_id, var_id, var_name, data[var_name].dtype.name, units, comment))
 
-            var_id = cur.lastrowid  # get the var_id of the row just inserted
 
-            for m in range(len(data[var_name])):
-                cur.execute('INSERT INTO data (file_id, sample_id, var_id, timestamp, value) VALUES (?, ?, ?, julianday(?), ?)', [file_id, s_id[m], var_id, str(ts[m]), str(p[m])])
-                con.commit()
+        i = 0
+        try:
+            for m in range(len(data)):
+                # load the data
+                d = data[var_name].values
+                data_idx = m
+                cur.execute('INSERT INTO data (file_id, sample_id, var_id, value) VALUES (?, ?, ?, ?)',
+                                (file_id, i, var_id, str(d[data_idx])))
+                i += 1
 
-    except KeyError as KE:
-        print(KE)
- #       continue
+        except KeyError as e:
+            print("KeyError", e)
+            pass
+
+        con.commit()  # only commit when entire file inserted
+
 cur.close()
 con.close()
