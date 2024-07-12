@@ -2,8 +2,7 @@ import sqlite3
 import pandas as pd
 
 
-def create_processed_data_db():
-    dbname = "test_sed_data.sqlite"
+def create_processed_data_db(dbname):
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -42,8 +41,7 @@ def create_processed_data_db():
     cur.execute("CREATE INDEX processed_data_sample_IDX ON 'processed_data' (sample_id)")
     con.commit()
 
-def populate_file_id():
-    dbname = "test_sed_data.sqlite"
+def populate_file_id(dbname):
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -468,7 +466,7 @@ def add_date_downloaded(dbname):
 
 
 if __name__ == "__main__":
-    dbname = r'test_sed_data.sqlite'
+    dbname = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\test\test_sed_data.sqlite'
     fn = r'Pangaea_wanted_variables_2.csv'
     var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
     filename = r'conversion_factors.csv'
@@ -518,18 +516,18 @@ if __name__ == "__main__":
                         'pop', 'opa', 'psi', 'psio2', 'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn',
                         'ba', 'lithogenic', 'detrital', 'ti'}
 
-    # create_processed_data_db()
-    # populate_file_id()
-    # add_times_var(var_interp, dbname)
-    # add_lat_lon(var_interp, dbname)
-    # var = ('mass_total', 'duration', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
-    #         'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
-    #         'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid')
-    # for vv in var:
-    #     add_variables(vv, var_interp, dbname, var_calculations)
+    create_processed_data_db(dbname)
+    populate_file_id(dbname)
+    add_times_var(var_interp, dbname)
+    add_lat_lon(var_interp, dbname)
+    var = ('mass_total', 'duration', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
+            'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
+            'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid')
+    for vv in var:
+        add_variables(vv, var_interp, dbname, var_calculations)
 
 #    add_depth
-    add_reference_var(dbname)
+#    add_reference_var(dbname)
 #    add_comments_var(var_interp, dbname)
 #    add_doi(dbname)
 #    add_url(dbname)
