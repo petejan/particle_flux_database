@@ -138,7 +138,7 @@ def add_times_var(var_interp, dbname):
 
                 for row in cur:
                     d = dict(row)
-                    vu = d['units']
+                    #vu = d['units']
                     print(v, d)
                     # continue
 
@@ -343,22 +343,22 @@ def add_reference_var(dbname):
 
     # reference
     # update the processed data table db
+
     try:
         cur.execute(
-            "SELECT file.file_id as file_id, file.citation as citation, file.doi as doi FROM file")
+            "SELECT file.file_id as file_id, file.source as source, file.doi as doi, file.citation as citation, file.date_loaded as date_loaded FROM file")
         insert = con.cursor()
 
         for row in cur:
             d = dict(row)
-            new_data = (d['citation'], d['doi'], d['file_id'])
-            insert.execute("UPDATE processed_data.citation = ?, processed_data.doi = ?"
-                           "WHERE processed_data.file_id = ?", new_data)
+            new_data = (d['citation'], d['doi'], d['source'], d['date_loaded'], d['file_id'])
+            insert.execute("UPDATE processed_data set citation = ?, doi = ?, source = ?, date_downloaded = ? WHERE file_id = ?", new_data)
         con.commit()
     except sqlite3.OperationalError as e:
         print(e)
 
 
-
+# not sure we need this anymore
 def add_comments_var(var_interp, dbname):
     var = 'comments'
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
@@ -387,86 +387,11 @@ def add_comments_var(var_interp, dbname):
     con.commit()
 
 
-def add_doi(dbname):
-    var = 'doi'
-    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-
-    # doi
-    # update the processed data table db for the variable
-    cur.execute(
-        "SELECT file_metadata.file_id as file_id, name, value FROM file_metadata WHERE file_metadata.name = '" + var + "'")
-    insert = con.cursor()
-
-    for row in cur:
-        d = dict(row)
-        new_data = (d['value'], d['file_id'])
-        insert.execute('UPDATE processed_data set ' + var + '= ? WHERE file_id = ?', new_data)
-
-    con.commit()
-
-
-def add_url(dbname):
-    var = 'url'
-    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-
-    # url
-    # update the processed data table db for the variable
-    cur.execute(
-        "SELECT file_metadata.file_id as file_id, name, value FROM file_metadata WHERE file_metadata.name = '" + var + "'")
-    insert = con.cursor()
-
-    for row in cur:
-        d = dict(row)
-        new_data = (d['value'], d['file_id'])
-        insert.execute('UPDATE processed_data set ' + var + '= ? WHERE file_id = ?', new_data)
-
-    con.commit()
-
-
-def add_citation(dbname):
-    var = 'citation'
-    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-
-    # update the processed data table db for the variable
-    cur.execute(
-        "SELECT file_metadata.file_id as file_id, name, value FROM file_metadata WHERE file_metadata.name = '" + var + "'")
-    insert = con.cursor()
-
-    for row in cur:
-        d = dict(row)
-        new_data = (d['value'], d['file_id'])
-        insert.execute('UPDATE processed_data set ' + var + '= ? WHERE file_id = ?', new_data)
-
-    con.commit()
-
-
-def add_date_downloaded(dbname):
-    var = 'date_downloaded'
-    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-
-    # update the processed data table db for the variable
-    cur.execute(
-        "SELECT file_metadata.file_id as file_id, name, value FROM file_metadata WHERE file_metadata.name = '" + var + "'")
-    insert = con.cursor()
-
-    for row in cur:
-        d = dict(row)
-        new_data = (d['value'], d['file_id'])
-        insert.execute('UPDATE processed_data set ' + var + '= ? WHERE file_id = ?', new_data)
-
-    con.commit()
-
 
 if __name__ == "__main__":
-    dbname = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\test\test_sed_data.sqlite'
+#    dbname = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\test\test_sed_data.sqlite'
+    dbname = r'test.sqlite'
+
     fn = r'Pangaea_wanted_variables_2.csv'
     var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
     filename = r'conversion_factors.csv'
@@ -516,21 +441,18 @@ if __name__ == "__main__":
                         'pop', 'opa', 'psi', 'psio2', 'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn',
                         'ba', 'lithogenic', 'detrital', 'ti'}
 
-#    create_processed_data_db(dbname)
-    populate_file_id(dbname)
-    add_times_var(var_interp, dbname)
-    add_lat_lon(var_interp, dbname)
-    var = ('mass_total', 'duration', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
-            'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
-            'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid')
-    for vv in var:
-        add_variables(vv, var_interp, dbname, var_calculations)
+    # create_processed_data_db(dbname)
+    # populate_file_id(dbname)
+    # add_times_var(var_interp, dbname)
+    # add_lat_lon(var_interp, dbname)
+    # var = ('mass_total', 'duration', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
+    #         'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
+    #         'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid')
+    # for vv in var:
+    #     add_variables(vv, var_interp, dbname, var_calculations)
 
-#    add_reference_var(dbname)
+    add_reference_var(dbname)
 #    add_comments_var(var_interp, dbname)
-#    add_doi(dbname)
-#    add_url(dbname)
-#    add_citation(dbname)
 #    add_data_type
 #    add_instrument_type
 #    add_instrument_collector_size
@@ -543,7 +465,7 @@ if __name__ == "__main__":
 #    add_z_eu
 #    add_par
 #    add_sfm
-#    add_date_downloaded(dbname)
+
 
 
 

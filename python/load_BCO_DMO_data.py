@@ -2,11 +2,10 @@
 import sqlite3
 import pandas as pd
 import os
-import datetime
 
 
-#dbname = "BCO_test.sqlite"
-dbname = r'test.sqlite'
+#dbname = r'test.sqlite'
+dbname = r'part_flux_data.sqlite'
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
 fn = r'Pangaea_wanted_variables_2.csv'
