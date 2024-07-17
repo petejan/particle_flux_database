@@ -1,54 +1,45 @@
-# to parse HOTA_ALOHA datafiles to pangaea_sqlite database
-
+# to parse BATS datafiles to pangaea_sqlite database
 
 import sqlite3
 import pandas as pd
 import numpy as np
-import os
 
 #dbname = r'test.sqlite'
 dbname = r'part_flux_data.sqlite'
+
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
 
 
-# put all the .txt files into one panda frame first
-file_folder = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\HOT_ALOHA'
-f = os.listdir(file_folder)
+# the relevant filenames
+filename = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\BATS\Sediment trap\flux\bats_flux_v002.csv'
+metadata_filename = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\BATS\Sediment trap\README.txt'
+unit_metadata_fn = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\BATS\Sediment trap\flux\bats_units.csv'
 
-column_names = ['Cruise','date_start','start_hour','date_end','end_hour', 'Depth','Treatment','Carbon_flux','Carbon_flux_SD','Carbon_flux_n','Nitrogen_flux','Nitrogen_flux_SD','Nitrogen_flux_n',
-            'Phosphorus_flux','Phosphorus_flux_SD','Phosphorus_flux_n','Total_mass_flux','Total_mass_flux_SD','Total_mass_flux_n','Silica_flux','Silica_flux_SD','Silica_flux_n',
-            'Delta_15N_flux','Delta_15N_flux_SD','Delta_15N_flux_n','Delta_13C_flux','Delta_13C_flux_SD','Delta_13C_flux_n','Particulate_inorganic_carbon_flux','Particulate_inorganic_carbon_flux_SD','Particulate_inorganic_carbon_flux_n']
+# read the csv file
+data = pd.read_csv(filename, sep=',', on_bad_lines='skip', skip_blank_lines=True, skiprows=51, header=None)
 
-data = pd.DataFrame()
-for i in f:
-    if i.endswith('.txt'):
-        fn = file_folder + '/' + i
-        print(fn)
-        df = pd.read_csv(fn, sep='\s+', on_bad_lines='skip', skip_blank_lines=True, skiprows=6, header=None)
-        df.columns = column_names
-        # missing values are denoted by -9
-        df = df.replace(-9, np.NaN)
-        df['date_start'] = pd.to_datetime(df['date_start'], format='%Y%m%d')
-        df['date_end'] = pd.to_datetime(df['date_end'], format='%Y%m%d')
-        data = pd.concat([data, df])
+column_names = ['Cruise', 'Depth', 'date_start', 'date_end', 'Dec_Year_start', 'Dec_Year_end', 'lat_start', 'lat_end', 'lon_start', 'lon_end',
+                'Mass_flux_1', 'Mass_flux_2', 'Mass_flux_3', 'Mass_flux_avg', 'Organic_carbon_flux_1', 'Organic_carbon_flux_2',
+                'Organic_carbon_flux_3', 'Organic_carbon_flux_avg', 'Nitrogen_flux_1', 'Nitrogen_flux_2', 'Nitrogen_flux_3',
+                'Nitrogen_flux_avg', 'Phosphorus_flux_1', 'Phosphorus_flux_2', 'Phosphorus_flux_3', 'Phosphorus_flux_avg',
+                'field_blank_corrected_organic_carbon_flux_1', 'field_blank_corrected_organic_carbon_flux_2', 'field_blank_corrected_organic_carbon_flux_3',
+                'field_blank_corrected_organic_carbon_flux_avg', 'field_blank_corrected_nitrogen_flux_1', 'field_blank_corrected_nitrogen_flux_2',
+                'field_blank_corrected_nitrogen_flux_3', 'field_blank_corrected_nitrogen_flux_avg']
 
-# according to https://hahana.soest.hawaii.edu/hot/reports/rep_y33.pdf, couldn't find more specifics for each deployment
-data['latitude'] = 22.45
-data['longitude'] = -158
+data.columns = column_names
+# missing values are denoted by -999
+data = data.replace(-999, np.NaN)
+data['date_start'] = pd.to_datetime(data['date_start'], format='%Y%m%d')
+data['date_end'] = pd.to_datetime(data['date_end'], format='%Y%m%d')
 mean_depth = data['Depth'].mean()
-mean_lat = data['latitude'].mean()
-mean_lon = data['longitude'].mean()
+mean_lat = data['lat_start'].mean()
+mean_lon = data['lon_start'].mean()
 minext = data['date_start'].min().strftime('%Y-%m-%d')
 maxext = data['date_start'].max().strftime('%Y-%m-%d')
 parameters = data.columns
 num_parameters = data.shape[1]
 num_samples = data.shape[0]
-
-# the relevant filenames
-metadata_filename = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\HOT_ALOHA\metadata\README.txt'
-unit_metadata_fn = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\HOT_ALOHA\metadata\HOT_units.csv'
-# read the csv file
 
 # read the metadata from the README.txt file I created
 metadata_keys = ("URI", "date_downloaded", "Citation", "Abstract", "Method", "Title", "DOI", "Description")
@@ -75,7 +66,6 @@ for m in metadata_keys:
                     d = line.split(m + ":")
                     print(m, ": ", d[-1])
                     metadata[m] = d[-1]
-
 
 try:
     cur.execute('INSERT INTO file (citation, doi, source, date_loaded, mintimeextent, maxtimeextent, number_params, number_samples, meanLatitude,'
@@ -150,3 +140,4 @@ for var_name in data.keys():
 
 cur.close()
 con.close()
+
