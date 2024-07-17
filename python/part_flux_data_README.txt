@@ -4,3 +4,4 @@ BCO DMO loaded
 HOT ALOHA loaded
 BATS loaded
 Billion obs loaded
+DYFAMED loaded
