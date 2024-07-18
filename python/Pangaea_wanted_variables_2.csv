@@ -633,3 +633,4 @@ deploy_lat,,,Latitude of deployment (positive values = North),latitude
 deploy_lon,,,Longitude of deployment (positive values = East),longitude
 lat_deploy,,,Latitude of deployment (positive values = North),latitude
 lon_deploy,,,Longitude of deployment (positive values = East),longitude
+DEPTH,m,,Depth,depth
