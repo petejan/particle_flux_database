@@ -9,6 +9,8 @@ dbname = r'part_flux_data.sqlite'
 con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
 cur = con.cursor()
 
+fn = r'Pangaea_wanted_variables_2.csv'
+var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
 
 # the root directory where all the BCO_DMO files are
 root = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\BCO_DMO_database'
