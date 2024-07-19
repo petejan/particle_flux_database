@@ -176,8 +176,8 @@ if __name__ == "__main__":
     files_fn = r'files_for_small_dataset_loader.csv'
     files = pd.read_csv(files_fn, encoding="UTF-8")
 
-#    for v in range(files.shape[0]):
-    for v in range(9,11):
+    for v in range(files.shape[0]):
+#    for v in range(9,11):
         filename = files['filename'][v]
         metadata_filename = files['metadata_filename'][v]
         unit_metadata_fn = files['unit_metadata_fn'][v]

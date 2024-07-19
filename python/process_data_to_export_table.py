@@ -1,5 +1,6 @@
 import sqlite3
 import pandas as pd
+import re
 
 
 def translate_varname_variations(dbname, var_interp):
@@ -154,36 +155,7 @@ def convert_units_mg_p_day(value, units_in, conversion_factor):
 
     return val_in
 
-def add_time_space_var(var_interp, dbname):
-    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-
-    time_vars = {'timestamp', 'time_mid', 'time_recovered', 'time_deployed', 'latitude', 'longitude'}
-
-    for var in time_vars:
-        try:
-            cur.execute(
-                "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-                "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
-                "WHERE file_variables.output_name = '" + var + "'")
-            insert = con.cursor()
-
-            for row in cur:
-                d = dict(row)
-                print(d)
-                new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
-                insert.execute(
-                    "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
-                    new_data)
-
-            con.commit()
-
-        except sqlite3.OperationalError as e:
-            print(e)
-
-
-def add_variables(var, var_interp, dbname, var_calculations):
+def add_variables(var, dbname, var_calculations):
     var_dict = var_calculations.loc[var_calculations['varname'] == var]
     conv_factor = var_dict['conversion_factor'].values[0]
     conv_unit = var_dict['final_unit'].values[0]
@@ -192,142 +164,122 @@ def add_variables(var, var_interp, dbname, var_calculations):
     con.row_factory = sqlite3.Row
     cur = con.cursor()
 
-    vars = var_interp[var_interp.column_name == var]
-    print(vars)
-    var_names = set(vars.name)
-    print(var + ' names', str(var_names)[1:-1])
+      # update the processed data table db for the variable
+    try:
+        cur.execute(
+            "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+            "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+            "WHERE file_variables.output_name = '" + var + "'")
+        insert = con.cursor()
 
-    # update the processed data table db for the variable
-    for v in var_names:
-        print('working on ', v)
-        # update the processed data table db
-        try:
-            # cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
-            cur.execute(
-                "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-                "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
-            insert = con.cursor()
+        for row in cur:
+            d = dict(row)
+            vu = d['units']
+            if '(' in vu:
+                clean_vu = re.findall(r"\((.*?)\)", vu)
+                vu = clean_vu[0]
+            print(var, d, vu)
 
-            for row in cur:
-                d = dict(row)
-                vu = d['units']
-                print(v, d)
-                #continue
-                try:
-                    if conv_unit is None:
-                        conv_unit = vu
-                except AttributeError:
-                    pass
-                try:
-                    if conv_factor is None:
-                        conv_factor = 1
-                except AttributeError:
-                    pass
+            try:
+                if conv_unit is None:
+                    conv_unit = vu
+            except AttributeError:
+                pass
+            try:
+                if conv_factor is None:
+                    conv_factor = 1
+            except AttributeError:
+                pass
 
-                if vu in u_pc:
-                    new_data = (d['value'], conv_unit, vu, d['file_id'], d['sample_id'])
-                    # insert.execute(
-                    #     "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
-                    #     new_data)
-                    insert.execute(
-                        "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND '" + var + "'",
-                        new_data)
+            if vu in u_pc:
+                new_data = (d['value'], conv_unit, vu, d['file_id'], d['sample_id'])
+                insert.execute(
+                    "UPDATE processed_data set '" + var + "' = mass_total * ?/100, '" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND '" + var + "'",
+                    new_data)
 
-                else:
-                    val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
-                    new_data = (val_in, conv_unit, vu, d['file_id'], d['sample_id'])
-                    # insert.execute(
-                    #     "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ? AND var_id = ? AND '" + var + "' IS NULL",
-                    #     new_data)
-                    insert.execute(
-                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ?",
-                        new_data)
+            else:
+                val_in = convert_units_mg_p_day(d['value'], vu, conv_factor)
+                new_data = (val_in, conv_unit, vu, d['file_id'], d['sample_id'])
+                insert.execute(
+                    "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ?, '" + var + "_units_raw' = ? WHERE file_id = ? AND sample_id = ?",
+                    new_data)
 
-            con.commit()
-        except sqlite3.OperationalError as e:
-            print(e)
+        con.commit()
+    except sqlite3.OperationalError as e:
+        print(e)
 
     # SD
-    vars = var_interp[var_interp.column_name == var + '_sd']
+    vars = var + '_sd'
     print(vars)
-    if vars is not None:
-        var_names = set(vars.name)
-        print(var + '_sd names', str(var_names)[1:-1])
-        # update the processed data table db for the variable
-        for v in var_names:
-            print('working on ', v)
-            # update the processed data table db
-            try:
-                # cur.execute(
-                #     "SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
-                cur.execute(
-                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-                    "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
-                insert = con.cursor()
+    try:
+        cur.execute(
+            "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+            "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+            "WHERE file_variables.output_name = '" + vars + "'")
+        insert = con.cursor()
 
-                for row in cur:
-                    d = dict(row)
-                    vu = d['units']
-                    print(v, d)
-                    # get the sample units
-                    get_units = con.cursor()
-                    unit_file_id = (d['file_id'], d['var_id'])
-                    get_units.execute("SELECT units FROM file_variables WHERE file_id = ? AND var_id = ?", unit_file_id)
-                    units_raw = get_units.fetchone()
-                    var_units = dict(units_raw)['units']
-                    #print(vu)
-                    if vu in u_pc:
-                        new_data = (d['value'], d['file_id'], d['sample_id'])
-                        insert.execute(
-                            "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ?",
-                            new_data)
+        for row in cur:
+            d = dict(row)
+            vu = d['units']
+            if '(' in vu:
+                clean_vu = re.findall(r"\((.*?)\)", vu)
+                vu = clean_vu[0]
+            print(vars, d)
+            # # get the sample units
+            get_units = con.cursor()
+            unit_file_id = [d['file_id'], var]
+            get_units.execute("SELECT file_variables.units as units, file_variables.file_id as file_id, "
+                "file_variables.output_name as output_name FROM file_variables WHERE file_id = ? AND output_name = ?",
+                              unit_file_id)
+            units_raw = get_units.fetchone()
+            var_units = dict(units_raw)['units']
+            #print(vu)
+            if vu in u_pc:
+                new_data = (d['value'], d['file_id'], d['sample_id'])
+                insert.execute(
+                    "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ?",
+                    new_data)
 
-                    elif v in u_plus_minus:
-                        val_in = convert_units_mg_p_day(d['value'], var_units, conv_factor)
-                        new_data = (val_in, d['file_id'], d['sample_id'])
-                        insert.execute(
-                            "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ?",
-                            new_data)
-                    else:
-                        val_in = convert_units_mg_p_day(d['value'], d['units'], conv_factor)
-                        new_data = (val_in, d['file_id'], d['sample_id'])
-                        insert.execute(
-                            "UPDATE processed_data set '" + var + "_sd'= ? WHERE file_id = ? AND sample_id = ?",
-                            new_data)
-                con.commit()
-            except sqlite3.OperationalError as e:
-                print(e)
-                continue
+            elif vu in u_plus_minus:
+                val_in = convert_units_mg_p_day(d['value'], var_units, conv_factor)
+                new_data = (val_in, d['file_id'], d['sample_id'])
+                insert.execute(
+                    "UPDATE processed_data set '" + var + "_sd' = mass_total * ?/100 WHERE file_id = ? AND sample_id = ?",
+                    new_data)
+            else:
+                val_in = convert_units_mg_p_day(d['value'], vu, conv_factor)
+                new_data = (val_in, d['file_id'], d['sample_id'])
+                insert.execute(
+                    "UPDATE processed_data set '" + var + "_sd'= ? WHERE file_id = ? AND sample_id = ?",
+                    new_data)
+        con.commit()
+    except sqlite3.OperationalError as e:
+        print(e)
+
 
     # QC
-
-    vars = var_interp[var_interp.column_name == var + '_qc']
+    vars = var + '_qc'
     print(vars)
-    if vars is not None:
-        var_names = set(vars.name)
-        print(var + '_qc names', str(var_names)[1:-1])
-        # update the processed data table db for the variable
-        for v in var_names:
-            print('working on ', v)
-            # update the processed data table db
-            try:
-                # cur.execute(
-                #     "SELECT data.file_id as file_id, sample_id, value, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
-                cur.execute(
-                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id FROM data JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
+    try:
+        cur.execute(
+            "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+            "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+            "WHERE file_variables.output_name = '" + vars + "'")
 
-                insert = con.cursor()
+        insert = con.cursor()
 
-                for row in cur:
-                    d = dict(row)
-                    new_data = (d['value'], d['file_id'], d['sample_id'])
-                    insert.execute(
-                        "UPDATE processed_data set '" + var + "_qc' = ? WHERE file_id = ? AND sample_id = ?",
-                        new_data)
-                con.commit()
-            except sqlite3.OperationalError as e:
-                print(e)
-                continue
+        for row in cur:
+            d = dict(row)
+            new_data = (d['value'], d['file_id'], d['sample_id'])
+            insert.execute(
+                "UPDATE processed_data set '" + var + "_qc' = ? WHERE file_id = ? AND sample_id = ?",
+                new_data)
+        con.commit()
+    except sqlite3.OperationalError as e:
+        print(e)
+
+    cur.close()
+    con.close()
 
 def add_reference_var(dbname):
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
@@ -349,7 +301,8 @@ def add_reference_var(dbname):
         con.commit()
     except sqlite3.OperationalError as e:
         print(e)
-
+    cur.close()
+    con.close()
 
 # not sure we need this anymore
 def add_comments_var(var_interp, dbname):
@@ -392,58 +345,66 @@ if __name__ == "__main__":
 
     u_mg = {'mg m-2 d-1', 'mg m-2 day-1', 'mg C m-2 d-1', 'mg N m-2 d-1', 'mg Chl a m-2 d-1',
             'mg Chl equivalents a m-2 d-1', 'mg/m2/d', 'mg/m2/day', 'mg m**2 d*1', 'mg m**2 day*1',
-            'mg/m**2/day', 'mg/m**2/d', 'milligram/m2/day', 'mg_m^-2_d^-1'}
+            'mg/m**2/day', 'mg/m**2/d', 'milligram/m2/day', 'mg_m^-2_d^-1',
+            '(mg m-2 d-1)', '(mg m-2 day-1)', '(mg C m-2 d-1)', '(mg N m-2 d-1)', '(mg Chl a m-2 d-1)',
+            '(mg Chl equivalents a m-2 d-1)', '(mg/m2/d)', '(mg/m2/day)', '(mg m**2 d*1)', '(mg m**2 day*1)',
+            '(mg/m**2/day)', '(mg/m**2/d)', '(milligram/m2/day)', '(mg_m^-2_d^-1)'}
 
-    u_ug = {'µg/m**2/day', 'ug/m2/day', 'ug chl a m-2 d-1'}
+    u_ug = {'µg/m**2/day', 'ug/m2/day', 'ug chl a m-2 d-1',
+            '(µg/m**2/day)', '(ug/m2/day)', '(ug chl a m-2 d-1)'}
 
-    u_pmol = {'pmol/m**2/day'}
+    u_pmol = {'pmol/m**2/day', '(pmol/m**2/day)'}
 
-    u_uga = {'µg/cm**2/a'}
+    u_uga = {'µg/cm**2/a', '(µg/cm**2/a)'}
 
-    u_mmol = {'mmol m-2 d-1', 'mmol/m**2/day', 'mmol/m2/day', 'mmol/m**2/d', 'mmol_m^-2_d^-1'}
+    u_mmol = {'mmol m-2 d-1', 'mmol/m**2/day', 'mmol/m2/day', 'mmol/m**2/d', 'mmol_m^-2_d^-1',
+              '(mmol m-2 d-1)', '(mmol/m**2/day)', '(mmol/m2/day)', '(mmol/m**2/d)', '(mmol_m^-2_d^-1)'}
 
-    u_umol = {'umol/m**2/d'}
+    u_umol = {'umol/m**2/d', '(umol/m**2/d)'}
 
-    u_ga = {'g/m**2/a'}
+    u_ga = {'g/m**2/a', '(g/m**2/a)'}
 
-    u_gd = {'g/m**2/day'}
+    u_gd = {'g/m**2/day', '(g/m**2/day)'}
 
-    u_ugcma = {'µg/cm**2/a'}
+    u_ugcma = {'µg/cm**2/a', '(µg/cm**2/a)'}
 
-    u_mola = {'mol/m**2/a'}
+    u_mola = {'mol/m**2/a', '(mol/m**2/a)'}
 
-    u_umolcma = {'µmol/cm**2/a'}
+    u_umolcma = {'µmol/cm**2/a', '(µmol/cm**2/a)'}
 
-    u_pc = {'%', 'percent'}
+    u_pc = {'%', 'percent', '(%)', '(percent)'}
 
-    u_plus_minus = {'±'}
+    u_plus_minus = {'±', '(±)'}
 
-    u_day = {'days', 'day', 'unitless', 'number of days', 'd'}
+    u_day = {'days', 'day', 'unitless', 'number of days', 'd',
+             '(days)', '(day)', '(unitless)', '(number of days)', '(d)'}
 
-    u_hours = {'h', 'hours'}
+    u_hours = {'h', 'hours', '(h)', '(hours)'}
 
-    u_m = {'m', 'Meters'}
+    u_m = {'m', 'Meters', '(m)', '(Meters)'}
 
-    u_lat = {'degrees', 'deg', 'unitless', 'decimal degrees', 'degrees_north', 'degrees North'}
+    u_lat = {'degrees', 'deg', 'unitless', 'decimal degrees', 'degrees_north', 'degrees North',
+             '(degrees)', '(deg)', '(unitless)', '(decimal degrees)', '(degrees_north)', '(degrees North)'}
 
-    u_lon = {'degrees', 'deg', 'unitless', 'decimal degrees', 'degrees_east', 'degrees East'}
+    u_lon = {'degrees', 'deg', 'unitless', 'decimal degrees', 'degrees_east', 'degrees East',
+             '(degrees)', '(deg)', '(unitless)', '(decimal degrees)', '(degrees_east)', '(degrees East)'}
 
     u_unknown = ''
 
-    vars_4_inclusion = {'duration', 'latitude', 'longitude', 'depth', 'mass_total', 'carbon_total', 'poc', 'poc', 'pon',
-                        'pop', 'opa', 'psi', 'psio2', 'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn',
-                        'ba', 'lithogenic', 'detrital', 'ti'}
+#    create_processed_data_db(dbname)
+#    populate_file_id(dbname)
 
-    create_processed_data_db(dbname)
-    populate_file_id(dbname)
-    add_time_space_var(var_interp, dbname)
-    # var = ('mass_total', 'duration', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
-    #         'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
-    #         'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid')
-    # for vv in var:
-    #     add_variables(vv, var_interp, dbname, var_calculations)
+    var = ('mass_total', 'duration', 'depth', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
+            'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
+            'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid', 'latitude', 'longitude')
+    for vv in var:
+        add_variables(vv, dbname, var_calculations)
 
-    add_reference_var(dbname)
+#    add_variables('pop', dbname, var_calculations)
+#    add_reference_var(dbname)
+
+
+#    add_time_space_var(dbname)
 #    add_comments_var(var_interp, dbname)
 #    add_data_type
 #    add_instrument_type
