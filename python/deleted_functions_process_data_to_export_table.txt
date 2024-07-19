@@ -1,3 +1,81 @@
+# def add_times_var(var_interp, dbname):
+#     time_vars = {'timestamp', 'time_mid', 'time_recovered', 'time_deployed'}
+#     for var in time_vars:
+#         con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+#         con.row_factory = sqlite3.Row
+#         cur = con.cursor()
+#
+#         vars = var_interp[var_interp.column_name == var]
+#         print(vars)
+#         var_names = set(vars.name)
+#         print(var + ' names', str(var_names)[1:-1])
+#
+#         # # update the processed data table db
+#         for v in var_names:
+#             print('working on ', v)
+#             # update the processed data table db
+#             try:
+#                 # cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
+#                 cur.execute(
+#                     "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+#                     "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
+#                 insert = con.cursor()
+#
+#                 for row in cur:
+#                     d = dict(row)
+#                     #vu = d['units']
+#                     print(v, d)
+#                     # continue
+#
+#                     new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
+#                     insert.execute(
+#                         "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
+#                         new_data)
+#
+#                 con.commit()
+#             except sqlite3.OperationalError as e:
+#                 print(e)
+
+def add_lat_lon(var_interp, dbname):
+    geo_vars = {'latitude', 'longitude'}
+    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    for var in geo_vars:
+
+        vars = var_interp[var_interp.column_name == var]
+        print(vars)
+        var_names = set(vars.name)
+        print(var + ' names', str(var_names)[1:-1])
+
+        # # update the processed data table db
+        for v in var_names:
+            print('working on ', v)
+            # update the processed data table db
+            try:
+                # cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
+                cur.execute(
+                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+                    "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
+                insert = con.cursor()
+
+                for row in cur:
+                    d = dict(row)
+                    vu = d['units']
+                    print(v, d)
+                    # continue
+
+                    new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
+                    insert.execute(
+                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
+                        new_data)
+
+                con.commit()
+            except sqlite3.OperationalError as e:
+                print(e)
+
+
 
 def add_lat_var(var_interp, dbname):
     var = 'latitude'

@@ -2,6 +2,46 @@ import sqlite3
 import pandas as pd
 
 
+def translate_varname_variations(dbname, var_interp):
+    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    cur.execute("SELECT var_id as var_id, name as name FROM variables")
+    insert = con.cursor()
+
+    for row in cur:
+        d = dict(row)
+        var_id = d['var_id']
+        alias = d['name']
+        print(alias)
+        standard_name = var_interp['column_name'][var_interp.name == alias]
+        if not standard_name.empty:
+            print('converted ', alias, ' to ', standard_name.values[0])
+            new_data = [standard_name.values[0], var_id]
+            insert.execute("UPDATE variables SET output_name =? WHERE var_id = ?", new_data)
+            con.commit()
+        else:
+            print(alias, ' is not a variable of interest, calling it unknown')
+            standard_name = 'unknown'
+            new_data = [standard_name, var_id]
+            insert.execute("UPDATE variables SET output_name = ? WHERE var_id = ?", new_data)
+            con.commit()
+    cur.close()
+
+    cur = con.cursor()
+    cur.execute("SELECT file_variables.var_id as var_id, variables.output_name as output_name "
+                "FROM file_variables JOIN variables using (var_id)")
+    insert = con.cursor()
+
+    for row in cur:
+        d = dict(row)
+        new_data = [d['output_name'], d['var_id']]
+        insert.execute("UPDATE file_variables SET output_name = ? WHERE var_id = ?", new_data)
+        con.commit()
+    cur.close()
+
+
 def create_processed_data_db(dbname):
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
     con.row_factory = sqlite3.Row
@@ -40,6 +80,7 @@ def create_processed_data_db(dbname):
 #    cur.execute("CREATE INDEX processed_data_var_id_IDX ON 'processed_data' (var_id)")
     cur.execute("CREATE INDEX processed_data_sample_IDX ON 'processed_data' (sample_id)")
     con.commit()
+
 
 def populate_file_id(dbname):
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
@@ -113,82 +154,34 @@ def convert_units_mg_p_day(value, units_in, conversion_factor):
 
     return val_in
 
-def add_times_var(var_interp, dbname):
-    time_vars = {'timestamp', 'time_mid', 'time_recovered', 'time_deployed'}
-    for var in time_vars:
-        con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
-        con.row_factory = sqlite3.Row
-        cur = con.cursor()
-
-        vars = var_interp[var_interp.column_name == var]
-        print(vars)
-        var_names = set(vars.name)
-        print(var + ' names', str(var_names)[1:-1])
-
-        # # update the processed data table db
-        for v in var_names:
-            print('working on ', v)
-            # update the processed data table db
-            try:
-                # cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
-                cur.execute(
-                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-                    "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
-                insert = con.cursor()
-
-                for row in cur:
-                    d = dict(row)
-                    #vu = d['units']
-                    print(v, d)
-                    # continue
-
-                    new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
-                    insert.execute(
-                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
-                        new_data)
-
-                con.commit()
-            except sqlite3.OperationalError as e:
-                print(e)
-
-def add_lat_lon(var_interp, dbname):
-    geo_vars = {'latitude', 'longitude'}
+def add_time_space_var(var_interp, dbname):
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
     con.row_factory = sqlite3.Row
     cur = con.cursor()
 
-    for var in geo_vars:
+    time_vars = {'timestamp', 'time_mid', 'time_recovered', 'time_deployed', 'latitude', 'longitude'}
 
-        vars = var_interp[var_interp.column_name == var]
-        print(vars)
-        var_names = set(vars.name)
-        print(var + ' names', str(var_names)[1:-1])
+    for var in time_vars:
+        try:
+            cur.execute(
+                "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+                "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+                "WHERE file_variables.output_name = '" + var + "'")
+            insert = con.cursor()
 
-        # # update the processed data table db
-        for v in var_names:
-            print('working on ', v)
-            # update the processed data table db
-            try:
-                # cur.execute("SELECT data.file_id as file_id, sample_id, value, units, var_id FROM data JOIN variables using (var_id) JOIN file_variables using (var_id) WHERE variables.name = '" + v + "'")
-                cur.execute(
-                    "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-                    "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) WHERE variables.name = '" + v + "'")
-                insert = con.cursor()
+            for row in cur:
+                d = dict(row)
+                print(d)
+                new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
+                insert.execute(
+                    "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
+                    new_data)
 
-                for row in cur:
-                    d = dict(row)
-                    vu = d['units']
-                    print(v, d)
-                    # continue
+            con.commit()
 
-                    new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
-                    insert.execute(
-                        "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
-                        new_data)
+        except sqlite3.OperationalError as e:
+            print(e)
 
-                con.commit()
-            except sqlite3.OperationalError as e:
-                print(e)
 
 def add_variables(var, var_interp, dbname, var_calculations):
     var_dict = var_calculations.loc[var_calculations['varname'] == var]
@@ -389,8 +382,8 @@ def add_comments_var(var_interp, dbname):
 
 
 if __name__ == "__main__":
-#    dbname = r'C:\Users\wyn028\OneDrive - CSIRO\Manuscripts\Particle_flux_database\DATA_Mining\test\test_sed_data.sqlite'
     dbname = r'test.sqlite'
+#    dbname = r'part_flux_data.sqlite'
 
     fn = r'Pangaea_wanted_variables_2.csv'
     var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
@@ -441,10 +434,9 @@ if __name__ == "__main__":
                         'pop', 'opa', 'psi', 'psio2', 'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn',
                         'ba', 'lithogenic', 'detrital', 'ti'}
 
-    # create_processed_data_db(dbname)
-    # populate_file_id(dbname)
-    # add_times_var(var_interp, dbname)
-    # add_lat_lon(var_interp, dbname)
+    create_processed_data_db(dbname)
+    populate_file_id(dbname)
+    add_time_space_var(var_interp, dbname)
     # var = ('mass_total', 'duration', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
     #         'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
     #         'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid')
