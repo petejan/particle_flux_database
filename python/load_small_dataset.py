@@ -4,17 +4,11 @@
 import sqlite3
 import pandas as pd
 import numpy as np
+import os
 
-def load_small_datasets(dbname, filename,metadata_filename, unit_metadata_fn, var_interp):
+def load_small_datasets(dbname, filename,metadata_filename, unit_metadata_fn, var_interp, data):
     con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
     cur = con.cursor()
-
-    # read the csv file
-    data = pd.read_csv(filename)
-
-    # missing values are denoted by 999 or - 999 in some files
-    data = data.replace(999, np.NaN)
-    data = data.replace(-999, np.NaN)
 
     geo_vars = {'latitude', 'longitude', 'depth', 'time_deployed'}
     new_data = dict.fromkeys(geo_vars)
@@ -34,17 +28,36 @@ def load_small_datasets(dbname, filename,metadata_filename, unit_metadata_fn, va
                 continue
 
     try:
-        min_ext_time = pd.to_datetime(data.date_start, format='mixed', dayfirst=True).min().strftime('%Y-%m-%d')
-    except ValueError:
-        min_ext_time = 'NaT'
+#        min_ext_time = pd.to_datetime(data.date_start, format='mixed', dayfirst=True).min().strftime('%Y-%m-%d')
+        min_ext_time = new_data['time_deployed'].min().strftime('%Y-%m-%d')
+    except AttributeError:
+        min_ext_time = new_data['time_deployed'].min()
+    except TypeError:
+        min_ext_time = pd.to_datetime(new_data['time_deployed'], format='mixed', dayfirst=True).min().strftime('%Y-%m-%d')
+#        min_ext_time = 'NaT'
     try:
-        max_ext_time = pd.to_datetime(data.date_start, format='mixed', dayfirst=True).max().strftime('%Y-%m-%d')
-    except ValueError:
-        max_ext_time = 'NaT'
-    mean_lon = new_data['longitude'].mean()
-    mean_lat = new_data['latitude'].mean()
-    mean_depth = new_data['depth'].mean()
-    #parameters = data.columns
+#        max_ext_time = pd.to_datetime(data.date_start, format='mixed', dayfirst=True).max().strftime('%Y-%m-%d')
+        max_ext_time = new_data['time_deployed'].max().strftime('%Y-%m-%d')
+    except AttributeError:
+        max_ext_time = new_data['time_deployed'].max()
+    except TypeError:
+        max_ext_time = pd.to_datetime(new_data['time_deployed'], format='mixed', dayfirst=True).max().strftime('%Y-%m-%d')
+
+    try:
+        mean_lon = new_data['longitude'].mean()
+    except (TypeError, ValueError):
+        mean_lon = pd.to_numeric(new_data['longitude']).mean()
+
+    try:
+        mean_lat = new_data['latitude'].mean()
+    except (TypeError, ValueError):
+        mean_lat = pd.to_numeric(new_data['latitude']).mean()
+
+    try:
+        mean_depth = new_data['depth'].mean()
+    except (TypeError, ValueError):
+        mean_depth = pd.to_numeric(new_data['depth']).mean()
+
     num_parameters = data.shape[1]
     num_samples = data.shape[0]
 
@@ -156,19 +169,71 @@ def load_small_datasets(dbname, filename,metadata_filename, unit_metadata_fn, va
 
 
 if __name__ == "__main__":
-    dbname = r'test.sqlite'
-    # dbname = r'part_flux_data.sqlite'
-    fn = r'Pangaea_wanted_variables_2.csv'
-    var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
+    #dbname = r'test.sqlite'
+    dbname = r'part_flux_data.sqlite'
+    var_fn = r'Pangaea_wanted_variables_2.csv'
+    var_interp = pd.read_csv(var_fn, encoding="ISO-8859-1")
     files_fn = r'files_for_small_dataset_loader.csv'
     files = pd.read_csv(files_fn, encoding="UTF-8")
 
-    filekeys = {'filename', 'metadata_filename', 'unit_metadata_fn'}
-    files = dict.fromkeys(filekeys)
-
-    for v in range(files.shape[0]):
+#    for v in range(files.shape[0]):
+    for v in range(9,11):
         filename = files['filename'][v]
         metadata_filename = files['metadata_filename'][v]
         unit_metadata_fn = files['unit_metadata_fn'][v]
         print(filename)
-        load_small_datasets(dbname, filename, metadata_filename, unit_metadata_fn, var_interp)
+        if 'MAINE' in filename:
+            csv_files = []
+            f = os.listdir(filename)
+            for i in f:
+                if i.endswith('.csv'):
+                    filenames = [i]
+                    csv_files += filenames
+
+            for vv in csv_files:
+                fn = os.path.join(filename, vv)
+                print(fn)
+
+                # read the csv file
+                data = pd.read_csv(fn, encoding="ISO-8859-1", header=None)
+                # find the row number from where the actual data starts
+                df = data[data[0].str.contains('/fields=*', na=False)].index
+                data = pd.read_csv(fn, encoding="ISO-8859-1", skiprows=range(df[0]))
+                # take out the unit and empty header rows
+                data = data.drop([0, 1])
+                # correct the first column header
+                c_name = data.columns[0].split("/fields=")
+                data = data.rename(columns={data.columns[0]: c_name[1]})
+                load_small_datasets(dbname, fn, metadata_filename, unit_metadata_fn, var_interp, data)
+        elif 'SKIDMORE' in filename:
+            csv_files = []
+            f = os.listdir(filename)
+            for i in f:
+                if i.endswith('.csv'):
+                    filenames = [i]
+                    csv_files += filenames
+
+            for vv in csv_files:
+                fn = os.path.join(filename, vv)
+                print(fn)
+
+                # read the csv file
+                data = pd.read_csv(fn, encoding="ISO-8859-1", header=None)
+                # find the row number from where the actual data starts
+                df = data[data[0].str.contains('/fields=*', na=False)].index
+                data = pd.read_csv(fn, encoding="ISO-8859-1", skiprows=range(df[0]))
+                # take out the unit and empty header rows
+                data = data.drop([0, 1])
+                # correct the first column header
+                c_name = data.columns[0].split("/fields=")
+                data = data.rename(columns={data.columns[0]: c_name[1]})
+                load_small_datasets(dbname, fn, metadata_filename, unit_metadata_fn, var_interp, data)
+        else:
+            # read the csv file
+            data = pd.read_csv(filename)
+
+            # missing values are denoted by 999 or - 999 in some files
+            data = data.replace(999, np.NaN)
+            data = data.replace(-999, np.NaN)
+            load_small_datasets(dbname, filename, metadata_filename, unit_metadata_fn, var_interp, data)
+

@@ -4,16 +4,16 @@ BCO DMO loaded
 HOT ALOHA loaded
 BATS loaded
 Billion obs loaded
-DYFAMED loaded --> added to files list
-Float data loaded --> added to files list
-Honjo compilation loaded --> added to files list
-JGOFS loaded --> added to files list
-K2 S1 loaded --> added to files list
-PALMER not loaded yet but added to files list
-PAP SO not loaded yet but added to files list
-San Pedro not loaded yet but added to files list
-
+DYFAMED loaded --> added to files list, duplicated now?
+Float data loaded --> added to files list, duplicated now?
+Honjo compilation loaded --> added to files list, duplicated now?
+JGOFS loaded --> added to files list, duplicated now?
+K2 S1 loaded --> added to files list, duplicated now?
+PALMER loaded --> added to files list, duplicated now?
+PAP SO loaded --> added to files list, duplicated now?
+San Pedro loaded --> added to files list, duplicated now?
+Seabass loaded --> added to files list
 
 
 still to do:
-Seabass and SOTS southern sites
+SOTS southern sites
