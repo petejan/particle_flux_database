@@ -72,7 +72,7 @@ def create_processed_data_db(dbname):
                 "lithogenic REAL, lithogenic_units_raw TEXT, lithogenic_units TEXT, lithogenic_sd REAL, "
                 "lithogenic_qc REAL, detrital REAL, detrital_units_raw TEXT, detrital_units TEXT, detrital_sd REAL, "
                 "detrital_qc TEXT, ti REAL, ti_units_raw TEXT, ti_units TEXT, ti_sd REAL, ti_qc TEXT, source TEXT, "
-                "comments TEXT, doi TEXT, citation TEXT, date_downloaded REAL, sst REAL, "
+                "comments TEXT, doi TEXT, citation TEXT, date_downloaded REAL, date_processed REAL, sst REAL, "
                 "mixed_layer_depth REAL, chl_tot_gsm REAL, npp_c REAL, kd490 REAL, z_eu REAL, par REAL, sfm REAL, "
                 "CONSTRAINT FK_data_var_id CONSTRAINT FK_data_file_id "
                 "FOREIGN KEY(file_id) REFERENCES file(file_id))")
@@ -154,6 +154,39 @@ def convert_units_mg_p_day(value, units_in, conversion_factor):
         val_in = value
 
     return val_in
+
+
+def add_time_space_var(dbname):
+    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    time_vars = {'timestamp', 'time_mid', 'time_recovered', 'time_deployed', 'latitude', 'longitude'}
+
+    for var in time_vars:
+        try:
+            cur.execute(
+                "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+                "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+                "WHERE file_variables.output_name = '" + var + "'")
+            insert = con.cursor()
+
+            for row in cur:
+                d = dict(row)
+                print(var, d)
+                new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
+                insert.execute(
+                    "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
+                    new_data)
+
+            con.commit()
+
+        except sqlite3.OperationalError as e:
+            print(e)
+
+    cur.close()
+    con.close()
+
 
 def add_variables(var, dbname, var_calculations):
     var_dict = var_calculations.loc[var_calculations['varname'] == var]
@@ -301,6 +334,7 @@ def add_reference_var(dbname):
         con.commit()
     except sqlite3.OperationalError as e:
         print(e)
+
     cur.close()
     con.close()
 
@@ -333,10 +367,9 @@ def add_comments_var(var_interp, dbname):
     con.commit()
 
 
-
 if __name__ == "__main__":
-    dbname = r'test.sqlite'
-#    dbname = r'part_flux_data.sqlite'
+    #dbname = r'test.sqlite'
+    dbname = r'part_flux_data.sqlite'
 
     fn = r'Pangaea_wanted_variables_2.csv'
     var_interp = pd.read_csv(fn, encoding="ISO-8859-1")
@@ -393,18 +426,18 @@ if __name__ == "__main__":
 
 #    create_processed_data_db(dbname)
 #    populate_file_id(dbname)
+    translate_varname_variations(dbname, var_interp)
+    add_time_space_var(dbname)
+    # var = ('mass_total', 'duration', 'depth', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
+    #         'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
+    #         'ti')
+    # for vv in var:
+    #     add_variables(vv, dbname, var_calculations)
+    #
+    # add_reference_var(dbname)
 
-    var = ('mass_total', 'duration', 'depth', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
-            'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
-            'ti', 'timestamp', 'time_deployed', 'time_recovered', 'time_mid', 'latitude', 'longitude')
-    for vv in var:
-        add_variables(vv, dbname, var_calculations)
-
-#    add_variables('pop', dbname, var_calculations)
-#    add_reference_var(dbname)
 
 
-#    add_time_space_var(dbname)
 #    add_comments_var(var_interp, dbname)
 #    add_data_type
 #    add_instrument_type
