@@ -89,10 +89,8 @@ def populate_file_id(dbname):
     cur = con.cursor()
 
     # start populating the table with file_id and sample_id to get started
-    # cur.execute(
-    #     "SELECT data.file_id as file_id, sample_id, var_id FROM data GROUP BY file_id, sample_id, var_id ORDER BY file_id, sample_id, var_id")
-    cur.execute(
-        "SELECT data.file_id as file_id, sample_id FROM data GROUP BY file_id, sample_id ORDER BY file_id, sample_id")
+    # only chose the files that have POC in it (plus the rest)
+    cur.execute("SELECT data.file_id as file_id, data.sample_id as sample_id FROM data WHERE data.file_id IN (SELECT file_variables.file_id FROM file_variables WHERE file_variables.output_name IS 'poc') GROUP BY file_id, sample_id ORDER BY file_id, sample_id")
 
     insert = con.cursor()
 
@@ -100,9 +98,7 @@ def populate_file_id(dbname):
         d = dict(row)
         print(d)
 
-        # new_data = (d['file_id'], d['sample_id'], d['var_id'])
         new_data = (d['file_id'], d['sample_id'])
-        # insert.execute('INSERT INTO processed_data (file_id, sample_id, var_id) VALUES (?,?,?)', new_data)
         insert.execute('INSERT INTO processed_data (file_id, sample_id) VALUES (?,?)', new_data)
     con.commit()
 
@@ -424,16 +420,16 @@ if __name__ == "__main__":
 
     u_unknown = ''
 
+#    translate_varname_variations(dbname, var_interp)
 #    create_processed_data_db(dbname)
 #    populate_file_id(dbname)
-    translate_varname_variations(dbname, var_interp)
     add_time_space_var(dbname)
-    # var = ('mass_total', 'duration', 'depth', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
-    #         'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
-    #         'ti')
-    # for vv in var:
-    #     add_variables(vv, dbname, var_calculations)
-    #
+    var = ('mass_total', 'duration', 'depth', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
+            'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
+            'ti')
+    for vv in var:
+        add_variables(vv, dbname, var_calculations)
+
     # add_reference_var(dbname)
 
 
