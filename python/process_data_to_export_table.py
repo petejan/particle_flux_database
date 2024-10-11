@@ -157,28 +157,49 @@ def add_time_space_var(dbname):
     con.row_factory = sqlite3.Row
     cur = con.cursor()
 
-    time_vars = {'timestamp', 'time_mid', 'time_recovered', 'time_deployed', 'latitude', 'longitude'}
+    time_vars = {'timestamp', 'time_mid', 'time_recovered', 'time_deployed', 'latitude', 'longitude', 'duration', 'depth'}
 
-    for var in time_vars:
+    for geo_var in time_vars:
         try:
             cur.execute(
-                "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-                "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
-                "WHERE file_variables.output_name = '" + var + "'")
+                "SELECT processed_data.file_id, processed_data.sample_id, data.value, data.var_id, "
+                "file_variables.units FROM processed_data JOIN data using (file_id, sample_id) "
+                "JOIN file_variables using (var_id)"
+                "WHERE file_variables.output_name = '" + geo_var + "'")
             insert = con.cursor()
 
             for row in cur:
                 d = dict(row)
-                print(var, d)
+                print(geo_var, d)
                 new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
                 insert.execute(
-                    "UPDATE processed_data set '" + var + "'= ?,'" + var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
+                    "UPDATE processed_data set '" + geo_var + "'= ?,'" + geo_var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
                     new_data)
 
-            con.commit()
+                con.commit()
 
         except sqlite3.OperationalError as e:
             print(e)
+
+        # try:
+        #     cur.execute(
+        #         "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+        #         "file_variables.units as units FROM data JOIN file_variables using (var_id) "
+        #         "WHERE data.file_id IN (SELECT file_id FROM processed_data) AND file_variables.output_name = '" + geo_var + "'")
+        #     insert = con.cursor()
+        #
+        #     for row in cur:
+        #         d = dict(row)
+        #         print(geo_var, d)
+        #         new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
+        #         insert.execute(
+        #             "UPDATE processed_data set '" + geo_var + "'= ?,'" + geo_var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
+        #             new_data)
+        #
+        #         con.commit()
+        #
+        # except sqlite3.OperationalError as e:
+        #     print(e)
 
     cur.close()
     con.close()
@@ -196,9 +217,15 @@ def add_variables(var, dbname, var_calculations):
       # update the processed data table db for the variable
     try:
         cur.execute(
-            "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-            "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+            "SELECT processed_data.file_id, processed_data.sample_id, data.value, data.var_id, "
+            "file_variables.units FROM processed_data JOIN data using (file_id, sample_id) "
+            "JOIN file_variables using (var_id)"
             "WHERE file_variables.output_name = '" + var + "'")
+        #
+        # cur.execute(
+        #     "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+        #     "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+        #     "WHERE data.file_id IN processed_data.file_id AND file_variables.output_name = '" + var + "'")
         insert = con.cursor()
 
         for row in cur:
@@ -242,9 +269,15 @@ def add_variables(var, dbname, var_calculations):
     print(vars)
     try:
         cur.execute(
-            "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-            "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+            "SELECT processed_data.file_id, processed_data.sample_id, data.value, data.var_id, "
+            "file_variables.units FROM processed_data JOIN data using (file_id, sample_id) "
+            "JOIN file_variables using (var_id)"
             "WHERE file_variables.output_name = '" + vars + "'")
+        #
+        # cur.execute(
+        #     "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+        #     "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+        #     "WHERE file_variables.output_name = '" + vars + "'")
         insert = con.cursor()
 
         for row in cur:
@@ -291,10 +324,16 @@ def add_variables(var, dbname, var_calculations):
     print(vars)
     try:
         cur.execute(
-            "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
-            "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+            "SELECT processed_data.file_id, processed_data.sample_id, data.value, data.var_id, "
+            "file_variables.units FROM processed_data JOIN data using (file_id, sample_id) "
+            "JOIN file_variables using (var_id)"
             "WHERE file_variables.output_name = '" + vars + "'")
-
+        #
+        # cur.execute(
+        #     "SELECT data.file_id as file_id, data.sample_id as sample_id, data.value as value, data.var_id as var_id, "
+        #     "file_variables.units as units FROM data JOIN file_variables using (var_id) JOIN variables using (var_id) "
+        #     "WHERE file_variables.output_name = '" + vars + "'")
+        #
         insert = con.cursor()
 
         for row in cur:
@@ -364,7 +403,7 @@ def add_comments_var(var_interp, dbname):
 
 
 if __name__ == "__main__":
-    #dbname = r'test.sqlite'
+    #dbname = r'python\test.sqlite'
     dbname = r'part_flux_data.sqlite'
 
     fn = r'Pangaea_wanted_variables_2.csv'
@@ -424,11 +463,12 @@ if __name__ == "__main__":
 #    create_processed_data_db(dbname)
 #    populate_file_id(dbname)
     add_time_space_var(dbname)
-    var = ('mass_total', 'duration', 'depth', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
+    var = ('mass_total', 'carbon_total', 'poc', 'pic', 'pon', 'pop', 'opal', 'psi', 'psio2',
             'psi_oh_4', 'pal', 'chl', 'pheop', 'caco3', 'ca', 'fe', 'mn', 'ba', 'lithogenics', 'detrital',
             'ti')
     for vv in var:
         add_variables(vv, dbname, var_calculations)
+
 
     # add_reference_var(dbname)
 
