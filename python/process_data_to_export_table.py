@@ -173,8 +173,8 @@ def add_time_space_var(dbname):
                 print(geo_var, d)
                 new_data = (d['value'], d['units'], d['file_id'], d['sample_id'])
                 insert.execute(
-                    "UPDATE processed_data set '" + geo_var + "'= ?,'" + geo_var + "_units' = ? WHERE file_id = ? AND sample_id = ?",
-                    new_data)
+                    "UPDATE processed_data set '" + geo_var + "'= ?,'" + geo_var + "_units' = ? WHERE file_id = ? AND sample_id = ?"
+                    , new_data)
 
                 con.commit()
 
